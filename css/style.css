@@ -199,19 +199,26 @@ h2 {
     align-items: flex-start;
     gap: 35px;
 
-    background-image:
-        linear-gradient(
-            rgba(255, 255, 255, 0.50),
-            rgba(255, 255, 255, 0.50)
-        ),
-        url("../images/about_background.jpg");
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
 
-    background-size: cover;
-    background-position: center;
+    background-color: #ffffff;
+    background-image: url("../images/YOUR_PHOTO_FILENAME.jpg");
     background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 115%;
 
     padding: 30px;
     border-radius: 10px;
+}
+
+.about-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.82);
+    z-index: -1;
 }
 
 .about-image img {
