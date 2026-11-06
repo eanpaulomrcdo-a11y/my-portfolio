@@ -195,14 +195,21 @@ h2 {
 ===================================== */
 
 .about-container {
-    background-image: url("../images/about_background.jpg");
+    display: flex;
+    align-items: flex-start;
+    gap: 35px;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.88),
+                        rgba(255, 255, 255, 0.88)),
+        url("../images/about_background.jpg");
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
     padding: 30px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.75);
-    background-blend-mode: screen;
 }
 
 .about-container {
