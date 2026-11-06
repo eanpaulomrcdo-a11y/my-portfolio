@@ -6,6 +6,11 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #f4f6f8;
     color: #333333;
