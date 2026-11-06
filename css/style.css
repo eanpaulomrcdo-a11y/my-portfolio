@@ -196,18 +196,23 @@ h2 {
 
 .about-container {
     display: flex;
-    align-items: flex-start;
-    gap: 35px;
+    align-items: center;
+    gap: 0;
 
     position: relative;
     isolation: isolate;
     overflow: hidden;
 
-    background-color: #ffffff;
-    background-image: url("../images/profile.jpg");
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: auto 115%;
+   background-image:
+    linear-gradient(
+        rgba(255, 255, 255, 0.10),
+        rgba(255, 255, 255, 0.10)
+    ),
+    url("../images/profile.jpg");
+
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
 
     padding: 30px;
     border-radius: 10px;
