@@ -201,6 +201,8 @@ h2 {
     background-repeat: no-repeat;
     padding: 30px;
     border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.75);
+    background-blend-mode: screen;
 }
 
 .about-container {
