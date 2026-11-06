@@ -195,6 +195,15 @@ h2 {
 ===================================== */
 
 .about-container {
+    background-image: url("../images/about_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.about-container {
     display: flex;
     align-items: flex-start;
     gap: 35px;
