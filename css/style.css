@@ -516,3 +516,9 @@ footer {
     h3 {
         font-size: 18px;
     }
+@media (max-width: 600px) {
+    .about-container {
+        background-position: center center;
+        background-size: cover;
+    }
+}
