@@ -200,8 +200,10 @@ h2 {
     gap: 35px;
 
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.88),
-                        rgba(255, 255, 255, 0.88)),
+        linear-gradient(
+            rgba(255, 255, 255, 0.96),
+            rgba(255, 255, 255, 0.96)
+        ),
         url("../images/about_background.jpg");
 
     background-size: cover;
@@ -210,16 +212,6 @@ h2 {
 
     padding: 30px;
     border-radius: 10px;
-}
-
-.about-container {
-    display: flex;
-    align-items: flex-start;
-    gap: 35px;
-}
-
-.about-image {
-    flex: 0 0 200px;
 }
 
 .about-image img {
