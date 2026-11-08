@@ -1,10 +1,7 @@
 /* =====================================
    1. GLOBAL STYLES
 ===================================== */
-
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
     overflow-y: scroll;
@@ -19,37 +16,18 @@ body {
     margin: 0;
 }
 
-main {
-    max-width: 1000px;
-    margin: 0 auto;
-}
+main { max-width: 1000px; margin: 0 auto; }
 
-p {
-    line-height: 1.7;
-    margin-top: 0;
-    margin-bottom: 18px;
-}
+p { line-height: 1.7; margin-top: 0; margin-bottom: 18px; }
 
-ul,
-ol {
-    line-height: 1.9;
-    padding-left: 35px;
-}
+ul, ol { line-height: 1.9; padding-left: 35px; }
 
-li {
-    margin-bottom: 5px;
-}
-
+li { margin-bottom: 5px; }
 
 /* =====================================
    2. HEADER AND NAVIGATION
 ===================================== */
-
-.top-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+.top-header { position: sticky; top: 0; z-index: 1000; }
 
 header {
     background-color: #1f2937;
@@ -57,11 +35,7 @@ header {
     text-align: center;
 }
 
-h1 {
-    color: white;
-    font-size: 36px;
-    margin: 0;
-}
+h1 { color: white; font-size: 36px; margin: 0; }
 
 nav {
     background-color: #1f2937;
@@ -80,16 +54,11 @@ nav a {
     transition: color 0.3s, background-color 0.3s;
 }
 
-nav a:hover {
-    color: #93c5fd;
-    background-color: #374151;
-}
-
+nav a:hover { color: #93c5fd; background-color: #374151; }
 
 /* =====================================
    3. GENERAL SECTION STYLES
 ===================================== */
-
 section {
     background-color: white;
     padding: 25px;
@@ -110,11 +79,9 @@ h2 {
     border-bottom: 2px solid #93c5fd;
 }
 
-
 /* =====================================
    4. HERO SECTION
 ===================================== */
-
 .hero {
     padding: 65px 55px;
     margin: 30px auto;
@@ -163,14 +130,9 @@ h2 {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.hero-buttons a:hover {
-    text-decoration: none;
-}
+.hero-buttons a:hover { text-decoration: none; }
 
-.btn-primary {
-    background-color: #3b82f6;
-    color: white;
-}
+.btn-primary { background-color: #3b82f6; color: white; }
 
 .btn-primary:hover {
     background-color: #2563eb;
@@ -178,10 +140,7 @@ h2 {
     transform: translateY(-2px);
 }
 
-.btn-secondary {
-    border: 1px solid #93c5fd;
-    color: #1f2937;
-}
+.btn-secondary { border: 1px solid #93c5fd; color: #1f2937; }
 
 .btn-secondary:hover {
     background-color: #f4f6f8;
@@ -189,31 +148,22 @@ h2 {
     transform: translateY(-2px);
 }
 
-
 /* =====================================
    5. ABOUT ME SECTION
 ===================================== */
-
 .about-container {
     display: flex;
     align-items: center;
     gap: 0;
-
     position: relative;
     isolation: isolate;
     overflow: hidden;
-
-   background-image:
-    linear-gradient(
-        rgba(255, 255, 255, 0.10),
-        rgba(255, 255, 255, 0.10)
-    ),
-    url("../images/profile.jpg");
-
-background-size: cover;
-background-position: center center;
-background-repeat: no-repeat;
-
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10)),
+        url("../images/profile.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     padding: 30px;
     border-radius: 10px;
 }
@@ -239,20 +189,12 @@ background-repeat: no-repeat;
     margin: 0 auto;
 }
 
-.about-text {
-    flex: 1;
-}
-
+.about-text { flex: 1; }
 
 /* =====================================
    6. SKILLS SECTION
 ===================================== */
-
-.skills-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+.skills-container { display: flex; gap: 20px; flex-wrap: wrap; }
 
 .skill-card {
     background-color: #f4f6f8;
@@ -272,21 +214,12 @@ background-repeat: no-repeat;
     margin-bottom: 10px;
 }
 
-.skill-card ul {
-    padding-left: 25px;
-    margin-bottom: 0;
-}
-
+.skill-card ul { padding-left: 25px; margin-bottom: 0; }
 
 /* =====================================
    7. PROFESSIONAL EXPERIENCE
 ===================================== */
-
-.experience-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+.experience-container { display: flex; gap: 20px; flex-wrap: wrap; }
 
 .experience-card {
     background-color: #f4f6f8;
@@ -313,21 +246,12 @@ background-repeat: no-repeat;
     margin-bottom: 12px;
 }
 
-.experience-card ul {
-    padding-left: 25px;
-    margin-bottom: 0;
-}
-
+.experience-card ul { padding-left: 25px; margin-bottom: 0; }
 
 /* =====================================
    8. PROJECTS SECTION
 ===================================== */
-
-.project-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+.project-container { display: flex; gap: 20px; flex-wrap: wrap; }
 
 .project-card {
     background-color: #f4f6f8;
@@ -354,39 +278,21 @@ background-repeat: no-repeat;
     margin-bottom: 0;
 }
 
-
 /* =====================================
    9. GENERAL LINKS
 ===================================== */
+a { color: #0066cc; text-decoration: none; }
 
-a {
-    color: #0066cc;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #ff6600;
-    text-decoration: underline;
-}
+a:hover { color: #ff6600; text-decoration: underline; }
 
 /* =====================================
-   CONTACT SECTION
+   10. CONTACT SECTION
 ===================================== */
+.contact-intro { text-align: center; color: #555555; }
 
-.contact-intro {
-    text-align: center;
-    color: #555555;
-}
+.contact-details { max-width: 500px; margin: 25px auto; }
 
-.contact-details {
-    max-width: 500px;
-    margin: 25px auto;
-}
-
-.contact-buttons {
-    text-align: center;
-    margin-top: 25px;
-}
+.contact-buttons { text-align: center; margin-top: 25px; }
 
 .contact-buttons a {
     display: inline-block;
@@ -397,9 +303,8 @@ a:hover {
 }
 
 /* =====================================
-   10. FOOTER
+   11. FOOTER
 ===================================== */
-
 footer {
     background-color: #333333;
     color: white;
@@ -409,44 +314,20 @@ footer {
     font-size: 14px;
 }
 
-
 /* =====================================
-   11. TABLET RESPONSIVENESS
+   12. TABLET RESPONSIVENESS
 ===================================== */
-
 @media (max-width: 768px) {
-
-    .project-card {
-        flex-basis: 250px;
-    }
-
+    .project-card { flex-basis: 250px; }
 }
 
-
 /* =====================================
-   12. MOBILE RESPONSIVENESS
+   13. MOBILE RESPONSIVENESS
 ===================================== */
-
 @media (max-width: 600px) {
-
-    /* General Mobile Text */
-
-    body {
-        font-size: 16px;
-    }
-    
-    /* Mobile Header */
-
-    header {
-        padding: 15px 10px;
-    }
-
-    h1 {
-        font-size: 21px;
-        line-height: 1.4;
-    }
-
-    /* Navigation */
+    body { font-size: 16px; }
+    header { padding: 15px 10px; }
+    h1 { font-size: 21px; line-height: 1.4; }
 
     nav {
         padding: 8px 5px;
@@ -463,62 +344,128 @@ footer {
         font-size: 13px;
     }
 
-    /* Hero section */
-
-    .hero {
-        padding: 28px 18px;
-        margin: 15px 15px;
-    }
-
-    .hero h2 {
-        font-size: 24px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .hero-buttons a {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* About Me */
-
-    .about-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .about-image {
-        flex: none;
-    }
-
-    /* Projects */
-
-    .project-card {
-        flex: 1 1 100%;
-        min-width: 0;
-    }
-
+    .hero { padding: 28px 18px; margin: 15px 15px; }
+    .hero h2 { font-size: 25px; }
+    .hero-buttons { flex-direction: column; gap: 10px; }
+    .hero-buttons a { width: 100%; text-align: center; }
+    .about-container { flex-direction: column; text-align: center; }
+    .about-image { flex: none; }
+    .project-card { flex: 1 1 100%; min-width: 0; }
+    h2 { font-size: 21px; }
+    h3 { font-size: 18px; }
 }
-    /* Mobile Section Headings */
 
-    h2 {
-        font-size: 21px;
-    }
+/* =====================================
+   14. FLOATING FEEDBACK BUTTON AND FORM
+===================================== */
+.feedback-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1100;
+    font-family: Verdana, sans-serif;
+}
 
-    .hero h2 {
-        font-size: 25px;
-    }
+.feedback-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 17px;
+    color: #ffffff;
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    list-style: none;
+    transition: background-color 0.2s, transform 0.2s;
+}
 
-    h3 {
-        font-size: 18px;
-    }
+.feedback-toggle::-webkit-details-marker { display: none; }
+.feedback-toggle::marker { content: ""; }
+
+.feedback-toggle:hover {
+    background-color: #374151;
+    transform: translateY(-2px);
+}
+
+.feedback-toggle:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+.feedback-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.feedback-panel {
+    position: absolute;
+    right: 0;
+    bottom: 62px;
+    display: flex;
+    flex-direction: column;
+    width: min(420px, calc(100vw - 32px));
+    max-height: min(700px, calc(100vh - 110px));
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+}
+
+.feedback-panel-header {
+    padding: 16px 18px 10px;
+    background: #1f2937;
+    color: #ffffff;
+}
+
+.feedback-panel-header h2 {
+    margin: 0 0 6px;
+    padding: 0;
+    border: 0;
+    color: #ffffff;
+    text-align: left;
+    font-size: 17px;
+}
+
+.feedback-panel-header p {
+    margin: 0;
+    color: #e5e7eb;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.feedback-panel iframe {
+    display: block;
+    width: 100%;
+    height: min(590px, calc(100vh - 190px));
+    min-height: 360px;
+    border: 0;
+    background: #ffffff;
+}
+
 @media (max-width: 600px) {
-    .about-container {
-        background-position: center center;
-        background-size: cover;
+    .feedback-widget { right: 14px; bottom: 14px; }
+    .feedback-toggle { padding: 11px 14px; font-size: 13px; }
+
+    .feedback-panel {
+        right: 0;
+        bottom: 58px;
+        width: calc(100vw - 28px);
+        max-height: calc(100vh - 90px);
+    }
+
+    .feedback-panel iframe {
+        height: calc(100vh - 190px);
+        min-height: 300px;
     }
 }
