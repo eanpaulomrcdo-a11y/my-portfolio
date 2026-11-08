@@ -1,0 +1,118 @@
+
+/* =============================================
+   IPM: SPACE DEFENDER
+   ============================================= */
+
+
+/* =============================================
+   1. GENERAL PAGE
+   ============================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: #080e1c;
+    color: #ffffff;
+    font-family: Verdana, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* =============================================
+   2. GAME CONTAINER
+   ============================================= */
+
+.game-container {
+    width: 95%;
+    max-width: 1000px;
+    padding: 20px;
+
+    text-align: center;
+}
+
+
+/* =============================================
+   3. GAME HEADER
+   ============================================= */
+
+.game-header h1 {
+    color: #60a5fa;
+    font-size: 30px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.game-header p {
+    color: #b8c7dc;
+    font-size: 14px;
+}
+
+
+/* =============================================
+   4. GAME SCREEN
+   ============================================= */
+
+.game-screen {
+    margin-top: 25px;
+
+    border: 2px solid #2563eb;
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    background: #050b18;
+}
+
+
+/* =============================================
+   5. GAME CONTROLS
+   ============================================= */
+
+.game-controls {
+    margin-top: 18px;
+
+    color: #93c5fd;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+
+/* =============================================
+   6. GAME BUTTON
+   ============================================= */
+
+#pauseButton {
+    margin-top: 12px;
+    padding: 10px 25px;
+
+    background: #2563eb;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    font-weight: bold;
+    font-family: Verdana, sans-serif;
+
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#pauseButton:hover {
+    background: #1d4ed8;
+}
