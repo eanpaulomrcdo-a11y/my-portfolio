@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPM: Space Defender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- MAIN GAME CONTAINER -->
+    <main class="game-container">
+
+        <!-- GAME HEADER -->
+        <header class="game-header">
+            <h1>IPM: SPACE DEFENDER</h1>
+            <p>Defend the galaxy. Survive as long as you can.</p>
+        </header>
+
+        <!-- SHARED GAME AREA -->
+        <div class="game-area">
+
+            <!-- MENU BACKGROUND -->
+            <section id="menuBackground">
+                <canvas id="menuCanvas" width="900" height="500"></canvas>
+            </section>
+
+            <!-- MAIN MENU -->
+            <section id="mainMenu" class="main-menu">
+                <div class="menu-overlay">
+                    <h2>IPM: SPACE DEFENDER</h2>
+                    <p>DEFEND THE GALAXY</p>
+                    <p>Survive the alien invasion.</p>
+
+                    <div class="menu-buttons">
+                        <button id="startGameButton">START GAME</button>
+                        <button id="highScoresButton">HIGH SCORES</button>
+                        <button id="optionsButton">OPTIONS</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GAMEPLAY SCREEN -->
+            <section id="gameScreen" class="game-screen">
+                <canvas id="gameCanvas" width="900" height="500"></canvas>
+            </section>
+
+            
+<!-- GAME OVER SCREEN -->
+<section id="gameOverScreen" class="main-menu sub-menu game-over-screen">
+    <div class="menu-overlay">
+        <h2>GAME OVER</h2>
+
+        <p class="game-over-title">THE FIGHT ISN'T OVER.</p>
+        <p class="game-over-message">
+            The galaxy still needs you. Rise again, pilot.
+        </p>
+
+        <p id="finalScoreDisplay">YOUR SCORE: 0</p>
+
+        <div id="recordEntrySection" style="display: none;">
+
+    <p id="achievementMessage"></p>
+
+    <input
+        type="text"
+        id="playerNameInput"
+        placeholder="ENTER YOUR PILOT NAME"
+        maxlength="15"
+        autocomplete="off"
+    >
+
+    <button id="saveRecordButton">SAVE RECORD</button>
+
+</div>
+
+        <div class="menu-buttons">
+            <button id="playAgainButton">PLAY AGAIN</button>
+            <button id="gameOverMenuButton">MAIN MENU</button>
+        </div>
+    </div>
+</section>
+
+
+            <!-- HIGH SCORES SCREEN -->
+            <section id="highScoresScreen" class="high-scores-screen">
+                <div class="menu-overlay">
+                    <h2>HIGH SCORES</h2>
+
+                    <div id="highScoresList">
+                        <p>NO HIGH SCORES RECORDED YET</p>
+                    </div>
+
+                    <div class="menu-buttons">
+                        <button id="highScoresBackButton">
+                            BACK TO MAIN MENU
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OPTIONS SCREEN -->
+            <section id="optionsScreen" class="options-screen">
+                <div class="menu-overlay">
+                    <h2>OPTIONS</h2>
+
+                    <div class="options-list">
+                        <button id="controlsGuideButton">CONTROLS GUIDE</button>
+                        <button id="resetRecordsButton">RESET RECORDS</button>
+                        <button class="disabled-option" disabled>
+                            SOUND EFFECTS — COMING SOON
+                        </button>
+                        <button class="disabled-option" disabled>
+                            BACKGROUND MUSIC — COMING SOON
+                        </button>
+                        <button class="disabled-option" disabled>
+                            DIFFICULTY — COMING SOON
+                        </button>
+                    </div>
+
+                    <div class="menu-buttons">
+                        <button id="optionsBackButton">
+                            BACK TO MAIN MENU
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTROLS GUIDE SCREEN -->
+            <section id="controlsGuideScreen" class="sub-screen">
+                <div class="menu-overlay">
+                    <h2>CONTROLS GUIDE</h2>
+
+                    <div class="controls-guide-list">
+                        <p>↑ — MOVE UP</p>
+                        <p>↓ — MOVE DOWN</p>
+                        <p>← — MOVE LEFT</p>
+                        <p>→ — MOVE RIGHT</p>
+                        <p>AUTO FIRE — ENABLED</p>
+                    </div>
+
+                    <div class="menu-buttons">
+                        <button id="controlsGuideBackButton">
+                            BACK TO OPTIONS
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESET RECORDS SCREEN -->
+            <section id="resetRecordsScreen" class="sub-screen">
+                <div class="menu-overlay">
+                    <h2>RESET RECORDS</h2>
+
+                    <div class="options-list">
+                        <button id="resetLeaderboardButton">
+                            RESET TOP 5 LEADERBOARD
+                        </button>
+                        <button id="resetHighScoreButton">
+                            RESET PERSONAL HIGH SCORE
+                        </button>
+                    </div>
+
+                    <div class="menu-buttons">
+                        <button id="resetRecordsBackButton">
+                            BACK TO OPTIONS
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESET CONFIRMATION SCREEN -->
+            <section id="resetConfirmationScreen" class="sub-screen">
+                <div class="menu-overlay">
+                    <h2>CONFIRM RESET</h2>
+
+                    <p id="resetConfirmationMessage">
+                        ARE YOU SURE YOU WANT TO RESET?
+                    </p>
+
+                    <div class="menu-buttons">
+                        <button id="confirmResetButton">YES, RESET</button>
+                        <button id="cancelResetButton">CANCEL</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- GAME CONTROLS -->
+        <footer class="game-controls">
+            <p>↑ ↓ ← → &nbsp; MOVE YOUR SPACESHIP</p>
+            <p>AUTO FIRE ENABLED</p>
+
+            <button id="pauseButton">START GAME</button>
+            <button id="quitGameButton">QUIT GAME</button>
+        </footer>
+
+    </main>
+
+    <!-- GAME JAVASCRIPT -->
+    <script src="game.js"></script>
+
+</body>
+</html>
