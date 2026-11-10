@@ -15,12 +15,101 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background: #080e1c;
+    background: #050816;
     color: #ffffff;
     font-family: Verdana, sans-serif;
     display: block;
+    position: relative;
+    isolation: isolate;
 }
 
+/* DISTANT GALAXY BACKGROUND */
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+
+/* Tiny distant stars */
+radial-gradient(circle 1px at 8% 18%, rgba(255,255,255,0.9) 99%, transparent 100%),
+radial-gradient(circle 1px at 22% 72%, rgba(191,219,254,0.9) 99%, transparent 100%),
+radial-gradient(circle 1.5px at 35% 12%, rgba(255,255,255,0.8) 99%, transparent 100%),
+radial-gradient(circle 1px at 48% 82%, rgba(255,255,255,0.8) 99%, transparent 100%),
+radial-gradient(circle 1px at 61% 25%, rgba(191,219,254,0.9) 99%, transparent 100%),
+radial-gradient(circle 1.5px at 79% 55%, rgba(255,255,255,0.9) 99%, transparent 100%),
+radial-gradient(circle 1px at 91% 15%, rgba(255,255,255,0.8) 99%, transparent 100%),
+radial-gradient(circle 1px at 68% 91%, rgba(191,219,254,0.8) 99%, transparent 100%),
+
+/* Large sun partially visible at bottom-right */
+radial-gradient(
+    circle 190px at 96% 100%,
+    #ffe0a8 0%,
+    #f5b875 20%,
+    #dc865f 42%,
+    rgba(190, 83, 65, 0.65) 65%,
+    transparent 100%
+),
+
+/* Warm solar atmosphere */
+radial-gradient(
+    ellipse 340px 250px at 96% 100%,
+    rgba(249, 115, 72, 0.30),
+    transparent 75%
+),
+
+/* Large moon on the left */
+radial-gradient(
+    circle 115px at 12% 48%,
+    #a5b4cc 0%,
+    #7186a8 25%,
+    #405578 55%,
+    #1b294b 82%,
+    transparent 100%
+),
+
+/* Moon's soft blue glow */
+radial-gradient(
+    ellipse 230px 210px at 12% 48%,
+    rgba(59, 130, 246, 0.22),
+    transparent 75%
+),
+        
+    /* Soft violet galaxy outer glow */
+        radial-gradient(
+            ellipse 420px 260px at 75% 35%,
+            rgba(109, 40, 217, 0.32),
+            transparent 75%
+        ),
+
+        /* Blue galaxy spiral glow */
+        radial-gradient(
+            ellipse 280px 180px at 75% 35%,
+            rgba(37, 99, 235, 0.30),
+            transparent 75%
+        ),
+
+        /* Glowing galactic core */
+        radial-gradient(
+            circle 65px at 75% 35%,
+            rgba(147, 197, 253, 0.20),
+            rgba(96, 165, 250, 0.08) 45%,
+            transparent 100%
+        ),
+
+        /* Distant nebula */
+        radial-gradient(
+            ellipse 650px 350px at 25% 75%,
+            rgba(76, 29, 149, 0.12),
+            transparent 75%
+        );
+
+    filter: blur(3px);
+    opacity: 0.9;
+}
 
 /* =============================================
    2. GAME CONTAINER
