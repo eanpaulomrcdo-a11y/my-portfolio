@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,6 @@
     <title>IPM: Space Defender</title>
     <link rel="icon" type="image/png" href="ipm-sd-favicon.png">
     <link rel="stylesheet" href="style.css">
-    
 </head>
 
 <body>
@@ -18,8 +16,8 @@
 
         <!-- GAME HEADER -->
         <header class="game-header">
-            <h1>IPM: SPACE DEFENDER</h1>
-            <p>Defend the galaxy. Survive as long as you can.</p>
+            <h1>SPACE DEFENDER</h1>
+            <p>Aliens on the attack!</p>
         </header>
 
         <!-- SHARED GAME AREA -->
@@ -33,9 +31,9 @@
             <!-- MAIN MENU -->
             <section id="mainMenu" class="main-menu">
                 <div class="menu-overlay">
-                    <h2>IPM: SPACE DEFENDER</h2>
+                    <img src="ipm-sd-logo.png" alt="Space Defender" class="main-menu-logo">
                     <p>DEFEND THE GALAXY</p>
-                    <p>Survive the alien invasion.</p>
+                    <p>Survive as long as you can.</p>
 
                     <div class="menu-buttons">
                         <button id="startGameButton">START GAME</button>
@@ -50,56 +48,65 @@
                 <canvas id="gameCanvas" width="900" height="500"></canvas>
             </section>
 
-            
-<!-- GAME OVER SCREEN -->
-<section id="gameOverScreen" class="main-menu sub-menu game-over-screen">
-    <div class="menu-overlay">
-        <h2>GAME OVER</h2>
+            <!-- NEW HIGH SCORE CONGRATULATIONS SCREEN -->
+            <section id="congratulationsScreen" class="main-menu sub-menu game-over-screen">
+                <div class="menu-overlay">
+                    <h2>CONGRATULATIONS!</h2>
+                    <p class="game-over-title">NEW HIGH SCORE!</p>
+                    <p class="game-over-message">You've set a new personal record, pilot!</p>
+                    <p id="finalScoreDisplay">YOUR SCORE: 0</p>
+                    <div class="menu-buttons">
+                        <button id="continueToNameEntryButton">CONTINUE</button>
+                    </div>
+                </div>
+            </section>
 
-        <p class="game-over-title">THE FIGHT ISN'T OVER.</p>
-        <p class="game-over-message">
-            The galaxy still needs you. Rise again, pilot.
-        </p>
+            <!-- TOP 5 NAME ENTRY SCREEN -->
+            <section id="nameEntryScreen" class="main-menu sub-menu game-over-screen">
+                <div class="menu-overlay">
+                    <h2>TOP 5 QUALIFIED!</h2>
+                    <p class="game-over-title">ENTER YOUR PILOT NAME</p>
+                    <p class="game-over-message">Add your name to the leaderboard.</p>
+                    <input
+                        type="text"
+                        id="playerNameInput"
+                        placeholder="ENTER YOUR PILOT NAME"
+                        maxlength="15"
+                        autocomplete="off"
+                    >
+                    <div class="menu-buttons">
+                        <button id="saveRecordButton">SAVE NAME</button>
+                        <button id="skipRecordButton">SKIP</button>
+                    </div>
+                </div>
+            </section>
 
-        <p id="finalScoreDisplay">YOUR SCORE: 0</p>
+            <!-- GAME OVER SCREEN -->
+            <section id="gameOverScreen" class="main-menu sub-menu game-over-screen">
+                <div class="menu-overlay">
+                    <h2>GAME OVER</h2>
+                    <p class="game-over-title">THE FIGHT ISN'T OVER.</p>
+                    <p class="game-over-message">
+                        The galaxy still needs you. Rise again, pilot.
+                    </p>
+                    <p id="gameOverFinalScoreDisplay">FINAL SCORE: 0</p>
 
-        <div id="recordEntrySection" style="display: none;">
-
-    <p id="achievementMessage"></p>
-
-    <input
-        type="text"
-        id="playerNameInput"
-        placeholder="ENTER YOUR PILOT NAME"
-        maxlength="15"
-        autocomplete="off"
-    >
-
-    <button id="saveRecordButton">SAVE RECORD</button>
-
-</div>
-
-        <div class="menu-buttons">
-            <button id="playAgainButton">PLAY AGAIN</button>
-            <button id="gameOverMenuButton">MAIN MENU</button>
-        </div>
-    </div>
-</section>
-
+                    <div class="menu-buttons">
+                        <button id="playAgainButton">PLAY AGAIN</button>
+                        <button id="gameOverMenuButton">MAIN MENU</button>
+                    </div>
+                </div>
+            </section>
 
             <!-- HIGH SCORES SCREEN -->
             <section id="highScoresScreen" class="high-scores-screen">
                 <div class="menu-overlay">
                     <h2>HIGH SCORES</h2>
-
                     <div id="highScoresList">
                         <p>NO HIGH SCORES RECORDED YET</p>
                     </div>
-
                     <div class="menu-buttons">
-                        <button id="highScoresBackButton">
-                            BACK TO MAIN MENU
-                        </button>
+                        <button id="highScoresBackButton">BACK TO MAIN MENU</button>
                     </div>
                 </div>
             </section>
@@ -108,25 +115,15 @@
             <section id="optionsScreen" class="options-screen">
                 <div class="menu-overlay">
                     <h2>OPTIONS</h2>
-
                     <div class="options-list">
                         <button id="controlsGuideButton">CONTROLS GUIDE</button>
                         <button id="resetRecordsButton">RESET RECORDS</button>
-                        <button class="disabled-option" disabled>
-                            SOUND EFFECTS — COMING SOON
-                        </button>
-                        <button class="disabled-option" disabled>
-                            BACKGROUND MUSIC — COMING SOON
-                        </button>
-                        <button class="disabled-option" disabled>
-                            DIFFICULTY — COMING SOON
-                        </button>
+                        <button class="disabled-option" disabled>SOUND EFFECTS — COMING SOON</button>
+                        <button class="disabled-option" disabled>BACKGROUND MUSIC — COMING SOON</button>
+                        <button class="disabled-option" disabled>DIFFICULTY — COMING SOON</button>
                     </div>
-
                     <div class="menu-buttons">
-                        <button id="optionsBackButton">
-                            BACK TO MAIN MENU
-                        </button>
+                        <button id="optionsBackButton">BACK TO MAIN MENU</button>
                     </div>
                 </div>
             </section>
@@ -135,7 +132,6 @@
             <section id="controlsGuideScreen" class="sub-screen">
                 <div class="menu-overlay">
                     <h2>CONTROLS GUIDE</h2>
-
                     <div class="controls-guide-list">
                         <p>↑ — MOVE UP</p>
                         <p>↓ — MOVE DOWN</p>
@@ -143,11 +139,8 @@
                         <p>→ — MOVE RIGHT</p>
                         <p>AUTO FIRE — ENABLED</p>
                     </div>
-
                     <div class="menu-buttons">
-                        <button id="controlsGuideBackButton">
-                            BACK TO OPTIONS
-                        </button>
+                        <button id="controlsGuideBackButton">BACK TO OPTIONS</button>
                     </div>
                 </div>
             </section>
@@ -156,20 +149,12 @@
             <section id="resetRecordsScreen" class="sub-screen">
                 <div class="menu-overlay">
                     <h2>RESET RECORDS</h2>
-
                     <div class="options-list">
-                        <button id="resetLeaderboardButton">
-                            RESET TOP 5 LEADERBOARD
-                        </button>
-                        <button id="resetHighScoreButton">
-                            RESET PERSONAL HIGH SCORE
-                        </button>
+                        <button id="resetLeaderboardButton">RESET TOP 5 LEADERBOARD</button>
+                        <button id="resetHighScoreButton">RESET PERSONAL HIGH SCORE</button>
                     </div>
-
                     <div class="menu-buttons">
-                        <button id="resetRecordsBackButton">
-                            BACK TO OPTIONS
-                        </button>
+                        <button id="resetRecordsBackButton">BACK TO OPTIONS</button>
                     </div>
                 </div>
             </section>
@@ -178,11 +163,7 @@
             <section id="resetConfirmationScreen" class="sub-screen">
                 <div class="menu-overlay">
                     <h2>CONFIRM RESET</h2>
-
-                    <p id="resetConfirmationMessage">
-                        ARE YOU SURE YOU WANT TO RESET?
-                    </p>
-
+                    <p id="resetConfirmationMessage">ARE YOU SURE YOU WANT TO RESET?</p>
                     <div class="menu-buttons">
                         <button id="confirmResetButton">YES, RESET</button>
                         <button id="cancelResetButton">CANCEL</button>
@@ -196,7 +177,6 @@
         <footer class="game-controls">
             <p>↑ ↓ ← → &nbsp; MOVE YOUR SPACESHIP</p>
             <p>AUTO FIRE ENABLED</p>
-
             <button id="pauseButton">START GAME</button>
             <button id="quitGameButton">QUIT GAME</button>
         </footer>

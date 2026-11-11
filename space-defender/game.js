@@ -453,19 +453,25 @@ const cancelResetButton = document.getElementById("cancelResetButton");
 
 let pendingReset = null;
 
-// GAME OVER SCREEN ELEMENTS
+// GAME OVER AND HIGH-SCORE SCREENS
 
+const congratulationsScreen = document.getElementById("congratulationsScreen");
+const nameEntryScreen = document.getElementById("nameEntryScreen");
 const gameOverScreen = document.getElementById("gameOverScreen");
-const finalScoreDisplay = document.getElementById("finalScoreDisplay");
+
+const congratulationsFinalScoreDisplay = document.getElementById("finalScoreDisplay");
+const gameOverFinalScoreDisplay = document.getElementById("gameOverFinalScoreDisplay");
+
+const continueToNameEntryButton = document.getElementById("continueToNameEntryButton");
+const playerNameInput = document.getElementById("playerNameInput");
+const saveRecordButton = document.getElementById("saveRecordButton");
+const skipRecordButton = document.getElementById("skipRecordButton");
 
 const playAgainButton = document.getElementById("playAgainButton");
 const gameOverMenuButton = document.getElementById("gameOverMenuButton");
 
-// TOP 5 RECORD ENTRY ELEMENTS
-const recordEntrySection = document.getElementById("recordEntrySection");
-const achievementMessage = document.getElementById("achievementMessage");
-const playerNameInput = document.getElementById("playerNameInput");
-const saveRecordButton = document.getElementById("saveRecordButton");
+// Prevent a score from being submitted more than once.
+let recordSubmissionHandled = false;
 
 // SCREEN NAVIGATION
 function showScreen(screen) {
@@ -476,6 +482,8 @@ function showScreen(screen) {
     highScoresScreen.style.display = "none";
     optionsScreen.style.display = "none";
     controlsGuideScreen.style.display = "none";
+    congratulationsScreen.style.display = "none";
+    nameEntryScreen.style.display = "none";
     gameOverScreen.style.display = "none";
     gameScreen.style.display = "none";
     gameControls.style.display = "none";
@@ -540,11 +548,15 @@ if (screen === resetConfirmationScreen) {
 
 }
 
-    // Show the frozen battlefield behind Game Over
-    if (screen === gameOverScreen) {
+    // Show the frozen battlefield behind the high-score and Game Over screens.
+    if (
+        screen === congratulationsScreen ||
+        screen === nameEntryScreen ||
+        screen === gameOverScreen
+    ) {
 
         gameScreen.style.display = "block";
-        gameOverScreen.style.display = "flex";
+        screen.style.display = "flex";
 
     }
 
@@ -597,6 +609,7 @@ startGameButton.addEventListener("click", function () {
     // Reset achievement status
     achievedNewHighScore = false;
     qualifiesForTopFive = false;
+    recordSubmissionHandled = false;
 
     showScreen(gameScreen);
 
@@ -770,6 +783,7 @@ if (!hasStarted) {
 
     achievedNewHighScore = false;
     qualifiesForTopFive = false;
+    recordSubmissionHandled = false;
 
     hasStarted = true;
     isPaused = false;
@@ -816,7 +830,32 @@ quitGameButton.addEventListener("click", function () {
 
 });
 
+// CONTINUE FROM NEW HIGH-SCORE CONGRATULATIONS
+
+continueToNameEntryButton.addEventListener("click", function () {
+
+    if (qualifiesForTopFive && !recordSubmissionHandled) {
+        showScreen(nameEntryScreen);
+        playerNameInput.focus();
+    }
+
+});
+
 // SAVE TOP 5 RECORD
+
+function submitTopScore(playerName) {
+
+    if (recordSubmissionHandled || !qualifiesForTopFive) {
+        return;
+    }
+
+    recordTopScore(playerName, finalScore);
+    recordSubmissionHandled = true;
+
+    displayTopScores();
+    showScreen(gameOverScreen);
+
+}
 
 saveRecordButton.addEventListener("click", function () {
 
@@ -825,18 +864,20 @@ saveRecordButton.addEventListener("click", function () {
     if (playerName === "") {
 
         alert("PLEASE ENTER YOUR PILOT NAME!");
-
         playerNameInput.focus();
-
         return;
 
     }
 
-    recordTopScore(playerName, finalScore);
+    submitTopScore(playerName);
 
-    recordEntrySection.style.display = "none";
+});
 
-    displayTopScores();
+// SKIP NAME ENTRY AND SAVE THE SCORE ANONYMOUSLY
+
+skipRecordButton.addEventListener("click", function () {
+
+    submitTopScore("ANONYMOUS");
 
 });
 
@@ -987,8 +1028,9 @@ function drawPlayer() {
     ctx.restore();
 
 }
+
 // =============================================
-// 8. KEYBOARD CONTROLS
+// 8. KEYBOARD AND MOBILE TOUCH CONTROLS
 // =============================================
 
 const keys = {
@@ -997,6 +1039,114 @@ const keys = {
     ArrowLeft: false,
     ArrowRight: false
 };
+
+// MOBILE TOUCH CONTROL STATE
+let touchControlActive = false;
+let touchPointerId = null;
+
+let touchTargetX = 0;
+let touchTargetY = 0;
+
+// KEYBOARD CONTROLS
+document.addEventListener("keydown", function (event) {
+
+    if (event.key in keys) {
+
+        event.preventDefault();
+        keys[event.key] = true;
+
+    }
+
+});
+
+document.addEventListener("keyup", function (event) {
+
+    if (event.key in keys) {
+
+        event.preventDefault();
+        keys[event.key] = false;
+
+    }
+
+});
+
+// CONVERT TOUCH POSITION TO CANVAS POSITION
+function updateTouchTarget(event) {
+
+    const rect = canvas.getBoundingClientRect();
+
+    touchTargetX =
+        (event.clientX - rect.left) *
+        (canvas.width / rect.width);
+
+    touchTargetY =
+        (event.clientY - rect.top) *
+        (canvas.height / rect.height);
+
+}
+
+// START TOUCH CONTROL
+canvas.addEventListener("pointerdown", function (event) {
+
+    if (
+        event.pointerType !== "touch" &&
+        event.pointerType !== "pen"
+    ) {
+        return;
+    }
+
+    if (
+        !hasStarted ||
+        isPaused ||
+        isPlayerDying ||
+        isGameOver
+    ) {
+        return;
+    }
+
+    event.preventDefault();
+
+    touchControlActive = true;
+    touchPointerId = event.pointerId;
+
+    updateTouchTarget(event);
+
+    canvas.setPointerCapture(event.pointerId);
+
+});
+
+// MOVE SPACESHIP WITH FINGER
+canvas.addEventListener("pointermove", function (event) {
+
+    if (
+        !touchControlActive ||
+        event.pointerId !== touchPointerId
+    ) {
+        return;
+    }
+
+    event.preventDefault();
+
+    updateTouchTarget(event);
+
+});
+
+// RELEASE TOUCH CONTROL
+function stopTouchControl(event) {
+
+    if (event.pointerId !== touchPointerId) {
+        return;
+    }
+
+    touchControlActive = false;
+    touchPointerId = null;
+
+}
+
+canvas.addEventListener("pointerup", stopTouchControl);
+canvas.addEventListener("pointercancel", stopTouchControl);
+canvas.addEventListener("lostpointercapture", stopTouchControl);
+
 
 document.addEventListener("keydown", function (event) {
 
@@ -1021,26 +1171,40 @@ document.addEventListener("keyup", function (event) {
 });
 
 
+
 // =============================================
 // 9. PLAYER MOVEMENT
 // =============================================
 
 function updatePlayer() {
 
-    if (keys.ArrowUp) {
-        player.y -= player.speed;
+    // MOBILE TOUCH MOVEMENT
+    if (touchControlActive) {
+
+        player.x = touchTargetX - player.width / 2;
+        player.y = touchTargetY - player.height / 2;
+
     }
 
-    if (keys.ArrowDown) {
-        player.y += player.speed;
-    }
+    // DESKTOP KEYBOARD MOVEMENT
+    else {
 
-    if (keys.ArrowLeft) {
-        player.x -= player.speed;
-    }
+        if (keys.ArrowUp) {
+            player.y -= player.speed;
+        }
 
-    if (keys.ArrowRight) {
-        player.x += player.speed;
+        if (keys.ArrowDown) {
+            player.y += player.speed;
+        }
+
+        if (keys.ArrowLeft) {
+            player.x -= player.speed;
+        }
+
+        if (keys.ArrowRight) {
+            player.x += player.speed;
+        }
+
     }
 
     // Keep spaceship inside game area
@@ -1055,6 +1219,7 @@ function updatePlayer() {
     );
 
 }
+
 // =============================================
 // 10. AUTOMATIC PLAYER LASER SYSTEM
 // =============================================
@@ -2305,11 +2470,10 @@ runStartingHighScore = highScore;
 
 achievedNewHighScore = false;
 qualifiesForTopFive = false;
+recordSubmissionHandled = false;
 
-// Hide and clear record entry
-recordEntrySection.style.display = "none";
+// Clear the name field for the next run.
 playerNameInput.value = "";
-achievementMessage.textContent = "";
 
     // Reset game states
     isGameOver = false;
@@ -2395,55 +2559,46 @@ if (explosions.length === 0) {
 
     finalScore = score;
 
-    // Check for a new personal high score
+    // Check for a new personal high score.
     achievedNewHighScore = finalScore > runStartingHighScore;
 
-    // Check whether the score qualifies for Top 5
+    // Check whether the score qualifies for Top 5.
+    // A new personal high score always gets the name-entry opportunity.
     qualifiesForTopFive =
         finalScore > 0 &&
         (
+            achievedNewHighScore ||
             topScores.length < 5 ||
             finalScore >= topScores[4].score
         );
 
-        console.log("Final Score:", finalScore);
-console.log("Top Scores:", topScores);
-console.log("Qualifies for Top 5:", qualifiesForTopFive);
-console.log("New Personal Record:", achievedNewHighScore);
+    recordSubmissionHandled = false;
+    playerNameInput.value = "";
 
-    // Display final score
-    finalScoreDisplay.textContent = "FINAL SCORE: " + finalScore;
+    console.log("Final Score:", finalScore);
+    console.log("Top Scores:", topScores);
+    console.log("Qualifies for Top 5:", qualifiesForTopFive);
+    console.log("New Personal Record:", achievedNewHighScore);
 
-    // Hide record entry by default
-    recordEntrySection.style.display = "none";
+    // Update the score shown on both relevant screens.
+    congratulationsFinalScoreDisplay.textContent = "YOUR SCORE: " + finalScore;
+    gameOverFinalScoreDisplay.textContent = "FINAL SCORE: " + finalScore;
 
-    // Show record entry only for Top 5 scores
-    if (qualifiesForTopFive) {
+    // Show only one screen at a time.
+    if (achievedNewHighScore) {
 
-        recordEntrySection.style.display = "block";
+        showScreen(congratulationsScreen);
 
-        playerNameInput.value = "";
+    } else if (qualifiesForTopFive) {
 
-        if (achievedNewHighScore) {
+        showScreen(nameEntryScreen);
+        playerNameInput.focus();
 
-            achievementMessage.textContent =
-                "NEW PERSONAL HIGH SCORE!";
+    } else {
 
-            achievementMessage.style.color = "#facc15";
-
-        } else {
-
-            achievementMessage.textContent =
-                "TOP 5 ACHIEVEMENT!";
-
-            achievementMessage.style.color = "#60a5fa";
-
-        }
+        showScreen(gameOverScreen);
 
     }
-
-    // Show Game Over screen
-    showScreen(gameOverScreen);
 
 }
 

@@ -23,7 +23,7 @@ body {
     isolation: isolate;
 }
 
-/* DISTANT GALAXY BACKGROUND */
+/* SPACE DEFENDER GALAXY BACKGROUND */
 
 body::after {
     content: "";
@@ -32,83 +32,18 @@ body::after {
     z-index: -1;
     pointer-events: none;
 
-    background:
-
-/* Tiny distant stars */
-radial-gradient(circle 1px at 8% 18%, rgba(255,255,255,0.9) 99%, transparent 100%),
-radial-gradient(circle 1px at 22% 72%, rgba(191,219,254,0.9) 99%, transparent 100%),
-radial-gradient(circle 1.5px at 35% 12%, rgba(255,255,255,0.8) 99%, transparent 100%),
-radial-gradient(circle 1px at 48% 82%, rgba(255,255,255,0.8) 99%, transparent 100%),
-radial-gradient(circle 1px at 61% 25%, rgba(191,219,254,0.9) 99%, transparent 100%),
-radial-gradient(circle 1.5px at 79% 55%, rgba(255,255,255,0.9) 99%, transparent 100%),
-radial-gradient(circle 1px at 91% 15%, rgba(255,255,255,0.8) 99%, transparent 100%),
-radial-gradient(circle 1px at 68% 91%, rgba(191,219,254,0.8) 99%, transparent 100%),
-
-/* Large sun partially visible at bottom-right */
-radial-gradient(
-    circle 190px at 96% 100%,
-    #ffe0a8 0%,
-    #f5b875 20%,
-    #dc865f 42%,
-    rgba(190, 83, 65, 0.65) 65%,
-    transparent 100%
-),
-
-/* Warm solar atmosphere */
-radial-gradient(
-    ellipse 340px 250px at 96% 100%,
-    rgba(249, 115, 72, 0.30),
-    transparent 75%
-),
-
-/* Large moon on the left */
-radial-gradient(
-    circle 115px at 12% 48%,
-    #a5b4cc 0%,
-    #7186a8 25%,
-    #405578 55%,
-    #1b294b 82%,
-    transparent 100%
-),
-
-/* Moon's soft blue glow */
-radial-gradient(
-    ellipse 230px 210px at 12% 48%,
-    rgba(59, 130, 246, 0.22),
-    transparent 75%
-),
-        
-    /* Soft violet galaxy outer glow */
-        radial-gradient(
-            ellipse 420px 260px at 75% 35%,
-            rgba(109, 40, 217, 0.32),
-            transparent 75%
+    background-image:
+        linear-gradient(
+            rgba(5, 8, 22, 0.70),
+            rgba(5, 8, 22, 0.70)
         ),
+        url("ipm-sd-background.png");
 
-        /* Blue galaxy spiral glow */
-        radial-gradient(
-            ellipse 280px 180px at 75% 35%,
-            rgba(37, 99, 235, 0.30),
-            transparent 75%
-        ),
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 
-        /* Glowing galactic core */
-        radial-gradient(
-            circle 65px at 75% 35%,
-            rgba(147, 197, 253, 0.20),
-            rgba(96, 165, 250, 0.08) 45%,
-            transparent 100%
-        ),
-
-        /* Distant nebula */
-        radial-gradient(
-            ellipse 650px 350px at 25% 75%,
-            rgba(76, 29, 149, 0.12),
-            transparent 75%
-        );
-
-    filter: blur(3px);
-    opacity: 0.9;
+    opacity: 1;
 }
 
 /* =============================================
@@ -129,17 +64,24 @@ radial-gradient(
    ============================================= */
 
 .game-header h1 {
-    color: #60a5fa;
     font-size: 30px;
+    font-weight: bold;
     letter-spacing: 3px;
-    margin-bottom: 10px;
-}
 
-.game-header p {
-    color: #b8c7dc;
-    font-size: 14px;
-}
+    background: linear-gradient(
+        90deg,
+        #60a5fa,
+        #38bdf8,
+        #fbbf24,
+        #f97316
+    );
 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    text-shadow: 0 0 18px rgba(59, 130, 246, 0.25);
+}
 
 /* =============================================
    4. MAIN MENU
@@ -260,6 +202,8 @@ canvas {
 #highScoresScreen,
 #optionsScreen,
 #gameOverScreen,
+#congratulationsScreen,
+#nameEntryScreen,
 .game-controls {
     display: none;
 }
@@ -559,4 +503,429 @@ canvas {
 
 #saveRecordButton:hover {
     background: #2563eb;
+}
+
+/* MAIN MENU LOGO */
+
+.main-menu-logo {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin: 0 auto 15px;
+    object-fit: contain;
+}
+
+/* MAIN MENU - REMOVE OVERLAY BOX */
+
+#mainMenu .menu-overlay {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* =============================================
+   19. CONGRATULATIONS AND NAME ENTRY SCREENS
+============================================= */
+
+#congratulationsScreen,
+#nameEntryScreen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 20px;
+    background: rgba(5, 11, 24, 0.82);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 3;
+}
+
+
+/* =============================================
+   19. NEW HIGH SCORE - CELEBRATION SCREEN
+============================================= */
+
+#congratulationsScreen {
+    background: rgba(3, 5, 20, 0.72);
+    z-index: 4;
+}
+
+#congratulationsScreen .menu-overlay {
+    position: relative;
+    width: 90%;
+    max-width: 480px;
+    padding: 35px 25px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(250, 204, 21, 0.16),
+            transparent 55%
+        ),
+        linear-gradient(145deg, #101a35, #080b20);
+
+    border: 1px solid #facc15;
+    border-radius: 16px;
+
+    box-shadow:
+        0 0 20px rgba(250, 204, 21, 0.25),
+        0 0 55px rgba(96, 165, 250, 0.15);
+
+    animation: achievementGlow 2.5s ease-in-out infinite alternate;
+}
+
+/* Decorative golden sparkles */
+
+#congratulationsScreen .menu-overlay::before {
+    content: "✦     ✧     ✦";
+    display: block;
+    color: #facc15;
+    font-size: 20px;
+    letter-spacing: 18px;
+    margin-bottom: 18px;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Trophy and congratulations heading */
+
+#congratulationsScreen h2 {
+    color: #67e8f9;
+    font-size: 25px;
+    letter-spacing: 3px;
+    margin: 0 0 18px;
+
+    text-shadow:
+        0 0 10px rgba(103, 232, 249, 0.7),
+        0 0 25px rgba(34, 211, 238, 0.4);
+}
+
+#congratulationsScreen h2::before {
+    content: "🏆";
+    display: block;
+    font-size: 55px;
+    margin-bottom: 15px;
+    animation: trophyFloat 2s ease-in-out infinite;
+}
+
+/* New high score message */
+
+#congratulationsScreen .game-over-title {
+    color: #facc15;
+    font-size: 19px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+
+    text-shadow: 0 0 12px rgba(250, 204, 21, 0.65);
+}
+
+#congratulationsScreen .game-over-message {
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Large achievement score */
+
+#congratulationsScreen #finalScoreDisplay {
+    color: #facc15;
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin: 15px 0 25px;
+
+    text-shadow:
+        0 0 10px rgba(250, 204, 21, 0.8),
+        0 0 25px rgba(250, 204, 21, 0.45);
+
+    animation: scorePulse 1.8s ease-in-out infinite;
+}
+
+/* Continue button */
+
+#continueToNameEntryButton {
+    width: 85%;
+    max-width: 280px;
+    padding: 15px;
+
+    background: linear-gradient(90deg, #854d0e, #ca8a04);
+    color: #ffffff;
+
+    border: 1px solid #facc15;
+    border-radius: 8px;
+
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 15px rgba(250, 204, 21, 0.25);
+    transition: 0.25s;
+}
+
+#continueToNameEntryButton:hover {
+    background: linear-gradient(90deg, #a16207, #eab308);
+    box-shadow: 0 0 25px rgba(250, 204, 21, 0.6);
+    transform: scale(1.04);
+}
+
+/* Celebration animations */
+
+@keyframes achievementGlow {
+    from {
+        box-shadow:
+            0 0 15px rgba(250, 204, 21, 0.2),
+            0 0 35px rgba(96, 165, 250, 0.1);
+    }
+
+    to {
+        box-shadow:
+            0 0 30px rgba(250, 204, 21, 0.4),
+            0 0 65px rgba(96, 165, 250, 0.2);
+    }
+}
+
+@keyframes trophyFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes scorePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Mobile adjustment */
+
+@media (max-width: 600px) {
+    #congratulationsScreen .menu-overlay {
+        padding: 25px 18px;
+    }
+
+    #congratulationsScreen h2 {
+        font-size: 20px;
+    }
+
+    #congratulationsScreen h2::before {
+        font-size: 45px;
+    }
+
+    #congratulationsScreen #finalScoreDisplay {
+        font-size: 34px;
+    }
+}
+
+
+/* =============================================
+   21. UNIFORM DIALOG BOXES AND SCROLLBARS
+============================================= */
+
+/* Apply one consistent size to all submenu dialogs */
+
+#highScoresScreen .menu-overlay,
+#optionsScreen .menu-overlay,
+#controlsGuideScreen .menu-overlay,
+#resetRecordsScreen .menu-overlay,
+#resetConfirmationScreen .menu-overlay,
+#congratulationsScreen .menu-overlay,
+#nameEntryScreen .menu-overlay,
+#gameOverScreen .menu-overlay {
+
+    width: 90%;
+    max-width: 420px;
+
+    height: 390px;
+    max-height: calc(100% - 24px);
+
+    box-sizing: border-box;
+    margin: auto;
+    padding: 24px 22px;
+
+    /* Allow long content to scroll inside the panel */
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+/* Consistent scrollbar appearance */
+
+#highScoresScreen .menu-overlay,
+#optionsScreen .menu-overlay,
+#controlsGuideScreen .menu-overlay,
+#resetRecordsScreen .menu-overlay,
+#resetConfirmationScreen .menu-overlay,
+#congratulationsScreen .menu-overlay,
+#nameEntryScreen .menu-overlay,
+#gameOverScreen .menu-overlay {
+
+    scrollbar-width: thin;
+    scrollbar-color: #6633ff #10152b;
+}
+
+#highScoresScreen .menu-overlay::-webkit-scrollbar,
+#optionsScreen .menu-overlay::-webkit-scrollbar,
+#controlsGuideScreen .menu-overlay::-webkit-scrollbar,
+#resetRecordsScreen .menu-overlay::-webkit-scrollbar,
+#resetConfirmationScreen .menu-overlay::-webkit-scrollbar,
+#congratulationsScreen .menu-overlay::-webkit-scrollbar,
+#nameEntryScreen .menu-overlay::-webkit-scrollbar,
+#gameOverScreen .menu-overlay::-webkit-scrollbar {
+    width: 7px;
+}
+
+#highScoresScreen .menu-overlay::-webkit-scrollbar-thumb,
+#optionsScreen .menu-overlay::-webkit-scrollbar-thumb,
+#controlsGuideScreen .menu-overlay::-webkit-scrollbar-thumb,
+#resetRecordsScreen .menu-overlay::-webkit-scrollbar-thumb,
+#resetConfirmationScreen .menu-overlay::-webkit-scrollbar-thumb,
+#congratulationsScreen .menu-overlay::-webkit-scrollbar-thumb,
+#nameEntryScreen .menu-overlay::-webkit-scrollbar-thumb,
+#gameOverScreen .menu-overlay::-webkit-scrollbar-thumb {
+    background: #6633ff;
+    border-radius: 10px;
+}
+
+#highScoresScreen .menu-overlay::-webkit-scrollbar-track,
+#optionsScreen .menu-overlay::-webkit-scrollbar-track,
+#controlsGuideScreen .menu-overlay::-webkit-scrollbar-track,
+#resetRecordsScreen .menu-overlay::-webkit-scrollbar-track,
+#resetConfirmationScreen .menu-overlay::-webkit-scrollbar-track,
+#congratulationsScreen .menu-overlay::-webkit-scrollbar-track,
+#nameEntryScreen .menu-overlay::-webkit-scrollbar-track,
+#gameOverScreen .menu-overlay::-webkit-scrollbar-track {
+    background: #10152b;
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 600px) {
+    #highScoresScreen .menu-overlay,
+    #optionsScreen .menu-overlay,
+    #controlsGuideScreen .menu-overlay,
+    #resetRecordsScreen .menu-overlay,
+    #resetConfirmationScreen .menu-overlay,
+    #congratulationsScreen .menu-overlay,
+    #nameEntryScreen .menu-overlay,
+    #gameOverScreen .menu-overlay {
+
+        width: 92%;
+        padding: 18px 15px;
+    }
+}
+
+/* =============================================
+   COMPACT CONGRATULATIONS SCREEN
+============================================= */
+
+#congratulationsScreen .menu-overlay {
+    width: 90%;
+    max-width: 420px;
+
+    height: 390px;
+    min-height: 0;
+    max-height: calc(100% - 20px);
+
+    box-sizing: border-box;
+    padding: 12px 22px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1px;
+    overflow: hidden;
+}
+
+/* Slightly reduce all content inside the panel */
+
+#congratulationsScreen .menu-overlay > * {
+    zoom: 0.90;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    flex-shrink: 0;
+}
+
+/* Headings */
+
+#congratulationsScreen .menu-overlay h1,
+#congratulationsScreen .menu-overlay h2,
+#congratulationsScreen .menu-overlay h3 {
+    margin-top: 3px;
+    margin-bottom: 4px;
+}
+
+/* Message text */
+
+#congratulationsScreen .menu-overlay p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+/* Continue button */
+
+#congratulationsScreen .menu-overlay button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    flex-shrink: 0;
+}
+
+/* Smaller screens */
+
+@media (max-width: 600px) {
+    #congratulationsScreen .menu-overlay {
+        width: 92%;
+        padding: 10px 15px;
+    }
+}
+
+/* Center the Continue button text */
+
+#congratulationsScreen .menu-overlay button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.2;
+    padding: 12px 20px;
+}
+
+/* Prevent mobile scrolling while controlling the spaceship */
+
+#gameCanvas {
+    touch-action: none;
 }
