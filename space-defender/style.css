@@ -1,29 +1,30 @@
 
-/* =============================================
+/* =================================================
    IPM: SPACE DEFENDER
-   ============================================= */
+   MAIN STYLESHEET
+================================================= */
 
 
-/* =============================================
-   1. GENERAL PAGE
-   ============================================= */
+/* =================================================
+   1. GLOBAL STYLES AND PAGE BACKGROUND
+================================================= */
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    background: #050816;
-    color: #ffffff;
-    font-family: Verdana, sans-serif;
     display: block;
     position: relative;
     isolation: isolate;
-}
 
-/* SPACE DEFENDER GALAXY BACKGROUND */
+    min-height: 100vh;
+    margin: 0;
+
+    background: #050816;
+    color: #ffffff;
+    font-family: Verdana, sans-serif;
+}
 
 body::after {
     content: "";
@@ -42,26 +43,21 @@ body::after {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-
-    opacity: 1;
 }
 
-/* =============================================
-   2. GAME CONTAINER
-   ============================================= */
+
+/* =================================================
+   2. MAIN CONTAINER AND HEADER
+================================================= */
 
 .game-container {
     width: 95%;
     max-width: 1000px;
-    padding: 20px;
     margin: 40px auto;
+    padding: 20px;
+
     text-align: center;
 }
-
-
-/* =============================================
-   3. GAME HEADER
-   ============================================= */
 
 .game-header h1 {
     font-size: 30px;
@@ -83,70 +79,24 @@ body::after {
     text-shadow: 0 0 18px rgba(59, 130, 246, 0.25);
 }
 
-/* =============================================
-   4. MAIN MENU
-   ============================================= */
 
-.main-menu {
-    margin-top: 25px;
-    padding: 45px 20px;
-    background: linear-gradient(145deg, #0f1c35, #080e1c);
-    border: 2px solid #2563eb;
-    border-radius: 10px;
-    box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
-}
+/* =================================================
+   3. GAME AREA AND CANVASES
+================================================= */
 
-.main-menu h2 {
-    color: #67e8f9;
-    font-size: 26px;
-    letter-spacing: 4px;
-    margin-bottom: 35px;
-}
+.game-area {
+    position: relative;
 
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 9 / 5;
 
-/* =============================================
-   5. MENU BUTTONS
-   ============================================= */
+    margin: 25px auto;
 
-.menu-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-.menu-buttons button {
-    width: 80%;
-    max-width: 300px;
-    padding: 15px;
-    background: #1e293b;
-    color: #ffffff;
-    border: 1px solid #2563eb;
-    border-radius: 7px;
-    font-family: Verdana, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.menu-buttons button:hover {
-    background: #2563eb;
-    box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
-    transform: scale(1.03);
-}
-
-
-/* =============================================
-   6. GAME SCREEN AND CANVAS
-   ============================================= */
-
-.game-screen {
-    margin-top: 25px;
     border: 2px solid #2563eb;
     border-radius: 10px;
     overflow: hidden;
+
     box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
 }
 
@@ -164,39 +114,40 @@ canvas {
     height: 100%;
 }
 
-
-/* =============================================
-   7. SHARED GAME AREA
-   ============================================= */
-
-.game-area {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    aspect-ratio: 9 / 5;
-    margin: 25px auto;
-    border: 2px solid #2563eb;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+#gameCanvas {
+    touch-action: none;
 }
 
 #menuBackground,
 #gameScreen {
     position: absolute;
     inset: 0;
+
     width: 100%;
     height: 100%;
     margin: 0;
+
     border: none;
     border-radius: 0;
     box-shadow: none;
 }
 
+.game-screen {
+    margin-top: 25px;
 
-/* =============================================
-   8. SCREEN VISIBILITY
-   ============================================= */
+    border: 2px solid #2563eb;
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+}
+
+
+/* =================================================
+   4. SCREEN VISIBILITY AND MAIN MENU
+================================================= */
+
+/* Initially hidden screens */
 
 #gameScreen,
 #highScoresScreen,
@@ -208,43 +159,120 @@ canvas {
     display: none;
 }
 
+/* Menu background */
+
 #menuBackground {
     display: block;
 }
 
-
-/* =============================================
-   9. MAIN MENU OVERLAY
-   ============================================= */
+/* Main menu positioning */
 
 #mainMenu {
     position: absolute;
     inset: 0;
+    z-index: 2;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     margin: 0;
     padding: 20px;
+
     background: transparent;
     border: none;
     box-shadow: none;
-    z-index: 2;
 }
+
+/* Shared menu panel */
 
 .menu-overlay {
     width: 80%;
     max-width: 420px;
     padding: 30px;
+
     background: rgba(5, 15, 35, 0.88);
+
     border: 1px solid #2563eb;
     border-radius: 12px;
+
     box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
 }
 
+/* Main menu without visible panel */
 
-/* =============================================
-   10. SUBMENU SCREENS
-   ============================================= */
+#mainMenu .menu-overlay {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Main menu logo */
+
+.main-menu-logo {
+    display: block;
+
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+
+    margin: 0 auto 15px;
+
+    object-fit: contain;
+}
+
+
+/* =================================================
+   5. SHARED MENU BUTTONS AND HEADINGS
+================================================= */
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-buttons button {
+    width: 80%;
+    max-width: 300px;
+    padding: 15px;
+
+    background: #1e293b;
+    color: #ffffff;
+
+    border: 1px solid #2563eb;
+    border-radius: 7px;
+
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu-buttons button:hover {
+    background: #2563eb;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+    transform: scale(1.03);
+}
+
+.main-menu h2 {
+    margin-bottom: 35px;
+
+    color: #67e8f9;
+    font-size: 26px;
+    letter-spacing: 4px;
+}
+
+
+/* =================================================
+   6. SUBMENU AND RESULT SCREEN POSITIONING
+================================================= */
+
+/* Regular submenu screens */
 
 #highScoresScreen,
 #optionsScreen,
@@ -253,32 +281,168 @@ canvas {
 #resetConfirmationScreen {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    z-index: 2;
+
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 2;
+
+    width: 100%;
+    height: 100%;
 }
 
+/* Result screen layers */
 
-/* =============================================
-   11. GAME OVER OVERLAY
-   ============================================= */
-
-#gameOverScreen {
+#gameOverScreen,
+#congratulationsScreen,
+#nameEntryScreen {
     position: absolute;
     inset: 0;
+
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
     margin: 0;
     padding: 20px;
+
     background: rgba(5, 11, 24, 0.82);
+
     border: none;
     border-radius: 0;
     box-shadow: none;
+
     z-index: 3;
+}
+
+/* Game Over transparent layer */
+
+#gameOverScreen {
+    background: transparent;
+}
+
+/* Congratulations overlay */
+
+#congratulationsScreen {
+    background: rgba(3, 5, 20, 0.72);
+    z-index: 4;
+}
+
+
+/* =================================================
+   7. SHARED DIALOG PANELS AND SCROLLBARS
+================================================= */
+
+#highScoresScreen .menu-overlay,
+#optionsScreen .menu-overlay,
+#controlsGuideScreen .menu-overlay,
+#resetRecordsScreen .menu-overlay,
+#resetConfirmationScreen .menu-overlay,
+#congratulationsScreen .menu-overlay,
+#nameEntryScreen .menu-overlay,
+#gameOverScreen .menu-overlay {
+    width: 90%;
+    max-width: 420px;
+
+    height: 390px;
+    max-height: calc(100% - 24px);
+
+    box-sizing: border-box;
+    margin: auto;
+    padding: 24px 22px;
+
+    display: block;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+
+    scrollbar-width: thin;
+    scrollbar-color: #6633ff #10152b;
+}
+
+/* Scrollbar width */
+
+#highScoresScreen .menu-overlay::-webkit-scrollbar,
+#optionsScreen .menu-overlay::-webkit-scrollbar,
+#controlsGuideScreen .menu-overlay::-webkit-scrollbar,
+#resetRecordsScreen .menu-overlay::-webkit-scrollbar,
+#resetConfirmationScreen .menu-overlay::-webkit-scrollbar,
+#congratulationsScreen .menu-overlay::-webkit-scrollbar,
+#nameEntryScreen .menu-overlay::-webkit-scrollbar,
+#gameOverScreen .menu-overlay::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Scrollbar thumb */
+
+#highScoresScreen .menu-overlay::-webkit-scrollbar-thumb,
+#optionsScreen .menu-overlay::-webkit-scrollbar-thumb,
+#controlsGuideScreen .menu-overlay::-webkit-scrollbar-thumb,
+#resetRecordsScreen .menu-overlay::-webkit-scrollbar-thumb,
+#resetConfirmationScreen .menu-overlay::-webkit-scrollbar-thumb,
+#congratulationsScreen .menu-overlay::-webkit-scrollbar-thumb,
+#nameEntryScreen .menu-overlay::-webkit-scrollbar-thumb,
+#gameOverScreen .menu-overlay::-webkit-scrollbar-thumb {
+    background: #6633ff;
+    border-radius: 10px;
+}
+
+/* Scrollbar track */
+
+#highScoresScreen .menu-overlay::-webkit-scrollbar-track,
+#optionsScreen .menu-overlay::-webkit-scrollbar-track,
+#controlsGuideScreen .menu-overlay::-webkit-scrollbar-track,
+#resetRecordsScreen .menu-overlay::-webkit-scrollbar-track,
+#resetConfirmationScreen .menu-overlay::-webkit-scrollbar-track,
+#congratulationsScreen .menu-overlay::-webkit-scrollbar-track,
+#nameEntryScreen .menu-overlay::-webkit-scrollbar-track,
+#gameOverScreen .menu-overlay::-webkit-scrollbar-track {
+    background: #10152b;
+}
+
+
+/* =================================================
+   8. GAME OVER SCREEN
+================================================= */
+
+#gameOverScreen .menu-overlay {
+    background: rgba(35, 8, 15, 0.92);
+
+    border: 1px solid #991b1b;
+
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
+}
+
+#gameOverScreen h2 {
+    margin-bottom: 20px;
+
+    color: #ff5555;
+
+    text-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+}
+
+#gameOverScreen .game-over-title {
+    margin-bottom: 12px;
+
+    color: #fca5a5;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#gameOverScreen .game-over-message {
+    margin-bottom: 25px;
+
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 #playAgainButton,
@@ -288,13 +452,14 @@ canvas {
 }
 
 
-/* =============================================
-   12. HIGH SCORES
-   ============================================= */
+/* =================================================
+   9. HIGH SCORES SCREEN
+================================================= */
 
 #highScoresList {
     width: 100%;
     max-width: 350px;
+
     margin: 20px auto;
 }
 
@@ -302,38 +467,46 @@ canvas {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     width: 100%;
     padding: 10px 15px;
+
+    color: #ffffff;
     font-size: 16px;
     font-weight: bold;
-    color: #ffffff;
 }
 
 
-/* =============================================
-   13. OPTIONS MENU BUTTONS
-   ============================================= */
+/* =================================================
+   10. OPTIONS AND CONTROLS GUIDE
+================================================= */
 
 .options-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
+
     width: 100%;
     max-width: 300px;
+
     margin: 20px auto;
 }
 
 .options-list button {
     width: 100%;
     padding: 12px;
+
     background: #1e293b;
     color: #ffffff;
+
     border: 1px solid #2563eb;
     border-radius: 7px;
+
     font-family: Verdana, sans-serif;
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 2px;
+
     cursor: pointer;
     transition: 0.2s;
 }
@@ -350,133 +523,42 @@ canvas {
 }
 
 
-/* =============================================
-   14. GAME CONTROLS
-   ============================================= */
-
-.game-controls {
-    margin-top: 18px;
-    color: #93c5fd;
-    font-size: 12px;
-    letter-spacing: 1px;
-}
-
-
-/* =============================================
-   15. PAUSE BUTTON
-   ============================================= */
-
-#pauseButton {
-    margin-top: 12px;
-    padding: 10px 25px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    font-family: Verdana, sans-serif;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-#pauseButton:hover {
-    background: #1d4ed8;
-}
-
-
-/* =============================================
-   16. QUIT GAME BUTTON
-   ============================================= */
-
-#quitGameButton {
-    display: none;
-    margin-top: 10px;
-    padding: 10px 25px;
-    background: #991b1b;
-    color: white;
-    border: 1px solid #ef4444;
-    border-radius: 6px;
-    font-weight: bold;
-    font-family: Verdana, sans-serif;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-#quitGameButton:hover {
-    background: #b91c1c;
-}
-
-/* =============================================
-   17. GAME OVER SCREEN - RED THEME
-============================================= */
-
-#gameOverScreen {
-    background: transparent;
-}
-
-#gameOverScreen .menu-overlay {
-    background: rgba(35, 8, 15, 0.92);
-    border: 1px solid #991b1b;
-    box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
-}
-
-#gameOverScreen h2 {
-    color: #ff5555;
-    text-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
-    margin-bottom: 20px;
-}
-
-#gameOverScreen .game-over-title {
-    color: #fca5a5;
-    font-size: 17px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-}
-
-#gameOverScreen .game-over-message {
-    color: #cbd5e1;
-    font-size: 13px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-#gameOverScreen #finalScoreDisplay {
-    color: #ffffff;
-    font-size: 19px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-}
-
-/* =============================================
-   18. TOP 5 RECORD ENTRY
-============================================= */
+/* =================================================
+   11. RECORD ENTRY AND PLAYER NAME
+================================================= */
 
 #recordEntrySection {
-    margin: 15px auto;
     width: 100%;
+    margin: 15px auto;
 }
 
 #achievementMessage {
+    margin-bottom: 15px;
+
     color: #60a5fa;
     font-size: 15px;
     font-weight: bold;
     letter-spacing: 1px;
-    margin-bottom: 15px;
 }
+
+/* Player name input */
 
 #playerNameInput {
     width: 100%;
     max-width: 280px;
-    padding: 12px;
+
     margin-bottom: 12px;
+    padding: 12px;
+
     background: #0f172a;
     color: #ffffff;
+
     border: 1px solid #2563eb;
     border-radius: 6px;
+
     font-family: Verdana, sans-serif;
     text-align: center;
+
     outline: none;
 }
 
@@ -485,19 +567,27 @@ canvas {
     box-shadow: 0 0 12px rgba(96, 165, 250, 0.4);
 }
 
+/* Save record button */
+
 #saveRecordButton {
     display: block;
+
     width: 80%;
     max-width: 280px;
-    padding: 12px;
+
     margin: 0 auto 15px;
+    padding: 12px;
+
     background: #1e3a8a;
     color: #ffffff;
+
     border: 1px solid #3b82f6;
     border-radius: 7px;
+
     font-family: Verdana, sans-serif;
     font-weight: bold;
     letter-spacing: 1px;
+
     cursor: pointer;
 }
 
@@ -505,64 +595,15 @@ canvas {
     background: #2563eb;
 }
 
-/* MAIN MENU LOGO */
 
-.main-menu-logo {
-    display: block;
-    width: 100%;
-    max-width: 360px;
-    height: auto;
-    margin: 0 auto 15px;
-    object-fit: contain;
-}
+/* =================================================
+   12. CONGRATULATIONS SCREEN
+================================================= */
 
-/* MAIN MENU - REMOVE OVERLAY BOX */
-
-#mainMenu .menu-overlay {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-}
-
-/* =============================================
-   19. CONGRATULATIONS AND NAME ENTRY SCREENS
-============================================= */
-
-#congratulationsScreen,
-#nameEntryScreen {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0;
-    padding: 20px;
-    background: rgba(5, 11, 24, 0.82);
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    z-index: 3;
-}
-
-
-/* =============================================
-   19. NEW HIGH SCORE - CELEBRATION SCREEN
-============================================= */
-
-#congratulationsScreen {
-    background: rgba(3, 5, 20, 0.72);
-    z-index: 4;
-}
+/* Achievement panel */
 
 #congratulationsScreen .menu-overlay {
     position: relative;
-    width: 90%;
-    max-width: 480px;
-    padding: 35px 25px;
-    overflow: hidden;
 
     background:
         radial-gradient(
@@ -582,25 +623,29 @@ canvas {
     animation: achievementGlow 2.5s ease-in-out infinite alternate;
 }
 
-/* Decorative golden sparkles */
+/* Decorative sparkles */
 
 #congratulationsScreen .menu-overlay::before {
     content: "✦     ✧     ✦";
     display: block;
+
+    margin-bottom: 18px;
+
     color: #facc15;
     font-size: 20px;
     letter-spacing: 18px;
-    margin-bottom: 18px;
+
     animation: sparkle 2s ease-in-out infinite;
 }
 
-/* Trophy and congratulations heading */
+/* Congratulations heading */
 
 #congratulationsScreen h2 {
+    margin: 3px 0 4px;
+
     color: #67e8f9;
     font-size: 25px;
     letter-spacing: 3px;
-    margin: 0 0 18px;
 
     text-shadow:
         0 0 10px rgba(103, 232, 249, 0.7),
@@ -610,38 +655,44 @@ canvas {
 #congratulationsScreen h2::before {
     content: "🏆";
     display: block;
+
+    margin-bottom: 6px;
+
     font-size: 55px;
-    margin-bottom: 15px;
+
     animation: trophyFloat 2s ease-in-out infinite;
 }
 
-/* New high score message */
+/* Achievement message */
 
 #congratulationsScreen .game-over-title {
+    margin: 2px 0;
+
     color: #facc15;
     font-size: 19px;
     font-weight: bold;
     letter-spacing: 3px;
-    margin-bottom: 12px;
 
     text-shadow: 0 0 12px rgba(250, 204, 21, 0.65);
 }
 
 #congratulationsScreen .game-over-message {
+    margin: 2px 0;
+
     color: #cbd5e1;
     font-size: 13px;
     line-height: 1.6;
-    margin-bottom: 20px;
 }
 
-/* Large achievement score */
+/* Achievement score */
 
 #congratulationsScreen #finalScoreDisplay {
+    margin: 15px 0 25px;
+
     color: #facc15;
     font-size: 42px;
     font-weight: bold;
     letter-spacing: 3px;
-    margin: 15px 0 25px;
 
     text-shadow:
         0 0 10px rgba(250, 204, 21, 0.8),
@@ -655,7 +706,13 @@ canvas {
 #continueToNameEntryButton {
     width: 85%;
     max-width: 280px;
-    padding: 15px;
+
+    margin: 5px 0;
+    padding: 12px 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     background: linear-gradient(90deg, #854d0e, #ca8a04);
     color: #ffffff;
@@ -667,6 +724,8 @@ canvas {
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 3px;
+    line-height: 1.2;
+    text-align: center;
 
     cursor: pointer;
 
@@ -680,7 +739,91 @@ canvas {
     transform: scale(1.04);
 }
 
-/* Celebration animations */
+/* Compact achievement content */
+
+#congratulationsScreen .menu-overlay > * {
+    zoom: 0.90;
+
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+    flex-shrink: 0;
+}
+
+#congratulationsScreen .menu-overlay p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#congratulationsScreen .menu-overlay button {
+    flex-shrink: 0;
+}
+
+
+/* =================================================
+   13. GAME CONTROLS
+================================================= */
+
+.game-controls {
+    margin-top: 18px;
+
+    color: #93c5fd;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* Pause button */
+
+#pauseButton {
+    margin-top: 12px;
+    padding: 10px 25px;
+
+    background: #2563eb;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#pauseButton:hover {
+    background: #1d4ed8;
+}
+
+/* Quit button */
+
+#quitGameButton {
+    display: none;
+
+    margin-top: 10px;
+    padding: 10px 25px;
+
+    background: #991b1b;
+    color: white;
+
+    border: 1px solid #ef4444;
+    border-radius: 6px;
+
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#quitGameButton:hover {
+    background: #b91c1c;
+}
+
+
+/* =================================================
+   14. ANIMATIONS
+================================================= */
 
 @keyframes achievementGlow {
     from {
@@ -726,227 +869,332 @@ canvas {
     }
 }
 
-/* Mobile adjustment */
 
-@media (max-width: 600px) {
-    #congratulationsScreen .menu-overlay {
-        padding: 25px 18px;
-    }
-
-    #congratulationsScreen h2 {
-        font-size: 20px;
-    }
-
-    #congratulationsScreen h2::before {
-        font-size: 45px;
-    }
-
-    #congratulationsScreen #finalScoreDisplay {
-        font-size: 34px;
-    }
-}
-
-
-/* =============================================
-   21. UNIFORM DIALOG BOXES AND SCROLLBARS
-============================================= */
-
-/* Apply one consistent size to all submenu dialogs */
-
-#highScoresScreen .menu-overlay,
-#optionsScreen .menu-overlay,
-#controlsGuideScreen .menu-overlay,
-#resetRecordsScreen .menu-overlay,
-#resetConfirmationScreen .menu-overlay,
-#congratulationsScreen .menu-overlay,
-#nameEntryScreen .menu-overlay,
-#gameOverScreen .menu-overlay {
-
-    width: 90%;
-    max-width: 420px;
-
-    height: 390px;
-    max-height: calc(100% - 24px);
-
-    box-sizing: border-box;
-    margin: auto;
-    padding: 24px 22px;
-
-    /* Allow long content to scroll inside the panel */
-    display: block;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    overscroll-behavior: contain;
-    scrollbar-gutter: stable;
-}
-
-/* Consistent scrollbar appearance */
-
-#highScoresScreen .menu-overlay,
-#optionsScreen .menu-overlay,
-#controlsGuideScreen .menu-overlay,
-#resetRecordsScreen .menu-overlay,
-#resetConfirmationScreen .menu-overlay,
-#congratulationsScreen .menu-overlay,
-#nameEntryScreen .menu-overlay,
-#gameOverScreen .menu-overlay {
-
-    scrollbar-width: thin;
-    scrollbar-color: #6633ff #10152b;
-}
-
-#highScoresScreen .menu-overlay::-webkit-scrollbar,
-#optionsScreen .menu-overlay::-webkit-scrollbar,
-#controlsGuideScreen .menu-overlay::-webkit-scrollbar,
-#resetRecordsScreen .menu-overlay::-webkit-scrollbar,
-#resetConfirmationScreen .menu-overlay::-webkit-scrollbar,
-#congratulationsScreen .menu-overlay::-webkit-scrollbar,
-#nameEntryScreen .menu-overlay::-webkit-scrollbar,
-#gameOverScreen .menu-overlay::-webkit-scrollbar {
-    width: 7px;
-}
-
-#highScoresScreen .menu-overlay::-webkit-scrollbar-thumb,
-#optionsScreen .menu-overlay::-webkit-scrollbar-thumb,
-#controlsGuideScreen .menu-overlay::-webkit-scrollbar-thumb,
-#resetRecordsScreen .menu-overlay::-webkit-scrollbar-thumb,
-#resetConfirmationScreen .menu-overlay::-webkit-scrollbar-thumb,
-#congratulationsScreen .menu-overlay::-webkit-scrollbar-thumb,
-#nameEntryScreen .menu-overlay::-webkit-scrollbar-thumb,
-#gameOverScreen .menu-overlay::-webkit-scrollbar-thumb {
-    background: #6633ff;
-    border-radius: 10px;
-}
-
-#highScoresScreen .menu-overlay::-webkit-scrollbar-track,
-#optionsScreen .menu-overlay::-webkit-scrollbar-track,
-#controlsGuideScreen .menu-overlay::-webkit-scrollbar-track,
-#resetRecordsScreen .menu-overlay::-webkit-scrollbar-track,
-#resetConfirmationScreen .menu-overlay::-webkit-scrollbar-track,
-#congratulationsScreen .menu-overlay::-webkit-scrollbar-track,
-#nameEntryScreen .menu-overlay::-webkit-scrollbar-track,
-#gameOverScreen .menu-overlay::-webkit-scrollbar-track {
-    background: #10152b;
-}
-
-/* Mobile adjustments */
-
-@media (max-width: 600px) {
-    #highScoresScreen .menu-overlay,
-    #optionsScreen .menu-overlay,
-    #controlsGuideScreen .menu-overlay,
-    #resetRecordsScreen .menu-overlay,
-    #resetConfirmationScreen .menu-overlay,
-    #congratulationsScreen .menu-overlay,
-    #nameEntryScreen .menu-overlay,
-    #gameOverScreen .menu-overlay {
-
-        width: 92%;
-        padding: 18px 15px;
-    }
-}
-
-/* =============================================
-   COMPACT CONGRATULATIONS SCREEN
-============================================= */
-
-#congratulationsScreen .menu-overlay {
-    width: 90%;
-    max-width: 420px;
-
-    height: 390px;
-    min-height: 0;
-    max-height: calc(100% - 20px);
-
-    box-sizing: border-box;
-    padding: 12px 22px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    gap: 1px;
-    overflow: hidden;
-}
-
-/* Slightly reduce all content inside the panel */
-
-#congratulationsScreen .menu-overlay > * {
-    zoom: 0.90;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    flex-shrink: 0;
-}
-
-/* Headings */
-
-#congratulationsScreen .menu-overlay h1,
-#congratulationsScreen .menu-overlay h2,
-#congratulationsScreen .menu-overlay h3 {
-    margin-top: 3px;
-    margin-bottom: 4px;
-}
-
-/* Message text */
-
-#congratulationsScreen .menu-overlay p {
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
-
-/* Continue button */
-
-#congratulationsScreen .menu-overlay button {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    flex-shrink: 0;
-}
-
-/* Smaller screens */
-
-@media (max-width: 600px) {
-    #congratulationsScreen .menu-overlay {
-        width: 92%;
-        padding: 10px 15px;
-    }
-}
-
-/* Center the Continue button text */
-
-#congratulationsScreen .menu-overlay button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    line-height: 1.2;
-    padding: 12px 20px;
-}
-
-/* Prevent mobile scrolling while controlling the spaceship */
-
-#gameCanvas {
-    touch-action: none;
-}
-
-/* =============================================
-   MOBILE DIALOG OPTIMIZATION
-============================================= */
+/* =================================================
+   15. RESPONSIVE DESIGN - MOBILE DEVICES
+================================================= */
 
 @media (max-width: 600px) {
 
-    /* Let dialog screens use the full phone screen */
+    /* ---------------------------------------------
+       15.1 SHARED MENU SCREEN LAYOUT
+    --------------------------------------------- */
 
+    .game-area:has(#mainMenu[style*="display: flex"]),
+    .game-area:has(#highScoresScreen[style*="display: flex"]),
+    .game-area:has(#optionsScreen[style*="display: flex"]),
+    .game-area:has(#controlsGuideScreen[style*="display: flex"]),
+    .game-area:has(#resetRecordsScreen[style*="display: flex"]),
+    .game-area:has(#resetConfirmationScreen[style*="display: flex"]) {
+        display: flex;
+        flex-direction: column;
+
+        aspect-ratio: auto;
+        height: auto;
+        overflow: visible;
+
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+
+    /* ---------------------------------------------
+       15.2 SHARED ANIMATED BACKGROUND FRAME
+    --------------------------------------------- */
+
+    .game-area:has(#mainMenu[style*="display: flex"]) #menuBackground,
+    .game-area:has(#highScoresScreen[style*="display: flex"]) #menuBackground,
+    .game-area:has(#optionsScreen[style*="display: flex"]) #menuBackground,
+    .game-area:has(#controlsGuideScreen[style*="display: flex"]) #menuBackground,
+    .game-area:has(#resetRecordsScreen[style*="display: flex"]) #menuBackground,
+    .game-area:has(#resetConfirmationScreen[style*="display: flex"]) #menuBackground {
+        position: relative;
+        inset: auto;
+
+        width: 100%;
+        height: auto;
+        aspect-ratio: 9 / 5;
+
+        flex: none;
+
+        border: 2px solid #2563eb;
+        border-radius: 10px;
+        overflow: hidden;
+
+        box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+    }
+
+
+    /* ---------------------------------------------
+       15.3 SHARED MENU SCREEN POSITIONING
+    --------------------------------------------- */
+
+    #mainMenu,
     #highScoresScreen,
     #optionsScreen,
     #controlsGuideScreen,
     #resetRecordsScreen,
-    #resetConfirmationScreen,
-    #congratulationsScreen,
-    #nameEntryScreen,
-    #gameOverScreen {
+    #resetConfirmationScreen {
+        position: relative;
+        inset: auto;
 
+        width: 100%;
+        height: auto;
+        min-height: 0;
+
+        padding: 12px;
+        overflow: visible;
+
+        flex: none;
+    }
+
+
+    /* ---------------------------------------------
+       15.4 SHARED SUBMENU PANEL DESIGN
+    --------------------------------------------- */
+
+    #highScoresScreen .menu-overlay,
+    #optionsScreen .menu-overlay,
+    #controlsGuideScreen .menu-overlay,
+    #resetRecordsScreen .menu-overlay,
+    #resetConfirmationScreen .menu-overlay {
+        width: 92%;
+        max-width: 420px;
+
+        height: auto;
+        min-height: 0;
+        max-height: none;
+
+        margin: 0 auto;
+        padding: 18px 16px;
+
+        box-sizing: border-box;
+
+        overflow: visible;
+    }
+
+
+    /* ---------------------------------------------
+       15.5 SHARED SUBMENU HEADINGS
+    --------------------------------------------- */
+
+    #highScoresScreen h2,
+    #optionsScreen h2,
+    #controlsGuideScreen h2,
+    #resetRecordsScreen h2,
+    #resetConfirmationScreen h2 {
+        margin: 8px 0 22px;
+
+        color: #67e8f9;
+        font-size: 19px;
+        letter-spacing: 2px;
+        text-align: center;
+
+        text-shadow: 0 0 10px rgba(103, 232, 249, 0.4);
+    }
+
+
+    /* ---------------------------------------------
+       15.6 SHARED SUBMENU BUTTONS
+    --------------------------------------------- */
+
+    #highScoresScreen .menu-buttons,
+    #optionsScreen .menu-buttons,
+    #controlsGuideScreen .menu-buttons,
+    #resetRecordsScreen .menu-buttons,
+    #resetConfirmationScreen .menu-buttons {
+        width: 100%;
+        margin: 18px auto 8px;
+        gap: 7px;
+    }
+
+    #highScoresScreen .menu-buttons button,
+    #optionsScreen .menu-buttons button,
+    #controlsGuideScreen .menu-buttons button,
+    #resetRecordsScreen .menu-buttons button,
+    #resetConfirmationScreen .menu-buttons button {
+        width: 85%;
+        max-width: 260px;
+
+        margin: 0 auto;
+        padding: 9px 10px;
+
+        font-family: Verdana, sans-serif;
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 1px;
+        font-weight: bold;
+
+        min-height: 0;
+    }
+
+
+    /* ---------------------------------------------
+       15.7 MAIN MENU
+    --------------------------------------------- */
+
+    #mainMenu {
+        justify-content: center;
+        align-items: center;
+    }
+
+    #mainMenu .menu-overlay {
+        width: 92%;
+        max-width: 380px;
+
+        height: auto;
+        max-height: none;
+        min-height: 0;
+
+        margin: 0 auto;
+        padding: 14px 12px;
+
+        overflow: visible;
+        box-sizing: border-box;
+    }
+
+    #mainMenu .main-menu-logo {
+        width: 75%;
+        max-width: 220px;
+
+        margin: 0 auto 8px;
+    }
+
+    #mainMenu .menu-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+
+        width: 100%;
+        margin: 8px auto;
+    }
+
+    #mainMenu .menu-buttons button {
+        width: 85%;
+        max-width: 260px;
+
+        margin: 0 auto;
+        padding: 9px 10px;
+
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 1px;
+
+        min-height: 0;
+    }
+
+
+    /* ---------------------------------------------
+       15.8 HIGH SCORES
+    --------------------------------------------- */
+
+    #highScoresList {
+        width: 100%;
+        max-width: 300px;
+
+        margin: 15px auto;
+    }
+
+    #highScoresList .score-row {
+        padding: 9px 10px;
+
+        font-size: 12px;
+        letter-spacing: 0.5px;
+
+        border-bottom: 1px solid rgba(96, 165, 250, 0.18);
+    }
+
+    #highScoresList p {
+        color: #cbd5e1;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+
+    /* ---------------------------------------------
+       15.9 OPTIONS AND RESET BUTTON GROUPS
+    --------------------------------------------- */
+
+    #optionsScreen .options-list,
+    #resetRecordsScreen .options-list {
+        width: 100%;
+        max-width: 300px;
+
+        margin: 15px auto;
+        gap: 9px;
+    }
+
+    #optionsScreen .options-list button,
+    #resetRecordsScreen .options-list button {
+        width: 85%;
+        max-width: 260px;
+
+        margin: 0 auto;
+        padding: 9px 10px;
+
+        font-family: Verdana, sans-serif;
+        font-size: 11px;
+        line-height: 1.3;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+
+    #optionsScreen .options-list button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+
+    /* ---------------------------------------------
+       15.10 CONTROLS GUIDE
+    --------------------------------------------- */
+
+    #controlsGuideScreen .controls-guide-list {
+        width: 100%;
+        max-width: 300px;
+
+        margin: 15px auto 25px;
+    }
+
+    #controlsGuideScreen .controls-guide-list p {
+        margin: 12px 0;
+        padding: 5px;
+
+        color: #cbd5e1;
+        font-size: 12px;
+        line-height: 1.5;
+        letter-spacing: 0.5px;
+    }
+
+
+    /* ---------------------------------------------
+       15.11 RESET CONFIRMATION
+    --------------------------------------------- */
+
+    #resetConfirmationScreen #resetConfirmationMessage {
+        width: 100%;
+        max-width: 300px;
+
+        margin: 25px auto;
+        padding: 12px;
+
+        color: #cbd5e1;
+        font-size: 12px;
+        line-height: 1.7;
+        letter-spacing: 0.5px;
+        text-align: center;
+    }
+
+
+    /* ---------------------------------------------
+       15.12 RESULT SCREEN OVERLAYS
+       CONGRATULATIONS AND NAME ENTRY
+    --------------------------------------------- */
+
+    #congratulationsScreen,
+    #nameEntryScreen {
         position: fixed;
         inset: 0;
 
@@ -964,27 +1212,80 @@ canvas {
         z-index: 20;
     }
 
-    /* Responsive dialog dimensions */
 
-    #highScoresScreen .menu-overlay,
-    #optionsScreen .menu-overlay,
-    #controlsGuideScreen .menu-overlay,
-    #resetRecordsScreen .menu-overlay,
-    #resetConfirmationScreen .menu-overlay,
-    #congratulationsScreen .menu-overlay,
-    #nameEntryScreen .menu-overlay,
-    #gameOverScreen .menu-overlay {
+    /* ---------------------------------------------
+       15.13 GAME OVER - PANEL BELOW CANVAS
+    --------------------------------------------- */
+
+    /* Remove the outer game-area frame while Game Over is displayed */
+
+    .game-area:has(#gameOverScreen[style*="display: flex"]) {
+        display: contents;
+    }
+
+    /* Keep the blue frame around the canvas only */
+
+    .game-area:has(#gameOverScreen[style*="display: flex"]) #gameScreen {
+        position: relative;
+        inset: auto;
 
         width: 100%;
-        max-width: 420px;
-
         height: auto;
-        max-height: calc(100dvh - 24px);
+        aspect-ratio: 9 / 5;
 
+        flex: none;
+
+        margin-top: 25px;
+
+        border: 2px solid #2563eb;
+        border-radius: 10px;
+        overflow: hidden;
+
+        box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+    }
+
+    /* Position Game Over below the canvas */
+
+    #gameOverScreen {
+        position: relative;
+        inset: auto;
+
+        width: 100%;
+        height: auto;
         min-height: 0;
 
+        margin-top: 12px;
+        padding: 15px 10px;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        background: transparent;
+        border: none;
+        box-shadow: none;
+
+        overflow: visible;
+        z-index: 3;
+    }
+
+
+    /* ---------------------------------------------
+       15.14 MOBILE RESULT SCREEN PANELS
+    --------------------------------------------- */
+
+    #gameOverScreen .menu-overlay,
+    #congratulationsScreen .menu-overlay,
+    #nameEntryScreen .menu-overlay {
+        width: 92%;
+        max-width: 380px;
+
+        height: auto;
+        min-height: 0;
+        max-height: calc(100dvh - 24px);
+
         margin: auto;
-        padding: 18px 16px;
+        padding: 16px 14px;
 
         box-sizing: border-box;
 
@@ -994,159 +1295,157 @@ canvas {
         scrollbar-gutter: auto;
     }
 
-    /* Reduce spacing inside dialogs */
-
-    #highScoresScreen .menu-overlay > *,
-    #optionsScreen .menu-overlay > *,
-    #controlsGuideScreen .menu-overlay > *,
-    #resetRecordsScreen .menu-overlay > *,
-    #resetConfirmationScreen .menu-overlay > *,
-    #nameEntryScreen .menu-overlay > *,
-    #gameOverScreen .menu-overlay > * {
-
+    #gameOverScreen .menu-overlay > *,
+    #nameEntryScreen .menu-overlay > * {
         max-width: 100%;
     }
 
-    /* Make buttons easier to fit on mobile */
 
-    .options-list {
-        margin: 12px auto;
-        gap: 9px;
+    /* ---------------------------------------------
+       15.15 MOBILE RESULT SCREEN TYPOGRAPHY
+    --------------------------------------------- */
+
+    #gameOverScreen h2,
+    #congratulationsScreen h2,
+    #nameEntryScreen h2 {
+        font-size: 19px;
+        letter-spacing: 2px;
+        line-height: 1.3;
+        margin-bottom: 14px;
     }
 
-    .options-list button {
-        padding: 10px;
-        font-size: 12px;
+    #gameOverScreen .game-over-title,
+    #congratulationsScreen .game-over-title,
+    #nameEntryScreen .game-over-title {
+        font-size: 13px;
+        letter-spacing: 1px;
+        line-height: 1.4;
+        margin-bottom: 10px;
     }
 
-    #playAgainButton,
-    #gameOverMenuButton {
-        margin: 5px auto;
+    #gameOverScreen .game-over-message,
+    #congratulationsScreen .game-over-message,
+    #nameEntryScreen .game-over-message {
+        font-size: 11px;
+        line-height: 1.5;
+        margin-bottom: 16px;
     }
 
-    /* Compact congratulations screen */
+    #gameOverScreen .menu-buttons,
+    #congratulationsScreen .menu-buttons,
+    #nameEntryScreen .menu-buttons {
+        gap: 7px;
+        width: 100%;
+    }
+
+    #gameOverScreen .menu-buttons button,
+    #congratulationsScreen .menu-buttons button,
+    #nameEntryScreen .menu-buttons button {
+        width: 85%;
+        max-width: 260px;
+
+        margin: 4px auto;
+        padding: 9px 10px;
+
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 1px;
+    }
+
+
+    /* ---------------------------------------------
+       15.16 CONGRATULATIONS SCREEN
+    --------------------------------------------- */
 
     #congratulationsScreen .menu-overlay {
-        height: auto;
-        max-height: calc(100dvh - 24px);
         padding: 12px 14px;
-        overflow-y: auto;
     }
 
     #congratulationsScreen .menu-overlay::before {
         margin-bottom: 8px;
     }
 
-    #congratulationsScreen h2 {
-        margin-bottom: 8px;
-    }
-
     #congratulationsScreen h2::before {
         margin-bottom: 6px;
+        font-size: 42px;
     }
 
-    #congratulationsScreen #finalScoreDisplay {
-        margin: 8px 0 12px;
-        font-size: clamp(24px, 7vw, 34px);
-    }
-
-    #continueToNameEntryButton {
-        padding: 11px;
-        font-size: 12px;
+    #congratulationsScreen .game-over-title {
+        font-size: 14px;
         letter-spacing: 2px;
     }
 
-}
-/* =============================================
-   MAIN MENU BUTTONS - MOBILE SIZE
-============================================= */
+    #congratulationsScreen #finalScoreDisplay {
+        margin: 10px 0 16px;
+        font-size: clamp(24px, 7vw, 34px);
+    }
 
-@media (max-width: 600px) {
+    #congratulationsScreen #continueToNameEntryButton {
+        padding: 9px 10px;
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
 
-    #mainMenu .menu-overlay button,
+
+    /* ---------------------------------------------
+       15.17 SAVE HIGH SCORE / NAME ENTRY
+    --------------------------------------------- */
+
+    #nameEntryScreen {
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        padding: 12px;
+    }
+
+    #nameEntryScreen .menu-overlay {
+        margin: 0 auto;
+        flex-shrink: 0;
+    }
+
+    #nameEntryScreen #playerNameInput {
+        width: 85%;
+        max-width: 260px;
+
+        margin: 5px auto 12px;
+        padding: 10px;
+
+        font-size: 12px;
+    }
+
+    #nameEntryScreen #saveRecordButton,
+    #nameEntryScreen #skipRecordButton {
+        width: 85%;
+        max-width: 260px;
+
+        margin: 4px auto;
+        padding: 9px 10px;
+
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 1px;
+    }
+
+
+    /* ---------------------------------------------
+       15.18 GENERAL MOBILE BUTTON ADJUSTMENTS
+    --------------------------------------------- */
+
     #mainMenu button,
     #menuBackground button {
-
         width: 75%;
         max-width: 260px;
 
+        margin: 5px auto;
         padding: 8px 12px;
 
         font-size: 11px;
         line-height: 1.2;
         letter-spacing: 1px;
 
-        margin: 5px auto;
-
-        min-height: 0;
-    }
-
-}
-
-/* =============================================
-   MAIN MENU - MOBILE SCREEN OPTIMIZATION
-============================================= */
-
-@media (max-width: 600px) {
-
-    /* Give the main menu the full phone screen */
-
-    #mainMenu {
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100vh;
-        height: 100dvh;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        z-index: 20;
-    }
-
-    /* Make the main menu box compact */
-
-    #mainMenu .menu-overlay {
-        width: 92%;
-        max-width: 380px;
-        height: auto;
-        max-height: calc(100dvh - 20px);
-        min-height: 0;
-        padding: 14px 12px;
-        margin: auto;
-        overflow-y: auto;
-        overflow-x: hidden;
-        box-sizing: border-box;
-    }
-
-    /* Reduce logo size */
-
-    #mainMenu .main-menu-logo {
-        width: 75%;
-        max-width: 220px;
-        margin: 0 auto 8px;
-    }
-
-    /* Compact the menu buttons */
-
-    #mainMenu .menu-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 7px;
-        width: 100%;
-        margin: 8px auto;
-    }
-
-    #mainMenu .menu-buttons button {
-        width: 85%;
-        max-width: 260px;
-        padding: 9px 10px;
-        margin: 0 auto;
-        font-size: 11px;
-        line-height: 1.2;
-        letter-spacing: 1px;
         min-height: 0;
     }
 

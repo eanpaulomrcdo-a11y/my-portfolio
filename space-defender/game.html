@@ -1,37 +1,69 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <!-- =========================================
+         1. PAGE CONFIGURATION
+    ========================================== -->
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+
     <title>IPM: Space Defender</title>
+
+    <!-- PAGE ICON AND STYLESHEET -->
     <link rel="icon" type="image/png" href="ipm-sd-favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- MAIN GAME CONTAINER -->
+    <!-- =========================================
+         2. MAIN GAME CONTAINER
+    ========================================== -->
+
     <main class="game-container">
 
-        <!-- GAME HEADER -->
+        <!-- =====================================
+             2.1 GAME HEADER
+        ====================================== -->
+
         <header class="game-header">
             <h1>SPACE DEFENDER</h1>
-            <p>Aliens on the attack!</p>
+            <p>Aliens are on the attack!</p>
         </header>
 
-        <!-- SHARED GAME AREA -->
+
+        <!-- =====================================
+             2.2 SHARED GAME AREA
+        ====================================== -->
+
         <div class="game-area">
 
-            <!-- MENU BACKGROUND -->
+            <!-- ---------------------------------
+                 2.2.1 MENU BACKGROUND
+            ---------------------------------- -->
+
             <section id="menuBackground">
                 <canvas id="menuCanvas" width="900" height="500"></canvas>
             </section>
 
-            <!-- MAIN MENU -->
+
+            <!-- ---------------------------------
+                 2.2.2 MAIN MENU
+            ---------------------------------- -->
+
             <section id="mainMenu" class="main-menu">
+
                 <div class="menu-overlay">
-                    <img src="ipm-sd-logo.png" alt="Space Defender" class="main-menu-logo">
+
+                    <img
+                        src="ipm-sd-logo.png"
+                        alt="Space Defender"
+                        class="main-menu-logo"
+                    >
+
                     <p>DEFEND THE GALAXY</p>
                     <p>Survive as long as you can.</p>
 
@@ -40,33 +72,54 @@
                         <button id="highScoresButton">HIGH SCORES</button>
                         <button id="optionsButton">OPTIONS</button>
                     </div>
+
                 </div>
+
             </section>
 
-            <!-- GAMEPLAY SCREEN -->
+
+            <!-- ---------------------------------
+                 2.2.3 GAMEPLAY SCREEN
+            ---------------------------------- -->
+
             <section id="gameScreen" class="game-screen">
                 <canvas id="gameCanvas" width="900" height="500"></canvas>
             </section>
 
-            <!-- NEW HIGH SCORE CONGRATULATIONS SCREEN -->
+
+            <!-- =================================
+                 2.2.4 GAME PROGRESSION SCREENS
+            ================================== -->
+
+            <!-- NEW HIGH SCORE CONGRATULATIONS -->
+
             <section id="congratulationsScreen" class="main-menu sub-menu game-over-screen">
+
                 <div class="menu-overlay">
                     <h2>CONGRATULATIONS!</h2>
+
                     <p class="game-over-title">NEW HIGH SCORE!</p>
                     <p class="game-over-message">You've set a new personal record, pilot!</p>
                     <p id="finalScoreDisplay">YOUR SCORE: 0</p>
+
                     <div class="menu-buttons">
                         <button id="continueToNameEntryButton">CONTINUE</button>
                     </div>
                 </div>
+
             </section>
 
-            <!-- TOP 5 NAME ENTRY SCREEN -->
+
+            <!-- TOP 5 NAME ENTRY -->
+
             <section id="nameEntryScreen" class="main-menu sub-menu game-over-screen">
+
                 <div class="menu-overlay">
                     <h2>TOP 5 QUALIFIED!</h2>
+
                     <p class="game-over-title">ENTER YOUR PILOT NAME</p>
                     <p class="game-over-message">Add your name to the leaderboard.</p>
+
                     <input
                         type="text"
                         id="playerNameInput"
@@ -74,21 +127,29 @@
                         maxlength="15"
                         autocomplete="off"
                     >
+
                     <div class="menu-buttons">
                         <button id="saveRecordButton">SAVE NAME</button>
                         <button id="skipRecordButton">SKIP</button>
                     </div>
                 </div>
+
             </section>
 
-            <!-- GAME OVER SCREEN -->
+
+            <!-- GAME OVER -->
+
             <section id="gameOverScreen" class="main-menu sub-menu game-over-screen">
+
                 <div class="menu-overlay">
                     <h2>GAME OVER</h2>
+
                     <p class="game-over-title">THE FIGHT ISN'T OVER.</p>
+
                     <p class="game-over-message">
                         The galaxy still needs you. Rise again, pilot.
                     </p>
+
                     <p id="gameOverFinalScoreDisplay">FINAL SCORE: 0</p>
 
                     <div class="menu-buttons">
@@ -96,42 +157,76 @@
                         <button id="gameOverMenuButton">MAIN MENU</button>
                     </div>
                 </div>
+
             </section>
 
-            <!-- HIGH SCORES SCREEN -->
+
+            <!-- =================================
+                 2.2.5 MAIN MENU SUBSCREENS
+            ================================== -->
+
+            <!-- HIGH SCORES -->
+
             <section id="highScoresScreen" class="high-scores-screen">
+
                 <div class="menu-overlay">
                     <h2>HIGH SCORES</h2>
+
                     <div id="highScoresList">
                         <p>NO HIGH SCORES RECORDED YET</p>
                     </div>
+
                     <div class="menu-buttons">
                         <button id="highScoresBackButton">BACK TO MAIN MENU</button>
                     </div>
                 </div>
+
             </section>
 
-            <!-- OPTIONS SCREEN -->
+
+            <!-- OPTIONS -->
+
             <section id="optionsScreen" class="options-screen">
+
                 <div class="menu-overlay">
                     <h2>OPTIONS</h2>
+
                     <div class="options-list">
                         <button id="controlsGuideButton">CONTROLS GUIDE</button>
                         <button id="resetRecordsButton">RESET RECORDS</button>
-                        <button class="disabled-option" disabled>SOUND EFFECTS — COMING SOON</button>
-                        <button class="disabled-option" disabled>BACKGROUND MUSIC — COMING SOON</button>
-                        <button class="disabled-option" disabled>DIFFICULTY — COMING SOON</button>
+
+                        <button class="disabled-option" disabled>
+                            SOUND EFFECTS — COMING SOON
+                        </button>
+
+                        <button class="disabled-option" disabled>
+                            BACKGROUND MUSIC — COMING SOON
+                        </button>
+
+                        <button class="disabled-option" disabled>
+                            DIFFICULTY — COMING SOON
+                        </button>
                     </div>
+
                     <div class="menu-buttons">
                         <button id="optionsBackButton">BACK TO MAIN MENU</button>
                     </div>
                 </div>
+
             </section>
 
-            <!-- CONTROLS GUIDE SCREEN -->
+
+            <!-- =================================
+                 2.2.6 OPTIONS SUBSCREENS
+            ================================== -->
+
+            <!-- CONTROLS GUIDE -->
+
             <section id="controlsGuideScreen" class="sub-screen">
+
                 <div class="menu-overlay">
                     <h2>CONTROLS GUIDE</h2>
+
                     <div class="controls-guide-list">
                         <p>↑ — MOVE UP</p>
                         <p>↓ — MOVE DOWN</p>
@@ -139,51 +234,83 @@
                         <p>→ — MOVE RIGHT</p>
                         <p>AUTO FIRE — ENABLED</p>
                     </div>
+
                     <div class="menu-buttons">
                         <button id="controlsGuideBackButton">BACK TO OPTIONS</button>
                     </div>
                 </div>
+
             </section>
 
-            <!-- RESET RECORDS SCREEN -->
+
+            <!-- RESET RECORDS -->
+
             <section id="resetRecordsScreen" class="sub-screen">
+
                 <div class="menu-overlay">
                     <h2>RESET RECORDS</h2>
+
                     <div class="options-list">
-                        <button id="resetLeaderboardButton">RESET TOP 5 LEADERBOARD</button>
-                        <button id="resetHighScoreButton">RESET PERSONAL HIGH SCORE</button>
+                        <button id="resetLeaderboardButton">
+                            RESET TOP 5 LEADERBOARD
+                        </button>
+
+                        <button id="resetHighScoreButton">
+                            RESET PERSONAL HIGH SCORE
+                        </button>
                     </div>
+
                     <div class="menu-buttons">
                         <button id="resetRecordsBackButton">BACK TO OPTIONS</button>
                     </div>
                 </div>
+
             </section>
 
-            <!-- RESET CONFIRMATION SCREEN -->
+
+            <!-- RESET CONFIRMATION -->
+
             <section id="resetConfirmationScreen" class="sub-screen">
+
                 <div class="menu-overlay">
                     <h2>CONFIRM RESET</h2>
-                    <p id="resetConfirmationMessage">ARE YOU SURE YOU WANT TO RESET?</p>
+
+                    <p id="resetConfirmationMessage">
+                        ARE YOU SURE YOU WANT TO RESET?
+                    </p>
+
                     <div class="menu-buttons">
                         <button id="confirmResetButton">YES, RESET</button>
                         <button id="cancelResetButton">CANCEL</button>
                     </div>
                 </div>
+
             </section>
 
         </div>
 
-        <!-- GAME CONTROLS -->
+
+        <!-- =====================================
+             2.3 GAME CONTROLS
+        ====================================== -->
+
         <footer class="game-controls">
+
             <p>↑ ↓ ← → &nbsp; MOVE YOUR SPACESHIP</p>
             <p>AUTO FIRE ENABLED</p>
+
             <button id="pauseButton">START GAME</button>
             <button id="quitGameButton">QUIT GAME</button>
+
         </footer>
 
     </main>
 
-    <!-- GAME JAVASCRIPT -->
+
+    <!-- =========================================
+         3. JAVASCRIPT
+    ========================================== -->
+
     <script src="game.js"></script>
 
 </body>
