@@ -1082,3 +1082,72 @@ canvas {
     }
 
 }
+
+/* =============================================
+   MAIN MENU - MOBILE SCREEN OPTIMIZATION
+============================================= */
+
+@media (max-width: 600px) {
+
+    /* Give the main menu the full phone screen */
+
+    #mainMenu {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        z-index: 20;
+    }
+
+    /* Make the main menu box compact */
+
+    #mainMenu .menu-overlay {
+        width: 92%;
+        max-width: 380px;
+        height: auto;
+        max-height: calc(100dvh - 20px);
+        min-height: 0;
+        padding: 14px 12px;
+        margin: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    /* Reduce logo size */
+
+    #mainMenu .main-menu-logo {
+        width: 75%;
+        max-width: 220px;
+        margin: 0 auto 8px;
+    }
+
+    /* Compact the menu buttons */
+
+    #mainMenu .menu-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        width: 100%;
+        margin: 8px auto;
+    }
+
+    #mainMenu .menu-buttons button {
+        width: 85%;
+        max-width: 260px;
+        padding: 9px 10px;
+        margin: 0 auto;
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 1px;
+        min-height: 0;
+    }
+
+}
