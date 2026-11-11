@@ -1057,3 +1057,28 @@ canvas {
     }
 
 }
+/* =============================================
+   MAIN MENU BUTTONS - MOBILE SIZE
+============================================= */
+
+@media (max-width: 600px) {
+
+    #mainMenu .menu-overlay button,
+    #mainMenu button,
+    #menuBackground button {
+
+        width: 75%;
+        max-width: 260px;
+
+        padding: 8px 12px;
+
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 1px;
+
+        margin: 5px auto;
+
+        min-height: 0;
+    }
+
+}
