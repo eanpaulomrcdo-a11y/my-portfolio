@@ -278,8 +278,17 @@ function updatePauseOverlay() {
 
     pauseOverlay.style.display = shouldShow ? "flex" : "none";
 
+    const isLandscapeTouch = window.matchMedia(
+        "(orientation: landscape) and (hover: none) and (pointer: coarse) and (max-height: 600px)"
+    ).matches;
+
     gameButtonHome.style.display =
-        isDesktop && hasStarted && !isPaused && !isGameOver && !isPlayerDying
+        isDesktop &&
+        !isLandscapeTouch &&
+        hasStarted &&
+        !isPaused &&
+        !isGameOver &&
+        !isPlayerDying
             ? "none"
             : "";
 }

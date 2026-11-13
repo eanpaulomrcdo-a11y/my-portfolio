@@ -2171,7 +2171,7 @@ canvas {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
 
         width: min(88%, 470px);
         max-width: 470px;
@@ -2179,19 +2179,26 @@ canvas {
         height: auto;
 
         margin: auto;
-        padding: 8px 12px;
+        padding: 10px 12px 12px;
 
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior: contain;
+        scrollbar-width: thin;
     }
 
     #mainMenu .main-menu-logo {
-        width: auto;
-        max-width: min(48vw, 190px);
-        max-height: 54px;
-        margin: 0 auto 4px;
+        flex: 0 0 auto;
+        display: block;
+        width: min(48vw, 220px);
+        max-width: 100%;
+        max-height: clamp(56px, 12vh, 76px);
+        margin: 0 auto 5px;
         object-fit: contain;
+    }
+
+    #mainMenu .menu-overlay > * {
+        flex-shrink: 0;
     }
 
     #mainMenu .menu-overlay p {
@@ -2355,19 +2362,21 @@ canvas {
     #nameEntryScreen .menu-buttons button,
     #optionsScreen .options-list button,
     #resetRecordsScreen .options-list button {
-        width: min(82%, 280px);
-        min-height: 34px;
+        width: min(90%, 300px);
+        min-height: 36px;
         margin: 2px auto;
-        padding: 7px 10px;
+        padding: 7px 8px;
 
         font-family: Verdana, sans-serif;
-        font-size: 10px;
-        line-height: 1.15;
-        letter-spacing: 0.8px;
+        font-size: clamp(9px, 1.7vh, 11px);
+        line-height: 1.1;
+        letter-spacing: 0.45px;
+        white-space: nowrap;
     }
 
     #mainMenu .menu-buttons {
         gap: 4px;
+        flex: 0 0 auto;
     }
 
     /* Pause popup uses the same contained, touch-friendly landscape frame. */
@@ -2488,10 +2497,18 @@ canvas {
     }
 
     #gameButtonHome {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+        width: 100%;
         margin: 0;
     }
 
     #gameButtonHome button {
         width: auto;
+        max-width: 100%;
+        white-space: nowrap;
     }
 }
