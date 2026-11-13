@@ -25,37 +25,22 @@
 
     <main class="game-container">
 
-        <!-- =====================================
-             2.1 GAME HEADER
-        ====================================== -->
-
+        <!-- 2.1 GAME HEADER -->
         <header class="game-header">
             <h1>SPACE DEFENDER</h1>
             <p>Aliens are on the attack!</p>
         </header>
 
-
-        <!-- =====================================
-             2.2 SHARED GAME AREA
-        ====================================== -->
-
+        <!-- 2.2 SHARED GAME AREA -->
         <div class="game-area">
 
-            <!-- ---------------------------------
-                 2.2.1 MENU BACKGROUND
-            ---------------------------------- -->
-
+            <!-- 2.2.1 MENU BACKGROUND -->
             <section id="menuBackground">
                 <canvas id="menuCanvas" width="900" height="500"></canvas>
             </section>
 
-
-            <!-- ---------------------------------
-                 2.2.2 MAIN MENU
-            ---------------------------------- -->
-
+            <!-- 2.2.2 MAIN MENU -->
             <section id="mainMenu" class="main-menu">
-
                 <div class="menu-overlay">
 
                     <img
@@ -74,27 +59,17 @@
                     </div>
 
                 </div>
-
             </section>
 
-
-            <!-- ---------------------------------
-                 2.2.3 GAMEPLAY SCREEN
-            ---------------------------------- -->
-
+            <!-- 2.2.3 GAMEPLAY SCREEN -->
             <section id="gameScreen" class="game-screen">
                 <canvas id="gameCanvas" width="900" height="500"></canvas>
             </section>
 
-
-            <!-- =================================
-                 2.2.4 GAME PROGRESSION SCREENS
-            ================================== -->
+            <!-- 2.2.4 GAME PROGRESSION SCREENS -->
 
             <!-- NEW HIGH SCORE CONGRATULATIONS -->
-
             <section id="congratulationsScreen" class="main-menu sub-menu game-over-screen">
-
                 <div class="menu-overlay">
                     <h2>CONGRATULATIONS!</h2>
 
@@ -106,14 +81,10 @@
                         <button id="continueToNameEntryButton">CONTINUE</button>
                     </div>
                 </div>
-
             </section>
 
-
             <!-- TOP 5 NAME ENTRY -->
-
             <section id="nameEntryScreen" class="main-menu sub-menu game-over-screen">
-
                 <div class="menu-overlay">
                     <h2>TOP 5 QUALIFIED!</h2>
 
@@ -133,19 +104,14 @@
                         <button id="skipRecordButton">SKIP</button>
                     </div>
                 </div>
-
             </section>
 
-
             <!-- GAME OVER -->
-
             <section id="gameOverScreen" class="main-menu sub-menu game-over-screen">
-
                 <div class="menu-overlay">
                     <h2>GAME OVER</h2>
 
                     <p class="game-over-title">THE FIGHT ISN'T OVER.</p>
-
                     <p class="game-over-message">
                         The galaxy still needs you. Rise again, pilot.
                     </p>
@@ -157,18 +123,12 @@
                         <button id="gameOverMenuButton">MAIN MENU</button>
                     </div>
                 </div>
-
             </section>
 
-
-            <!-- =================================
-                 2.2.5 MAIN MENU SUBSCREENS
-            ================================== -->
+            <!-- 2.2.5 MAIN MENU SUBSCREENS -->
 
             <!-- HIGH SCORES -->
-
             <section id="highScoresScreen" class="high-scores-screen">
-
                 <div class="menu-overlay">
                     <h2>HIGH SCORES</h2>
 
@@ -180,14 +140,10 @@
                         <button id="highScoresBackButton">BACK TO MAIN MENU</button>
                     </div>
                 </div>
-
             </section>
 
-
             <!-- OPTIONS -->
-
             <section id="optionsScreen" class="options-screen">
-
                 <div class="menu-overlay">
                     <h2>OPTIONS</h2>
 
@@ -212,41 +168,54 @@
                         <button id="optionsBackButton">BACK TO MAIN MENU</button>
                     </div>
                 </div>
-
             </section>
 
-
-            <!-- =================================
-                 2.2.6 OPTIONS SUBSCREENS
-            ================================== -->
+            <!-- 2.2.6 OPTIONS SUBSCREENS -->
 
             <!-- CONTROLS GUIDE -->
-
             <section id="controlsGuideScreen" class="sub-screen">
-
                 <div class="menu-overlay">
+
                     <h2>CONTROLS GUIDE</h2>
 
                     <div class="controls-guide-list">
-                        <p>↑ — MOVE UP</p>
-                        <p>↓ — MOVE DOWN</p>
-                        <p>← — MOVE LEFT</p>
-                        <p>→ — MOVE RIGHT</p>
-                        <p>AUTO FIRE — ENABLED</p>
+
+                        <!-- LAPTOP / DESKTOP CONTROLS -->
+                        <div class="control-platform-section">
+                            <h3>LAPTOP / DESKTOP</h3>
+
+                            <p>↑ — MOVE UP</p>
+                            <p>↓ — MOVE DOWN</p>
+                            <p>← — MOVE LEFT</p>
+                            <p>→ — MOVE RIGHT</p>
+                            <p>P — PAUSE / RESUME GAME</p>
+                            <p>ENTER — SELECT OPTION</p>
+                            <p>ESC — TO RETURN</p>
+                            <p>MOUSE — NAVIGATE MENUS</p>
+                            <p>CLICK & DRAG — MOVE YOUR SPACESHIP</p>
+                            <p>AUTO FIRE — ENABLED</p>
+                        </div>
+
+                        <!-- ANDROID / MOBILE CONTROLS -->
+                        <div class="control-platform-section">
+                            <h3>ANDROID / MOBILE</h3>
+
+                            <p>TOUCH & DRAG — MOVE YOUR SPACESHIP</p>
+                            <p>TAP — SELECT MENU BUTTONS</p>
+                            <p>AUTO FIRE — ENABLED</p>
+                        </div>
+
                     </div>
 
                     <div class="menu-buttons">
                         <button id="controlsGuideBackButton">BACK TO OPTIONS</button>
                     </div>
-                </div>
 
+                </div>
             </section>
 
-
             <!-- RESET RECORDS -->
-
             <section id="resetRecordsScreen" class="sub-screen">
-
                 <div class="menu-overlay">
                     <h2>RESET RECORDS</h2>
 
@@ -264,14 +233,10 @@
                         <button id="resetRecordsBackButton">BACK TO OPTIONS</button>
                     </div>
                 </div>
-
             </section>
 
-
             <!-- RESET CONFIRMATION -->
-
             <section id="resetConfirmationScreen" class="sub-screen">
-
                 <div class="menu-overlay">
                     <h2>CONFIRM RESET</h2>
 
@@ -284,33 +249,58 @@
                         <button id="cancelResetButton">CANCEL</button>
                     </div>
                 </div>
-
             </section>
 
         </div>
 
+        
+<!-- 2.3 GAME CONTROLS -->
+<footer class="game-controls">
 
-        <!-- =====================================
-             2.3 GAME CONTROLS
-        ====================================== -->
+    <!-- DESKTOP / LAPTOP INSTRUCTIONS -->
+    <div class="desktop-instructions desktop-controls">
 
-        <footer class="game-controls">
+        <!-- KEYBOARD CONTROLS -->
+        <div class="control-group">
+            <h3>KEYBOARD</h3>
+            <p>↑ ↓ ← → &nbsp; MOVE SPACESHIP</p>
+            <p>P &nbsp; PAUSE / RESUME</p>
+            <p>ENTER ↵ &nbsp; SELECT OPTION</p>
+        </div>
 
-            <p>↑ ↓ ← → &nbsp; MOVE YOUR SPACESHIP</p>
-            <p>AUTO FIRE ENABLED</p>
+        <!-- MOUSE CONTROLS -->
+        <div class="control-group">
+            <h3>MOUSE</h3>
+            <p>CLICK & HOLD &nbsp; SELECT SPACESHIP</p>
+            <p>DRAG &nbsp; MOVE SPACESHIP</p>
+            <p>CLICK &nbsp; SELECT MENU OPTION</p>
+        </div>
 
-            <button id="pauseButton">START GAME</button>
-            <button id="quitGameButton">QUIT GAME</button>
+    </div>
 
-        </footer>
+    <!-- MOBILE INSTRUCTIONS -->
+    <div class="mobile-controls">
+        <div class="control-group">
+            <h3>TOUCH CONTROLS</h3>
+            <p>TOUCH & DRAG &nbsp; MOVE SPACESHIP</p>
+            <p>TOUCH &nbsp; SELECT MENU OPTION</p>
+        </div>
+    </div>
+
+    <!-- AUTO FIRE -->
+    <div class="auto-fire-instruction">
+        <p>AUTO FIRE ENABLED</p>
+    </div>
+
+    <button id="pauseButton">START GAME</button>
+    <button id="quitGameButton">QUIT GAME</button>
+
+</footer>
+
 
     </main>
 
-
-    <!-- =========================================
-         3. JAVASCRIPT
-    ========================================== -->
-
+    <!-- 3. JAVASCRIPT -->
     <script src="game.js"></script>
 
 </body>

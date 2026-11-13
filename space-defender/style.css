@@ -33,16 +33,12 @@ body::after {
     z-index: -1;
     pointer-events: none;
 
-    background-image:
+    background:
         linear-gradient(
             rgba(5, 8, 22, 0.70),
             rgba(5, 8, 22, 0.70)
         ),
-        url("ipm-sd-background.png");
-
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
+        url("ipm-sd-background.png") center / cover no-repeat;
 }
 
 
@@ -147,8 +143,6 @@ canvas {
    4. SCREEN VISIBILITY AND MAIN MENU
 ================================================= */
 
-/* Initially hidden screens */
-
 #gameScreen,
 #highScoresScreen,
 #optionsScreen,
@@ -159,13 +153,9 @@ canvas {
     display: none;
 }
 
-/* Menu background */
-
 #menuBackground {
     display: block;
 }
-
-/* Main menu positioning */
 
 #mainMenu {
     position: absolute;
@@ -184,8 +174,6 @@ canvas {
     box-shadow: none;
 }
 
-/* Shared menu panel */
-
 .menu-overlay {
     width: 80%;
     max-width: 420px;
@@ -199,15 +187,11 @@ canvas {
     box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
 }
 
-/* Main menu without visible panel */
-
 #mainMenu .menu-overlay {
     background: transparent;
     border: none;
     box-shadow: none;
 }
-
-/* Main menu logo */
 
 .main-menu-logo {
     display: block;
@@ -253,10 +237,14 @@ canvas {
     transition: 0.2s;
 }
 
-.menu-buttons button:hover {
-    background: #2563eb;
-    box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
-    transform: scale(1.03);
+/* Hover effects are limited to devices with a real mouse. */
+@media (hover: hover) and (pointer: fine) {
+    body:not(.keyboard-navigation-active) .menu-buttons button:hover,
+    body:not(.keyboard-navigation-active) #nameEntryScreen button:hover {
+        background: #2563eb;
+        box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+        transform: scale(1.03);
+    }
 }
 
 .main-menu h2 {
@@ -271,8 +259,6 @@ canvas {
 /* =================================================
    6. SUBMENU AND RESULT SCREEN POSITIONING
 ================================================= */
-
-/* Regular submenu screens */
 
 #highScoresScreen,
 #optionsScreen,
@@ -291,13 +277,12 @@ canvas {
     height: 100%;
 }
 
-/* Result screen layers */
-
 #gameOverScreen,
 #congratulationsScreen,
 #nameEntryScreen {
     position: absolute;
     inset: 0;
+    z-index: 3;
 
     display: none;
     justify-content: center;
@@ -315,17 +300,11 @@ canvas {
     border: none;
     border-radius: 0;
     box-shadow: none;
-
-    z-index: 3;
 }
-
-/* Game Over transparent layer */
 
 #gameOverScreen {
     background: transparent;
 }
-
-/* Congratulations overlay */
 
 #congratulationsScreen {
     background: rgba(3, 5, 20, 0.72);
@@ -351,7 +330,6 @@ canvas {
     height: 390px;
     max-height: calc(100% - 24px);
 
-    box-sizing: border-box;
     margin: auto;
     padding: 24px 22px;
 
@@ -366,7 +344,13 @@ canvas {
     scrollbar-width: thin;
     scrollbar-color: #6633ff #10152b;
 }
+/* CONGRATULATIONS SCREEN - FIT CONTENT */
 
+#congratulationsScreen .menu-overlay {
+    height: auto;
+    overflow-y: auto;
+    scrollbar-gutter: auto;
+}
 /* Scrollbar width */
 
 #highScoresScreen .menu-overlay::-webkit-scrollbar,
@@ -511,10 +495,12 @@ canvas {
     transition: 0.2s;
 }
 
-.options-list button:hover:not(:disabled) {
-    background: #2563eb;
-    box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
-    transform: scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+    body:not(.keyboard-navigation-active) .options-list button:hover:not(:disabled) {
+        background: #2563eb;
+        box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+        transform: scale(1.03);
+    }
 }
 
 .options-list button.disabled-option {
@@ -541,8 +527,6 @@ canvas {
     letter-spacing: 1px;
 }
 
-/* Player name input */
-
 #playerNameInput {
     width: 100%;
     max-width: 280px;
@@ -567,8 +551,6 @@ canvas {
     box-shadow: 0 0 12px rgba(96, 165, 250, 0.4);
 }
 
-/* Save record button */
-
 #saveRecordButton {
     display: block;
 
@@ -578,10 +560,10 @@ canvas {
     margin: 0 auto 15px;
     padding: 12px;
 
-    background: #1e3a8a;
+    background: #1e293b;
     color: #ffffff;
 
-    border: 1px solid #3b82f6;
+    border: 1px solid #2563eb;
     border-radius: 7px;
 
     font-family: Verdana, sans-serif;
@@ -591,16 +573,10 @@ canvas {
     cursor: pointer;
 }
 
-#saveRecordButton:hover {
-    background: #2563eb;
-}
-
 
 /* =================================================
    12. CONGRATULATIONS SCREEN
 ================================================= */
-
-/* Achievement panel */
 
 #congratulationsScreen .menu-overlay {
     position: relative;
@@ -623,8 +599,6 @@ canvas {
     animation: achievementGlow 2.5s ease-in-out infinite alternate;
 }
 
-/* Decorative sparkles */
-
 #congratulationsScreen .menu-overlay::before {
     content: "✦     ✧     ✦";
     display: block;
@@ -637,8 +611,6 @@ canvas {
 
     animation: sparkle 2s ease-in-out infinite;
 }
-
-/* Congratulations heading */
 
 #congratulationsScreen h2 {
     margin: 3px 0 4px;
@@ -663,8 +635,6 @@ canvas {
     animation: trophyFloat 2s ease-in-out infinite;
 }
 
-/* Achievement message */
-
 #congratulationsScreen .game-over-title {
     margin: 2px 0;
 
@@ -684,8 +654,6 @@ canvas {
     line-height: 1.6;
 }
 
-/* Achievement score */
-
 #congratulationsScreen #finalScoreDisplay {
     margin: 15px 0 25px;
 
@@ -700,8 +668,6 @@ canvas {
 
     animation: scorePulse 1.8s ease-in-out infinite;
 }
-
-/* Continue button */
 
 #continueToNameEntryButton {
     width: 85%;
@@ -733,13 +699,13 @@ canvas {
     transition: 0.25s;
 }
 
-#continueToNameEntryButton:hover {
-    background: linear-gradient(90deg, #a16207, #eab308);
-    box-shadow: 0 0 25px rgba(250, 204, 21, 0.6);
-    transform: scale(1.04);
+@media (hover: hover) and (pointer: fine) {
+    #continueToNameEntryButton:hover {
+        background: linear-gradient(90deg, #a16207, #eab308);
+        box-shadow: 0 0 25px rgba(250, 204, 21, 0.6);
+        transform: scale(1.04);
+    }
 }
-
-/* Compact achievement content */
 
 #congratulationsScreen .menu-overlay > * {
     zoom: 0.90;
@@ -760,6 +726,7 @@ canvas {
 }
 
 
+
 /* =================================================
    13. GAME CONTROLS
 ================================================= */
@@ -772,30 +739,121 @@ canvas {
     letter-spacing: 1px;
 }
 
-/* Pause button */
+/* DESKTOP KEYBOARD AND MOUSE COLUMNS */
+
+.desktop-instructions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 16px;
+
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.desktop-instructions .control-group,
+.mobile-controls .control-group {
+    background: rgba(8, 20, 45, 0.85);
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+
+    padding: 12px;
+    text-align: center;
+}
+
+.desktop-instructions h3,
+.mobile-controls h3 {
+    margin: 0 0 10px;
+    padding-bottom: 8px;
+
+    color: #60a5fa;
+    font-size: 13px;
+    letter-spacing: 2px;
+
+    border-bottom: 1px solid rgba(96, 165, 250, 0.35);
+}
+
+.desktop-instructions p,
+.mobile-controls p {
+    margin: 8px 0;
+
+    color: #dbeafe;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* MOBILE TOUCH INSTRUCTIONS */
+
+.mobile-controls {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* AUTO FIRE INDICATOR */
+
+.auto-fire-instruction {
+    margin: 12px auto 0;
+
+    color: #4ade80;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.auto-fire-instruction p {
+    margin: 0;
+}
+
+/* GAME BUTTONS */
 
 #pauseButton {
     margin-top: 12px;
     padding: 10px 25px;
 
-    background: #2563eb;
-    color: white;
+    background: #1e293b;
+    color: #ffffff;
 
-    border: none;
+    border: 1px solid #2563eb;
     border-radius: 6px;
 
     font-family: Verdana, sans-serif;
     font-weight: bold;
 
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-#pauseButton:hover {
-    background: #1d4ed8;
+@media (hover: hover) and (pointer: fine) {
+    body:not(.keyboard-navigation-active) #pauseButton:hover {
+        outline: 2px solid #60a5fa;
+        outline-offset: 3px;
+
+        background: #2563eb;
+        color: #ffffff;
+
+        box-shadow:
+            0 0 10px rgba(37, 99, 235, 0.7),
+            0 0 20px rgba(37, 99, 235, 0.4);
+
+        transform: scale(1.05);
+    }
 }
 
-/* Quit button */
+#pauseButton.keyboard-selected {
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    box-shadow:
+        0 0 10px rgba(37, 99, 235, 0.7),
+        0 0 20px rgba(37, 99, 235, 0.4);
+
+    transform: scale(1.05);
+}
 
 #quitGameButton {
     display: none;
@@ -803,22 +861,53 @@ canvas {
     margin-top: 10px;
     padding: 10px 25px;
 
-    background: #991b1b;
-    color: white;
+    background: #1e293b;
+    color: #ffffff;
 
-    border: 1px solid #ef4444;
+    border: 1px solid #2563eb;
     border-radius: 6px;
 
     font-family: Verdana, sans-serif;
     font-weight: bold;
 
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-#quitGameButton:hover {
-    background: #b91c1c;
+@media (hover: hover) and (pointer: fine) {
+    body:not(.keyboard-navigation-active) #quitGameButton:hover {
+        outline: 2px solid #f87171;
+        outline-offset: 3px;
+
+        background: #991b1b;
+        color: #ffffff;
+
+        border-color: #ef4444;
+
+        box-shadow:
+            0 0 10px rgba(239, 68, 68, 0.7),
+            0 0 20px rgba(239, 68, 68, 0.4);
+
+        transform: scale(1.05);
+    }
 }
+
+#quitGameButton.keyboard-selected {
+    outline: 2px solid #f87171;
+    outline-offset: 3px;
+
+    background: #991b1b;
+    color: #ffffff;
+
+    border-color: #ef4444;
+
+    box-shadow:
+        0 0 10px rgba(239, 68, 68, 0.7),
+        0 0 20px rgba(239, 68, 68, 0.4);
+
+    transform: scale(1.05);
+}
+
 
 
 /* =================================================
@@ -876,9 +965,7 @@ canvas {
 
 @media (max-width: 600px) {
 
-    /* ---------------------------------------------
-       15.1 SHARED MENU SCREEN LAYOUT
-    --------------------------------------------- */
+    /* 15.1 SHARED MENU SCREEN LAYOUT */
 
     .game-area:has(#mainMenu[style*="display: flex"]),
     .game-area:has(#highScoresScreen[style*="display: flex"]),
@@ -898,10 +985,7 @@ canvas {
         box-shadow: none;
     }
 
-
-    /* ---------------------------------------------
-       15.2 SHARED ANIMATED BACKGROUND FRAME
-    --------------------------------------------- */
+    /* 15.2 SHARED ANIMATED BACKGROUND FRAME */
 
     .game-area:has(#mainMenu[style*="display: flex"]) #menuBackground,
     .game-area:has(#highScoresScreen[style*="display: flex"]) #menuBackground,
@@ -925,10 +1009,7 @@ canvas {
         box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
     }
 
-
-    /* ---------------------------------------------
-       15.3 SHARED MENU SCREEN POSITIONING
-    --------------------------------------------- */
+    /* 15.3 SHARED MENU SCREEN POSITIONING */
 
     #mainMenu,
     #highScoresScreen,
@@ -949,10 +1030,7 @@ canvas {
         flex: none;
     }
 
-
-    /* ---------------------------------------------
-       15.4 SHARED SUBMENU PANEL DESIGN
-    --------------------------------------------- */
+    /* 15.4 SHARED SUBMENU PANEL DESIGN */
 
     #highScoresScreen .menu-overlay,
     #optionsScreen .menu-overlay,
@@ -969,15 +1047,10 @@ canvas {
         margin: 0 auto;
         padding: 18px 16px;
 
-        box-sizing: border-box;
-
         overflow: visible;
     }
 
-
-    /* ---------------------------------------------
-       15.5 SHARED SUBMENU HEADINGS
-    --------------------------------------------- */
+    /* 15.5 SHARED SUBMENU HEADINGS */
 
     #highScoresScreen h2,
     #optionsScreen h2,
@@ -994,10 +1067,7 @@ canvas {
         text-shadow: 0 0 10px rgba(103, 232, 249, 0.4);
     }
 
-
-    /* ---------------------------------------------
-       15.6 SHARED SUBMENU BUTTONS
-    --------------------------------------------- */
+    /* 15.6 SHARED SUBMENU BUTTONS */
 
     #highScoresScreen .menu-buttons,
     #optionsScreen .menu-buttons,
@@ -1029,10 +1099,7 @@ canvas {
         min-height: 0;
     }
 
-
-    /* ---------------------------------------------
-       15.7 MAIN MENU
-    --------------------------------------------- */
+    /* 15.7 MAIN MENU */
 
     #mainMenu {
         justify-content: center;
@@ -1051,7 +1118,6 @@ canvas {
         padding: 14px 12px;
 
         overflow: visible;
-        box-sizing: border-box;
     }
 
     #mainMenu .main-menu-logo {
@@ -1085,10 +1151,7 @@ canvas {
         min-height: 0;
     }
 
-
-    /* ---------------------------------------------
-       15.8 HIGH SCORES
-    --------------------------------------------- */
+    /* 15.8 HIGH SCORES */
 
     #highScoresList {
         width: 100%;
@@ -1112,10 +1175,7 @@ canvas {
         line-height: 1.6;
     }
 
-
-    /* ---------------------------------------------
-       15.9 OPTIONS AND RESET BUTTON GROUPS
-    --------------------------------------------- */
+    /* 15.9 OPTIONS AND RESET BUTTON GROUPS */
 
     #optionsScreen .options-list,
     #resetRecordsScreen .options-list {
@@ -1146,10 +1206,7 @@ canvas {
         cursor: not-allowed;
     }
 
-
-    /* ---------------------------------------------
-       15.10 CONTROLS GUIDE
-    --------------------------------------------- */
+    /* 15.10 CONTROLS GUIDE */
 
     #controlsGuideScreen .controls-guide-list {
         width: 100%;
@@ -1168,10 +1225,7 @@ canvas {
         letter-spacing: 0.5px;
     }
 
-
-    /* ---------------------------------------------
-       15.11 RESET CONFIRMATION
-    --------------------------------------------- */
+    /* 15.11 RESET CONFIRMATION */
 
     #resetConfirmationScreen #resetConfirmationMessage {
         width: 100%;
@@ -1187,11 +1241,7 @@ canvas {
         text-align: center;
     }
 
-
-    /* ---------------------------------------------
-       15.12 RESULT SCREEN OVERLAYS
-       CONGRATULATIONS AND NAME ENTRY
-    --------------------------------------------- */
+    /* 15.12 RESULT SCREEN OVERLAYS */
 
     #congratulationsScreen,
     #nameEntryScreen {
@@ -1212,18 +1262,11 @@ canvas {
         z-index: 20;
     }
 
-
-    /* ---------------------------------------------
-       15.13 GAME OVER - PANEL BELOW CANVAS
-    --------------------------------------------- */
-
-    /* Remove the outer game-area frame while Game Over is displayed */
+    /* 15.13 GAME OVER - PANEL BELOW CANVAS */
 
     .game-area:has(#gameOverScreen[style*="display: flex"]) {
         display: contents;
     }
-
-    /* Keep the blue frame around the canvas only */
 
     .game-area:has(#gameOverScreen[style*="display: flex"]) #gameScreen {
         position: relative;
@@ -1243,8 +1286,6 @@ canvas {
 
         box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
     }
-
-    /* Position Game Over below the canvas */
 
     #gameOverScreen {
         position: relative;
@@ -1269,10 +1310,7 @@ canvas {
         z-index: 3;
     }
 
-
-    /* ---------------------------------------------
-       15.14 MOBILE RESULT SCREEN PANELS
-    --------------------------------------------- */
+    /* 15.14 MOBILE RESULT SCREEN PANELS */
 
     #gameOverScreen .menu-overlay,
     #congratulationsScreen .menu-overlay,
@@ -1287,8 +1325,6 @@ canvas {
         margin: auto;
         padding: 16px 14px;
 
-        box-sizing: border-box;
-
         overflow-y: auto;
         overflow-x: hidden;
 
@@ -1300,10 +1336,7 @@ canvas {
         max-width: 100%;
     }
 
-
-    /* ---------------------------------------------
-       15.15 MOBILE RESULT SCREEN TYPOGRAPHY
-    --------------------------------------------- */
+    /* 15.15 MOBILE RESULT SCREEN TYPOGRAPHY */
 
     #gameOverScreen h2,
     #congratulationsScreen h2,
@@ -1352,10 +1385,7 @@ canvas {
         letter-spacing: 1px;
     }
 
-
-    /* ---------------------------------------------
-       15.16 CONGRATULATIONS SCREEN
-    --------------------------------------------- */
+    /* 15.16 CONGRATULATIONS SCREEN */
 
     #congratulationsScreen .menu-overlay {
         padding: 12px 14px;
@@ -1386,10 +1416,7 @@ canvas {
         letter-spacing: 1px;
     }
 
-
-    /* ---------------------------------------------
-       15.17 SAVE HIGH SCORE / NAME ENTRY
-    --------------------------------------------- */
+    /* 15.17 SAVE HIGH SCORE / NAME ENTRY */
 
     #nameEntryScreen {
         align-items: flex-start;
@@ -1429,10 +1456,7 @@ canvas {
         letter-spacing: 1px;
     }
 
-
-    /* ---------------------------------------------
-       15.18 GENERAL MOBILE BUTTON ADJUSTMENTS
-    --------------------------------------------- */
+    /* 15.18 GENERAL MOBILE BUTTON ADJUSTMENTS */
 
     #mainMenu button,
     #menuBackground button {
@@ -1449,4 +1473,293 @@ canvas {
         min-height: 0;
     }
 
+}
+
+
+
+/* =================================================
+   16. DEVICE-SPECIFIC CONTROL INSTRUCTIONS
+================================================= */
+
+/* DESKTOP / LAPTOP */
+
+.mobile-controls {
+    display: none;
+}
+
+.desktop-controls {
+    display: grid;
+}
+
+/* ANDROID / MOBILE */
+
+@media (max-width: 600px) {
+
+    .desktop-controls {
+        display: none;
+    }
+
+    .mobile-controls {
+        display: block;
+
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .auto-fire-instruction {
+        margin-top: 10px;
+    }
+
+}
+
+
+
+/* =================================================
+   17. CONTROLS GUIDE - PLATFORM SECTIONS
+================================================= */
+
+.controls-guide-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 10px;
+}
+
+.control-platform-section {
+    background: rgba(8, 20, 45, 0.95);
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    padding: 15px;
+
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+    box-sizing: border-box;
+}
+
+.control-platform-section h3 {
+    color: #60a5fa;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-align: center;
+
+    margin: 0 0 12px;
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid rgba(96, 165, 250, 0.35);
+}
+
+.control-platform-section p {
+    color: #dbeafe;
+    font-size: 14px;
+    text-align: center;
+
+    margin: 9px 0;
+    line-height: 1.5;
+}
+
+
+/* =================================================
+   18. KEYBOARD MENU NAVIGATION HIGHLIGHT
+================================================= */
+
+.menu-buttons button.keyboard-selected,
+.options-list button.keyboard-selected {
+    background: #2563eb;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.7);
+    transform: scale(1.03);
+
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+}
+
+/* Keep disabled options visually disabled. */
+
+.menu-buttons button:disabled,
+.options-list button:disabled {
+    cursor: not-allowed;
+}
+
+
+/* Pause and Quit keyboard-selection styles are defined with the game buttons above. */
+/* NAME ENTRY - KEYBOARD SELECTION */
+
+#nameEntryScreen button.keyboard-selected {
+    background: #2563eb;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.7);
+    transform: scale(1.03);
+
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+}
+
+/* =================================================
+   19. CONTROLS GUIDE - SINGLE SCROLLBAR
+================================================= */
+
+/* Desktop: keep the heading and Back button fixed.
+   Only the guide content itself will scroll. */
+
+@media (min-width: 601px) {
+
+    #controlsGuideScreen .menu-overlay {
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
+    }
+
+    #controlsGuideScreen .controls-guide-list {
+        flex: 1;
+        min-height: 0;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: #6633ff #10152b;
+    }
+
+    #controlsGuideScreen .controls-guide-list::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    #controlsGuideScreen .controls-guide-list::-webkit-scrollbar-thumb {
+        background: #6633ff;
+        border-radius: 10px;
+    }
+
+    #controlsGuideScreen .controls-guide-list::-webkit-scrollbar-track {
+        background: #10152b;
+    }
+
+    #controlsGuideScreen .menu-buttons {
+        flex: 0 0 auto;
+        margin-top: 20px;
+    }
+}
+
+/* Mobile: retain the existing full-content layout. */
+
+@media (max-width: 600px) {
+
+    #controlsGuideScreen .menu-overlay {
+        display: block;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
+    #controlsGuideScreen .controls-guide-list {
+        flex: none;
+        min-height: 0;
+        overflow: visible;
+    }
+}
+
+/* =================================================
+   20. MOUSE MENU NAVIGATION HIGHLIGHT
+================================================= */
+
+.menu-buttons button.mouse-selected,
+.options-list button.mouse-selected {
+    background: #2563eb;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.7);
+    transform: scale(1.03);
+
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+}
+
+
+/* =================================================
+   21. TOUCHSCREEN BUTTON FEEDBACK
+================================================= */
+
+/* Remove the browser's persistent tap flash; provide our own while pressed. */
+button {
+    /* Keep a visible native tap response on Android and other touch browsers. */
+    -webkit-tap-highlight-color: rgba(37, 99, 235, 0.25);
+}
+
+/* Preserve the special tap colors for the Quit and Continue buttons. */
+#quitGameButton {
+    -webkit-tap-highlight-color: rgba(239, 68, 68, 0.28);
+}
+
+#continueToNameEntryButton {
+    -webkit-tap-highlight-color: rgba(250, 204, 21, 0.28);
+}
+
+button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Touch devices do not use hover states. A button lights only while pressed. */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Do not leave a keyboard/mouse selection glow on a phone after a tap. */
+    .menu-buttons button.keyboard-selected,
+    .options-list button.keyboard-selected,
+    #nameEntryScreen button.keyboard-selected,
+    .menu-buttons button.mouse-selected,
+    .options-list button.mouse-selected,
+    #pauseButton.keyboard-selected,
+    #quitGameButton.keyboard-selected {
+        background: #1e293b;
+        color: #ffffff;
+        border-color: #2563eb;
+        box-shadow: none;
+        outline: none;
+        transform: none;
+    }
+
+    button:active:not(:disabled) {
+        filter: brightness(1.4);
+        box-shadow:
+            0 0 0 2px rgba(96, 165, 250, 0.8),
+            0 0 24px rgba(37, 99, 235, 1),
+            inset 0 0 10px rgba(96, 165, 250, 0.3);
+        transform: scale(0.96);
+    }
+
+    /* Keep the special gold Continue button gold while it is pressed. */
+    #continueToNameEntryButton:active:not(:disabled) {
+        filter: brightness(1.4);
+        box-shadow:
+            0 0 0 2px rgba(253, 224, 71, 0.9),
+            0 0 26px rgba(250, 204, 21, 1),
+            inset 0 0 10px rgba(253, 224, 71, 0.35);
+        transform: scale(0.96);
+    }
+
+    /* Keep Quit Game's pressed feedback red. */
+    #quitGameButton:active:not(:disabled) {
+        filter: brightness(1.4);
+        box-shadow:
+            0 0 0 2px rgba(252, 165, 165, 0.9),
+            0 0 26px rgba(239, 68, 68, 1),
+            inset 0 0 10px rgba(252, 165, 165, 0.35);
+        transform: scale(0.96);
+    }
+}
+
+@media (max-width: 600px) {
+    /*
+       Match the active-game buttons to the main-menu button size.
+       Width is intentionally left automatic so it can follow the text.
+    */
+    #pauseButton,
+    #quitGameButton {
+        padding: 9px 10px;
+
+        font-family: Verdana, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 1.2;
+        letter-spacing: 1px;
+    }
 }
