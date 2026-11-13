@@ -2511,4 +2511,72 @@ canvas {
         max-width: 100%;
         white-space: nowrap;
     }
+
+    /*
+       FINAL LANDSCAPE BUTTON CONSISTENCY PASS
+       Apply one compact, predictable button treatment to every screen.
+       This is presentation-only: button IDs, actions and game logic stay intact.
+    */
+    #mainMenu button,
+    #highScoresScreen button,
+    #optionsScreen button,
+    #controlsGuideScreen button,
+    #resetRecordsScreen button,
+    #resetConfirmationScreen button,
+    #gameOverScreen button,
+    #congratulationsScreen button,
+    #nameEntryScreen button,
+    #pauseOverlay button,
+    #gameButtonHome button {
+        box-sizing: border-box;
+        min-width: 0;
+        max-width: 100%;
+        min-height: 34px;
+        padding: 7px 8px;
+
+        font-family: Verdana, sans-serif;
+        font-size: clamp(8px, 1.55vh, 10px);
+        font-weight: bold;
+        line-height: 1.1;
+        letter-spacing: 0.2px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        flex-shrink: 0;
+    }
+
+    /* Menu, submenu and result buttons share a centered, consistent width. */
+    #mainMenu .menu-buttons button,
+    #highScoresScreen .menu-buttons button,
+    #optionsScreen .menu-buttons button,
+    #controlsGuideScreen .menu-buttons button,
+    #resetRecordsScreen .menu-buttons button,
+    #resetConfirmationScreen .menu-buttons button,
+    #gameOverScreen .menu-buttons button,
+    #congratulationsScreen .menu-buttons button,
+    #nameEntryScreen .menu-buttons button,
+    #optionsScreen .options-list button,
+    #resetRecordsScreen .options-list button {
+        width: min(92%, 320px);
+        margin: 2px auto;
+    }
+
+    /* Pause controls remain compact without inheriting menu-button width. */
+    #pauseOverlayButtons button {
+        width: min(82%, 260px);
+        margin: 2px auto;
+    }
+
+    #gameButtonHome {
+        flex-wrap: nowrap;
+        gap: 6px;
+    }
+
+    #gameButtonHome button {
+        width: auto;
+        max-width: min(48%, 190px);
+        margin: 2px 0;
+        padding: 7px 9px;
+    }
 }
