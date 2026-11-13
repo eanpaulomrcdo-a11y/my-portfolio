@@ -2020,3 +2020,478 @@ canvas {
     }
 }
 
+
+
+/* =================================================
+   25. MOBILE LANDSCAPE LAYOUT
+================================================= */
+
+/*
+   Landscape phones use the desktop-style game composition, but keep
+   touch-friendly controls and mobile instructions. This is deliberately
+   isolated from the portrait and desktop layouts.
+*/
+
+@media (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-height: 600px) {
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    body {
+        height: 100vh;
+        height: 100dvh;
+    }
+
+    .game-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        max-width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+
+        margin: 0;
+        padding: 4px 10px;
+        overflow: hidden;
+    }
+
+    /* Compact laptop-style header. */
+    .game-header {
+        flex: 0 0 auto;
+        width: 100%;
+        margin: 0;
+    }
+
+    .game-header h1 {
+        margin: 1px 0;
+        font-size: clamp(15px, 3.8vh, 23px);
+        letter-spacing: 2px;
+    }
+
+    .game-header p {
+        margin: 1px 0;
+        font-size: clamp(8px, 1.8vh, 10px);
+    }
+
+    /* Scale the 9:5 game frame to the available landscape viewport. */
+    .game-area {
+        position: relative;
+        display: block;
+
+        flex: 0 1 auto;
+        width: min(96vw, calc((100dvh - 94px) * 1.8));
+        max-width: none;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 9 / 5;
+
+        margin: 4px auto;
+        overflow: hidden;
+
+        border: 2px solid #2563eb;
+        border-radius: 10px;
+        box-shadow: 0 0 25px rgba(37, 99, 235, 0.25);
+    }
+
+    /* Keep the animated menu background filling the same game frame. */
+    #menuBackground {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* All menu and result screens remain inside the game frame. */
+    #mainMenu,
+    #highScoresScreen,
+    #optionsScreen,
+    #controlsGuideScreen,
+    #resetRecordsScreen,
+    #resetConfirmationScreen,
+    #gameOverScreen,
+    #congratulationsScreen,
+    #nameEntryScreen {
+        position: absolute;
+        inset: 0;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+
+        margin: 0;
+        padding: 8px;
+
+        overflow: hidden;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    #mainMenu {
+        background: transparent;
+    }
+
+    #highScoresScreen,
+    #optionsScreen,
+    #controlsGuideScreen,
+    #resetRecordsScreen,
+    #resetConfirmationScreen {
+        background: rgba(3, 5, 20, 0.76);
+    }
+
+    #gameOverScreen {
+        background: rgba(5, 11, 24, 0.72);
+    }
+
+    #congratulationsScreen,
+    #nameEntryScreen {
+        background: rgba(3, 5, 20, 0.76);
+    }
+
+    /* Main menu panel and buttons fit the short landscape height. */
+    #mainMenu .menu-overlay {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: min(88%, 470px);
+        max-width: 470px;
+        max-height: calc(100% - 10px);
+        height: auto;
+
+        margin: auto;
+        padding: 8px 12px;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    #mainMenu .main-menu-logo {
+        width: auto;
+        max-width: min(48vw, 190px);
+        max-height: 54px;
+        margin: 0 auto 4px;
+        object-fit: contain;
+    }
+
+    #mainMenu .menu-overlay p {
+        margin: 2px 0;
+        font-size: clamp(8px, 1.8vh, 10px);
+        line-height: 1.25;
+    }
+
+    #mainMenu .menu-buttons {
+        width: 100%;
+        gap: 5px;
+        margin: 6px auto 0;
+    }
+
+    /* Shared submenu and result panels stay fully inside the game frame.
+       Long content scrolls inside its own panel, not the page. */
+    #highScoresScreen .menu-overlay,
+    #optionsScreen .menu-overlay,
+    #controlsGuideScreen .menu-overlay,
+    #resetRecordsScreen .menu-overlay,
+    #resetConfirmationScreen .menu-overlay,
+    #gameOverScreen .menu-overlay,
+    #congratulationsScreen .menu-overlay,
+    #nameEntryScreen .menu-overlay {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: min(88%, 470px);
+        max-width: 470px;
+        height: min(390px, calc(100% - 12px));
+        max-height: calc(100% - 12px);
+        min-height: 0;
+
+        margin: auto;
+        padding: 10px 14px;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+    }
+
+    #highScoresScreen h2,
+    #optionsScreen h2,
+    #controlsGuideScreen h2,
+    #resetRecordsScreen h2,
+    #resetConfirmationScreen h2,
+    #gameOverScreen h2,
+    #congratulationsScreen h2,
+    #nameEntryScreen h2 {
+        margin: 2px 0 8px;
+        font-size: clamp(15px, 3.3vh, 20px);
+        letter-spacing: 1.5px;
+        line-height: 1.2;
+    }
+
+    #highScoresList,
+    #optionsScreen .options-list,
+    #resetRecordsScreen .options-list,
+    #controlsGuideScreen .controls-guide-list {
+        width: 100%;
+        max-width: 360px;
+        margin: 6px auto;
+    }
+
+    #highScoresList .score-row {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
+    #optionsScreen .options-list,
+    #resetRecordsScreen .options-list {
+        gap: 5px;
+    }
+
+    #controlsGuideScreen .menu-overlay {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    #controlsGuideScreen .controls-guide-list {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin: 4px auto;
+        padding: 4px;
+    }
+
+    #controlsGuideScreen .control-platform-section {
+        padding: 7px;
+        margin-bottom: 6px;
+    }
+
+    #controlsGuideScreen .control-platform-section h3 {
+        margin: 0 0 4px;
+        padding-bottom: 4px;
+        font-size: 10px;
+    }
+
+    #controlsGuideScreen .control-platform-section p {
+        margin: 3px 0;
+        font-size: 9px;
+        line-height: 1.25;
+    }
+
+    #controlsGuideScreen .menu-buttons {
+        flex: 0 0 auto;
+        margin: 5px auto 0;
+    }
+
+    #resetConfirmationScreen #resetConfirmationMessage {
+        margin: 8px auto;
+        padding: 6px;
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    /* Result-screen copy and controls remain compact and touchable. */
+    #gameOverScreen .game-over-title,
+    #congratulationsScreen .game-over-title,
+    #nameEntryScreen .game-over-title {
+        margin: 3px 0 5px;
+        font-size: 10px;
+        line-height: 1.3;
+    }
+
+    #gameOverScreen .game-over-message,
+    #congratulationsScreen .game-over-message,
+    #nameEntryScreen .game-over-message {
+        margin: 3px 0 7px;
+        font-size: 9px;
+        line-height: 1.35;
+    }
+
+    #congratulationsScreen #finalScoreDisplay,
+    #gameOverScreen #gameOverFinalScoreDisplay {
+        margin: 5px 0 8px;
+        font-size: clamp(18px, 4vh, 25px);
+    }
+
+    #nameEntryScreen #playerNameInput {
+        width: 85%;
+        max-width: 260px;
+        margin: 4px auto 7px;
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    /* Keep all buttons large enough for touch, without changing their actions. */
+    #mainMenu .menu-buttons button,
+    #highScoresScreen .menu-buttons button,
+    #optionsScreen .menu-buttons button,
+    #controlsGuideScreen .menu-buttons button,
+    #resetRecordsScreen .menu-buttons button,
+    #resetConfirmationScreen .menu-buttons button,
+    #gameOverScreen .menu-buttons button,
+    #congratulationsScreen .menu-buttons button,
+    #nameEntryScreen .menu-buttons button,
+    #optionsScreen .options-list button,
+    #resetRecordsScreen .options-list button {
+        width: min(82%, 280px);
+        min-height: 34px;
+        margin: 2px auto;
+        padding: 7px 10px;
+
+        font-family: Verdana, sans-serif;
+        font-size: 10px;
+        line-height: 1.15;
+        letter-spacing: 0.8px;
+    }
+
+    #mainMenu .menu-buttons {
+        gap: 4px;
+    }
+
+    /* Pause popup uses the same contained, touch-friendly landscape frame. */
+    #pauseOverlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        background: rgba(5, 8, 22, 0.78);
+        backdrop-filter: blur(3px);
+    }
+
+    .pause-overlay-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: min(88%, 420px);
+        height: min(300px, calc(100% - 12px));
+        max-height: calc(100% - 12px);
+        margin: auto;
+        padding: 10px 14px;
+
+        background: rgba(8, 20, 45, 0.96);
+        border: 1px solid #2563eb;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+    }
+
+    .pause-overlay-panel h2 {
+        margin: 0 0 6px;
+        font-size: clamp(16px, 3.5vh, 22px);
+        letter-spacing: 2px;
+    }
+
+    .pause-overlay-message {
+        margin: 0 0 10px;
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .pause-overlay-message span {
+        font-size: 9px;
+    }
+
+    #pauseOverlayButtons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 7px;
+    }
+
+    #pauseOverlayButtons #pauseButton,
+    #pauseOverlayButtons #quitGameButton,
+    #gameButtonHome button {
+        min-height: 36px;
+        margin: 2px auto;
+        padding: 7px 14px;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    /* Landscape phones use touch instructions, not the desktop mouse guide. */
+    .desktop-controls {
+        display: none !important;
+    }
+
+    .mobile-controls {
+        display: block;
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .mobile-controls .control-group {
+        padding: 2px 6px;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .mobile-controls h3 {
+        margin: 0 0 2px;
+        padding: 0;
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .mobile-controls p {
+        display: inline-block;
+        margin: 0 5px;
+        font-size: 8px;
+        line-height: 1.2;
+    }
+
+    .game-controls {
+        flex: 0 0 auto;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 8px;
+    }
+
+    .auto-fire-instruction {
+        margin: 1px auto;
+        font-size: 8px;
+        line-height: 1.1;
+    }
+
+    .auto-fire-instruction p {
+        margin: 0;
+    }
+
+    #gameButtonHome {
+        margin: 0;
+    }
+
+    #gameButtonHome button {
+        width: auto;
+    }
+}

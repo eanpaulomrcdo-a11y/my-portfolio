@@ -246,7 +246,7 @@ const gameButtonHome = document.getElementById("gameButtonHome");
 
 // Keep the same buttons in the correct location for each device.
 function positionPauseButtons() {
-    const isDesktop = window.matchMedia("(min-width: 601px)").matches;
+    const isDesktop = window.matchMedia("(min-width: 601px), (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-height: 600px)").matches;
 
     const showInOverlay =
         isDesktop &&
@@ -264,7 +264,7 @@ function positionPauseButtons() {
 }
 
 function updatePauseOverlay() {
-    const isDesktop = window.matchMedia("(min-width: 601px)").matches;
+    const isDesktop = window.matchMedia("(min-width: 601px), (orientation: landscape) and (hover: none) and (pointer: coarse) and (max-height: 600px)").matches;
 
     positionPauseButtons();
 
