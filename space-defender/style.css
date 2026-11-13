@@ -2512,10 +2512,11 @@ canvas {
         white-space: nowrap;
     }
 
+
     /*
-       FINAL LANDSCAPE BUTTON CONSISTENCY PASS
-       Apply one compact, predictable button treatment to every screen.
-       This is presentation-only: button IDs, actions and game logic stay intact.
+       NATURAL, CENTERED LANDSCAPE BUTTONS
+       Buttons size to their labels instead of forcing every label into
+       one identical narrow shape. Text remains centered and unwrapped.
     */
     #mainMenu button,
     #highScoresScreen button,
@@ -2528,55 +2529,74 @@ canvas {
     #nameEntryScreen button,
     #pauseOverlay button,
     #gameButtonHome button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         box-sizing: border-box;
-        min-width: 0;
+        width: fit-content;
+        min-width: 170px;
         max-width: 100%;
-        min-height: 34px;
-        padding: 7px 8px;
-
+        min-height: 36px;
+        height: auto;
+        margin: 3px auto;
+        padding: 8px 16px;
         font-family: Verdana, sans-serif;
-        font-size: clamp(8px, 1.55vh, 10px);
+        font-size: clamp(9px, 1.7vh, 11px);
         font-weight: bold;
-        line-height: 1.1;
-        letter-spacing: 0.2px;
-
+        line-height: 1.15;
+        letter-spacing: 0.35px;
+        text-align: center;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: clip;
-        flex-shrink: 0;
+        flex: 0 0 auto;
     }
 
-    /* Menu, submenu and result buttons share a centered, consistent width. */
-    #mainMenu .menu-buttons button,
-    #highScoresScreen .menu-buttons button,
-    #optionsScreen .menu-buttons button,
-    #controlsGuideScreen .menu-buttons button,
-    #resetRecordsScreen .menu-buttons button,
-    #resetConfirmationScreen .menu-buttons button,
-    #gameOverScreen .menu-buttons button,
-    #congratulationsScreen .menu-buttons button,
-    #nameEntryScreen .menu-buttons button,
+    #mainMenu .menu-buttons,
+    #highScoresScreen .menu-buttons,
+    #optionsScreen .menu-buttons,
+    #controlsGuideScreen .menu-buttons,
+    #resetRecordsScreen .menu-buttons,
+    #resetConfirmationScreen .menu-buttons,
+    #gameOverScreen .menu-buttons,
+    #congratulationsScreen .menu-buttons,
+    #nameEntryScreen .menu-buttons,
+    #optionsScreen .options-list,
+    #resetRecordsScreen .options-list,
+    #pauseOverlayButtons {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Longer option labels receive more horizontal room, not clipped text. */
     #optionsScreen .options-list button,
     #resetRecordsScreen .options-list button {
-        width: min(92%, 320px);
-        margin: 2px auto;
-    }
-
-    /* Pause controls remain compact without inheriting menu-button width. */
-    #pauseOverlayButtons button {
-        width: min(82%, 260px);
-        margin: 2px auto;
+        width: min(100%, 340px);
+        min-width: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: clamp(8px, 1.55vh, 10px);
+        letter-spacing: 0.2px;
     }
 
     #gameButtonHome {
         flex-wrap: nowrap;
-        gap: 6px;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
     }
 
     #gameButtonHome button {
+        min-width: 0;
         width: auto;
-        max-width: min(48%, 190px);
+        max-width: 48%;
+        padding: 8px 12px;
         margin: 2px 0;
-        padding: 7px 9px;
+        font-size: clamp(9px, 1.6vh, 10px);
+        letter-spacing: 0.25px;
+    }
+
+    #pauseOverlayButtons button {
+        width: fit-content;
+        min-width: 170px;
     }
 }

@@ -1159,6 +1159,138 @@ function drawStars(move = true) {
 
 
 // =============================================
+// 8A. RANDOM GALACTIC SCENERY EVENTS
+// =============================================
+
+let scenery = null;
+let sceneryEventTriggered = false;
+let enemiesDefeatedSinceBoss = 0;
+let nextSceneryMilestone = 0;
+
+function chooseSceneryMilestone() {
+    // One scenery event is scheduled randomly between 8 and 15 defeats.
+    nextSceneryMilestone = Math.floor(Math.random() * 8) + 8;
+}
+
+function createRandomScenery() {
+    const types = ["moon", "ringedPlanet", "alienPlanet", "nebula"];
+    const type = types[Math.floor(Math.random() * types.length)];
+    const size = type === "nebula" ? 260 : Math.random() * 65 + 150;
+
+    scenery = {
+        type,
+        x: canvas.width + size,
+        y: Math.random() * Math.max(1, canvas.height - size),
+        size,
+        speed: Math.random() * 0.25 + 0.45,
+        rotation: (Math.random() - 0.5) * 0.12
+    };
+    sceneryEventTriggered = true;
+}
+
+function updateScenery() {
+    if (!scenery) return;
+
+    scenery.x -= scenery.speed;
+
+    if (scenery.x + scenery.size < 0) {
+        scenery = null;
+    }
+}
+
+function drawScenery() {
+    if (!scenery) return;
+
+    const cx = scenery.x + scenery.size / 2;
+    const cy = scenery.y + scenery.size / 2;
+    const radius = scenery.size * 0.38;
+
+    ctx.save();
+    ctx.globalAlpha = 0.72;
+
+    if (scenery.type === "nebula") {
+        const glow = ctx.createRadialGradient(cx, cy, 5, cx, cy, radius * 1.8);
+        glow.addColorStop(0, "rgba(99, 102, 241, 0.42)");
+        glow.addColorStop(0.45, "rgba(168, 85, 247, 0.25)");
+        glow.addColorStop(1, "rgba(30, 41, 59, 0)");
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, radius * 1.8, radius * 1.15, scenery.rotation, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(56, 189, 248, 0.13)";
+        ctx.beginPath();
+        ctx.ellipse(cx - 20, cy + 8, radius * 1.1, radius * 0.55, -0.3, 0, Math.PI * 2);
+        ctx.fill();
+    } else {
+        // Soft atmospheric halo behind each celestial body.
+        const halo = ctx.createRadialGradient(cx, cy, radius * 0.65, cx, cy, radius * 1.5);
+        halo.addColorStop(0, "rgba(96, 165, 250, 0.12)");
+        halo.addColorStop(1, "rgba(96, 165, 250, 0)");
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius * 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (scenery.type === "ringedPlanet") {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(-0.25);
+            ctx.strokeStyle = "rgba(186, 230, 253, 0.72)";
+            ctx.lineWidth = Math.max(5, radius * 0.16);
+            ctx.beginPath();
+            ctx.ellipse(0, 0, radius * 1.55, radius * 0.48, 0, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.strokeStyle = "rgba(125, 211, 252, 0.42)";
+            ctx.lineWidth = Math.max(3, radius * 0.07);
+            ctx.beginPath();
+            ctx.ellipse(0, 0, radius * 1.35, radius * 0.4, 0, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        const planet = ctx.createRadialGradient(
+            cx - radius * 0.35, cy - radius * 0.4, radius * 0.08,
+            cx, cy, radius
+        );
+
+        if (scenery.type === "moon") {
+            planet.addColorStop(0, "#e2e8f0");
+            planet.addColorStop(0.65, "#94a3b8");
+            planet.addColorStop(1, "#334155");
+        } else if (scenery.type === "alienPlanet") {
+            planet.addColorStop(0, "#bef264");
+            planet.addColorStop(0.55, "#0d9488");
+            planet.addColorStop(1, "#164e63");
+        } else {
+            planet.addColorStop(0, "#bfdbfe");
+            planet.addColorStop(0.6, "#64748b");
+            planet.addColorStop(1, "#1e293b");
+        }
+
+        ctx.fillStyle = planet;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Subtle surface details add depth without looking like obstacles.
+        ctx.globalAlpha = 0.22;
+        ctx.fillStyle = scenery.type === "moon" ? "#475569" : "#0f172a";
+        for (let i = 0; i < 7; i++) {
+            const craterX = cx + Math.sin(i * 2.4) * radius * 0.55;
+            const craterY = cy + Math.cos(i * 1.7) * radius * 0.5;
+            const craterR = radius * (0.045 + (i % 3) * 0.018);
+            ctx.beginPath();
+            ctx.arc(craterX, craterY, craterR, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    ctx.restore();
+}
+
+
+// =============================================
 // 9. PLAYER SPACESHIP AND ENGINE FLAME
 // =============================================
 
@@ -1929,6 +2061,7 @@ const ENEMY_FIRE_START = 15;
 let aliensDestroyedAfterFire = 0;
 let alienSpeed = 2;
 let aliensSpawnedAfterSpeedIncrease = 0;
+let alienFireChance = 0.35;
 
 let boss = null;
 let bossesDefeated = 0;
@@ -1956,7 +2089,15 @@ function createAlien() {
 
 function updateAliens() {
 
-    if (!boss && aliensSpawnedAfterSpeedIncrease >= 20) {
+    // Boss 1 keeps the original spawn-based milestone. From Boss 2 onward,
+    // each boss arrives after 20 actual alien defeats in the current stage.
+    if (
+        !boss &&
+        (
+            (bossesDefeated === 0 && aliensSpawnedAfterSpeedIncrease >= 20) ||
+            (bossesDefeated > 0 && enemiesDefeatedSinceBoss >= 20)
+        )
+    ) {
         createBoss();
         alienSpawnTimer = 0;
     }
@@ -1984,6 +2125,9 @@ function updateAliens() {
 }
 
 function createBoss() {
+    const bossNumber = bossesDefeated + 1;
+    const bossHealth = BOSS_HEALTH + (bossesDefeated * 4);
+
     boss = {
         x: canvas.width,
         y: canvas.height / 2 - 45,
@@ -1991,11 +2135,16 @@ function createBoss() {
         height: 90,
         targetX: canvas.width - 170,
         speed: 1.2,
-        health: BOSS_HEALTH,
-        maxHealth: BOSS_HEALTH,
+        health: bossHealth,
+        maxHealth: bossHealth,
         fireCooldown: 90,
         heavyFireCooldown: 240,
-        phase: 0
+        phase: 0,
+        bossNumber,
+        beamCooldown: 360,
+        beamChargeTimer: 0,
+        beamActiveTimer: 0,
+        beamY: null
     };
 }
 
@@ -2129,6 +2278,28 @@ function updateEnemyLasers() {
 
             boss.heavyFireCooldown = 240;
         }
+
+        // Boss 2 introduces a screen-spanning beam. Later bosses retain it.
+        if (boss.bossNumber >= 2) {
+            if (boss.beamActiveTimer > 0) {
+                boss.beamActiveTimer--;
+                if (boss.beamActiveTimer === 0) {
+                    boss.beamCooldown = 420;
+                }
+            } else if (boss.beamChargeTimer > 0) {
+                boss.beamChargeTimer--;
+                if (boss.beamChargeTimer === 0) {
+                    boss.beamActiveTimer = 45;
+                }
+            } else {
+                boss.beamCooldown--;
+                if (boss.beamCooldown <= 0) {
+                    const lanes = [0.22, 0.5, 0.78];
+                    boss.beamY = canvas.height * lanes[Math.floor(Math.random() * lanes.length)];
+                    boss.beamChargeTimer = 100;
+                }
+            }
+        }
     }
 
     // Alien firing begins after the configured spawn threshold.
@@ -2140,7 +2311,7 @@ function updateEnemyLasers() {
         alien.fireCooldown--;
 
         if (alien.fireCooldown <= 0) {
-            if (Math.random() < 0.35) {
+            if (Math.random() < alienFireChance) {
                 enemyLasers.push({
                     x: alien.x,
                     y: alien.y + alien.height / 2 - 2,
@@ -2193,6 +2364,51 @@ function drawEnemyLasers() {
 
         ctx.restore();
     });
+}
+
+function drawBossBeam() {
+    if (!boss || boss.bossNumber < 2 || boss.beamY === null) return;
+
+    const beamEndX = boss.x;
+    const beamY = boss.beamY;
+
+    ctx.save();
+
+    if (boss.beamChargeTimer > 0) {
+        const pulse = 0.35 + Math.sin(Date.now() / 75) * 0.18;
+        ctx.globalAlpha = pulse;
+        ctx.strokeStyle = "#facc15";
+        ctx.lineWidth = 3;
+        ctx.setLineDash([12, 9]);
+        ctx.beginPath();
+        ctx.moveTo(0, beamY);
+        ctx.lineTo(beamEndX, beamY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "#fef08a";
+        ctx.font = "bold 13px Verdana";
+        ctx.textAlign = "center";
+        ctx.fillText("WARNING - LASER CHARGING", canvas.width / 2, Math.max(18, beamY - 22));
+    }
+
+    if (boss.beamActiveTimer > 0) {
+        ctx.shadowColor = "#fb7185";
+        ctx.shadowBlur = 28;
+        ctx.fillStyle = "rgba(239, 68, 68, 0.35)";
+        ctx.fillRect(0, beamY - 22, beamEndX, 44);
+        ctx.shadowColor = "#fef2f2";
+        ctx.shadowBlur = 18;
+        ctx.fillStyle = "#fb7185";
+        ctx.fillRect(0, beamY - 12, beamEndX, 24);
+        ctx.shadowColor = "#fff7ed";
+        ctx.shadowBlur = 18;
+        ctx.fillStyle = "#fff7ed";
+        ctx.fillRect(0, beamY - 5, beamEndX, 10);
+        ctx.shadowBlur = 0;
+    }
+
+    ctx.restore();
 }
 
 
@@ -2417,8 +2633,22 @@ function checkCollisions() {
                 if (aliensSpawned > ENEMY_FIRE_START) {
                     aliensDestroyedAfterFire++;
 
-                    if (aliensDestroyedAfterFire === 20) {
+                    if (aliensDestroyedAfterFire === 20 && bossesDefeated === 0) {
                         alienSpeed = 2.3;
+                    }
+                }
+
+                // After Boss 1, count actual alien defeats toward scenery and
+                // the next boss instead of relying on the number spawned.
+                if (bossesDefeated > 0) {
+                    enemiesDefeatedSinceBoss++;
+
+                    if (
+                        !sceneryEventTriggered &&
+                        nextSceneryMilestone > 0 &&
+                        enemiesDefeatedSinceBoss >= nextSceneryMilestone
+                    ) {
+                        createRandomScenery();
                     }
                 }
 
@@ -2461,6 +2691,21 @@ function checkCollisions() {
 
                 bossesDefeated++;
                 aliensSpawnedAfterSpeedIncrease = 0;
+                enemiesDefeatedSinceBoss = 0;
+                scenery = null;
+                sceneryEventTriggered = false;
+                chooseSceneryMilestone();
+
+                // Boss 1 starts the next stage at 2.5 speed and 37% alien fire.
+                // Each later boss adds another 0.2 speed and 2% firing chance.
+                if (bossesDefeated === 1) {
+                    alienSpeed = 2.5;
+                    alienFireChance = 0.37;
+                } else {
+                    alienSpeed = Math.min(4.5, alienSpeed + 0.2);
+                    alienFireChance = Math.min(0.70, alienFireChance + 0.02);
+                }
+
                 boss = null;
             }
         }
@@ -2504,6 +2749,25 @@ function checkCollisions() {
                 break;
             }
         }
+    }
+
+    // Boss 2+ screen-spanning beam: entering its active lane is fatal.
+    if (
+        boss &&
+        boss.bossNumber >= 2 &&
+        boss.beamActiveTimer > 0 &&
+        !isPlayerDying &&
+        !isGameOver &&
+        player.x < boss.x &&
+        player.y < boss.beamY + 22 &&
+        player.y + player.height > boss.beamY - 22
+    ) {
+        finalScore = score;
+        isPlayerDying = true;
+        createExplosion(
+            player.x + player.width / 2,
+            player.y + player.height / 2
+        );
     }
 
     // Enemy laser to player.
@@ -2657,7 +2921,12 @@ function restartGame() {
     aliensDestroyedAfterFire = 0;
     alienSpeed = 2;
     aliensSpawnedAfterSpeedIncrease = 0;
+    alienFireChance = 0.35;
     bossesDefeated = 0;
+    enemiesDefeatedSinceBoss = 0;
+    nextSceneryMilestone = 0;
+    sceneryEventTriggered = false;
+    scenery = null;
 
     
 // Reset keyboard controls.
@@ -2698,6 +2967,7 @@ function gameLoop() {
     if (gameIsActive) {
         updatePlayer();
         updateLasers();
+        updateScenery();
         updateAliens();
         updateEnemyLasers();
         updateSpaceDebris();
@@ -2755,7 +3025,11 @@ function gameLoop() {
         updateExplosions();
     }
 
+    // Draw scenery behind all combat objects.
+    drawScenery();
+
     // Draw game objects.
+    drawBossBeam();
     drawLasers();
     drawEnemyLasers();
     drawAliens();
