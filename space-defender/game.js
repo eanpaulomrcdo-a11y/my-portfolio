@@ -239,6 +239,61 @@ let finalScore = 0;
 const pauseButton = document.getElementById("pauseButton");
 const quitGameButton = document.getElementById("quitGameButton");
 
+
+const pauseOverlay = document.getElementById("pauseOverlay");
+const pauseOverlayButtons = document.getElementById("pauseOverlayButtons");
+const gameButtonHome = document.getElementById("gameButtonHome");
+
+// Keep the same buttons in the correct location for each device.
+function positionPauseButtons() {
+    const isDesktop = window.matchMedia("(min-width: 601px)").matches;
+
+    const showInOverlay =
+        isDesktop &&
+        hasStarted &&
+        isPaused &&
+        !isGameOver &&
+        !isPlayerDying;
+
+    const destination = showInOverlay
+        ? pauseOverlayButtons
+        : gameButtonHome;
+
+    destination.appendChild(pauseButton);
+    destination.appendChild(quitGameButton);
+}
+
+function updatePauseOverlay() {
+    const isDesktop = window.matchMedia("(min-width: 601px)").matches;
+
+    positionPauseButtons();
+
+    const shouldShow =
+        isDesktop &&
+        currentScreen === gameScreen &&
+        hasStarted &&
+        isPaused &&
+        !isGameOver &&
+        !isPlayerDying;
+
+    pauseOverlay.style.display = shouldShow ? "flex" : "none";
+
+    gameButtonHome.style.display =
+        isDesktop && hasStarted && !isPaused && !isGameOver && !isPlayerDying
+            ? "none"
+            : "";
+}
+
+// Set the correct button location and overlay state when the page loads.
+window.addEventListener("load", function () {
+    updatePauseOverlay();
+});
+
+// Reposition the buttons if the browser crosses the desktop/mobile breakpoint.
+window.addEventListener("resize", function () {
+    updatePauseOverlay();
+});
+
 const mainMenu = document.getElementById("mainMenu");
 const menuBackground = document.getElementById("menuBackground");
 const menuCanvas = document.getElementById("menuCanvas");
@@ -713,10 +768,6 @@ function handleMenuEscape() {
 }
 
 
-// =============================================
-// 6. SCREEN MANAGEMENT
-// =============================================
-
 function resetScreenScroll(screen) {
     if (!screen) return;
 
@@ -834,6 +885,9 @@ function showScreen(screen) {
 
     // Clear selection visuals on the newly opened screen.
     updateKeyboardSelection(false);
+    requestAnimationFrame(function () {
+    updatePauseOverlay();
+});
 }
 
 
@@ -862,6 +916,7 @@ startGameButton.addEventListener("click", function () {
     isPaused = false;
 
     pauseButton.textContent = "PAUSE GAME";
+    updatePauseOverlay();
 });
 
 highScoresButton.addEventListener("click", function () {
@@ -948,7 +1003,6 @@ gameOverMenuButton.addEventListener("click", function () {
     showScreen(mainMenu);
 });
 
-
 pauseButton.addEventListener("click", function () {
 
     if (isPlayerDying) {
@@ -1004,6 +1058,7 @@ pauseButton.addEventListener("click", function () {
         pauseButton.classList.remove("keyboard-selected", "mouse-selected");
         quitGameButton.classList.remove("keyboard-selected", "mouse-selected");
     }
+    updatePauseOverlay();
 });
 
 
@@ -1301,6 +1356,8 @@ let touchControlActive = false;
 let touchPointerId = null;
 let touchTargetX = 0;
 let touchTargetY = 0;
+let touchOffsetX = 0;
+let touchOffsetY = 0;
 
 // Mouse controls.
 let mouseControlActive = false;
@@ -1587,12 +1644,27 @@ canvas.addEventListener("pointerdown", function (event) {
         return;
     }
 
+    updateTouchTarget(event);
+
+    // Start dragging only when the player touches the spaceship.
+    if (
+        touchTargetX < player.x ||
+        touchTargetX > player.x + player.width ||
+        touchTargetY < player.y ||
+        touchTargetY > player.y + player.height
+    ) {
+        return;
+    }
+
     event.preventDefault();
 
     touchControlActive = true;
     touchPointerId = event.pointerId;
 
-    updateTouchTarget(event);
+    // Preserve the exact point where the spaceship was grabbed.
+    touchOffsetX = touchTargetX - player.x;
+    touchOffsetY = touchTargetY - player.y;
+
     canvas.setPointerCapture(event.pointerId);
 });
 
@@ -1689,14 +1761,70 @@ canvas.addEventListener("lostpointercapture", stopMouseControl);
 
 
 // =============================================
+// MOBILE BUTTON TAP FEEDBACK
+// =============================================
+
+// Keep the pressed appearance briefly after a touchscreen tap is released.
+const touchButtonTimers = new WeakMap();
+const activeTouchButtons = new Map();
+const TOUCH_BUTTON_FEEDBACK_DELAY = 350;
+
+document.addEventListener("pointerdown", function (event) {
+    if (event.pointerType !== "touch" && event.pointerType !== "pen") {
+        return;
+    }
+
+    const button = event.target.closest("button");
+
+    if (!button || button.disabled) {
+        return;
+    }
+
+    const existingTimer = touchButtonTimers.get(button);
+
+    if (existingTimer) {
+        clearTimeout(existingTimer);
+        touchButtonTimers.delete(button);
+    }
+
+    button.classList.add("touch-feedback");
+    activeTouchButtons.set(event.pointerId, button);
+}, true);
+
+function finishTouchButtonFeedback(event) {
+    const button = activeTouchButtons.get(event.pointerId);
+
+    if (!button) {
+        return;
+    }
+
+    activeTouchButtons.delete(event.pointerId);
+
+    const timer = setTimeout(function () {
+        button.classList.remove("touch-feedback");
+        touchButtonTimers.delete(button);
+    }, TOUCH_BUTTON_FEEDBACK_DELAY);
+
+    touchButtonTimers.set(button, timer);
+}
+
+document.addEventListener("pointerup", finishTouchButtonFeedback, true);
+document.addEventListener("pointercancel", finishTouchButtonFeedback, true);
+
+
+// =============================================
 // 11. PLAYER MOVEMENT
 // =============================================
 
 function updatePlayer() {
 
     if (touchControlActive) {
-        player.x = touchTargetX - player.width / 2;
-        player.y = touchTargetY - player.height / 2;
+        const targetX = touchTargetX - touchOffsetX;
+        const targetY = touchTargetY - touchOffsetY;
+
+        // Smoothly follow the finger instead of instantly jumping to it.
+        player.x += (targetX - player.x) * 0.35;
+        player.y += (targetY - player.y) * 0.35;
     } else if (mouseControlActive) {
         player.x = mouseTargetX - mouseOffsetX;
         player.y = mouseTargetY - mouseOffsetY;

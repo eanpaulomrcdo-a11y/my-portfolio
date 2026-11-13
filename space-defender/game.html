@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
 
-    <title>IPM: Space Defender</title>
+    <title>Space Defenders</title>
 
     <!-- PAGE ICON AND STYLESHEET -->
     <link rel="icon" type="image/png" href="ipm-sd-favicon.png">
@@ -64,6 +64,18 @@
             <!-- 2.2.3 GAMEPLAY SCREEN -->
             <section id="gameScreen" class="game-screen">
                 <canvas id="gameCanvas" width="900" height="500"></canvas>
+
+                <!-- DESKTOP PAUSE OVERLAY -->
+                <div id="pauseOverlay" style="display: none;">
+                    <div class="pause-overlay-panel">
+                        <h2>GAME PAUSED</h2>
+                        <p class="pause-overlay-message">
+                            NEED A MOMENT TO THINK?<br>
+                            <span>The galaxy can wait, pilot.</span>
+                        </p>
+                        <div id="pauseOverlayButtons"></div>
+                    </div>
+                </div>
             </section>
 
             <!-- 2.2.4 GAME PROGRESSION SCREENS -->
@@ -292,8 +304,10 @@
         <p>AUTO FIRE ENABLED</p>
     </div>
 
-    <button id="pauseButton">START GAME</button>
-    <button id="quitGameButton">QUIT GAME</button>
+    <div id="gameButtonHome">
+        <button id="pauseButton">START GAME</button>
+        <button id="quitGameButton">QUIT GAME</button>
+    </div>
 
 </footer>
 
