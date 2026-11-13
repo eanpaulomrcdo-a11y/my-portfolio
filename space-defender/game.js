@@ -1761,15 +1761,14 @@ canvas.addEventListener("lostpointercapture", stopMouseControl);
 
 
 // =============================================
-// MOBILE BUTTON TAP FEEDBACK
+// MOBILE BUTTON TAP RIPPLE
 // =============================================
 
-// Keep the pressed appearance briefly after a touchscreen tap is released.
-const touchButtonTimers = new WeakMap();
-const activeTouchButtons = new Map();
-const TOUCH_BUTTON_FEEDBACK_DELAY = 350;
+// Show a short ripple exactly where the player touches a button.
+// This is visual-only: the button's normal click action is unchanged.
+const touchButtonRippleTimers = new WeakMap();
 
-document.addEventListener("pointerdown", function (event) {
+function showTouchButtonRipple(event) {
     if (event.pointerType !== "touch" && event.pointerType !== "pen") {
         return;
     }
@@ -1780,37 +1779,47 @@ document.addEventListener("pointerdown", function (event) {
         return;
     }
 
-    const existingTimer = touchButtonTimers.get(button);
+    const existingTimer = touchButtonRippleTimers.get(button);
 
     if (existingTimer) {
         clearTimeout(existingTimer);
-        touchButtonTimers.delete(button);
     }
 
-    button.classList.add("touch-feedback");
-    activeTouchButtons.set(event.pointerId, button);
-}, true);
+    // Replace an unfinished ripple if the same button is tapped again.
+    const oldLayer = button.querySelector(":scope > .tap-ripple-layer");
 
-function finishTouchButtonFeedback(event) {
-    const button = activeTouchButtons.get(event.pointerId);
-
-    if (!button) {
-        return;
+    if (oldLayer) {
+        oldLayer.remove();
     }
 
-    activeTouchButtons.delete(event.pointerId);
+    const buttonRect = button.getBoundingClientRect();
+    const rippleLayer = document.createElement("span");
+    const ripple = document.createElement("span");
+
+    rippleLayer.className = "tap-ripple-layer";
+    ripple.className = "tap-ripple";
+
+    ripple.style.left = `${event.clientX - buttonRect.left}px`;
+    ripple.style.top = `${event.clientY - buttonRect.top}px`;
+
+    if (button.id === "quitGameButton") {
+        ripple.classList.add("tap-ripple--danger");
+    } else if (button.id === "continueToNameEntryButton") {
+        ripple.classList.add("tap-ripple--gold");
+    }
+
+    rippleLayer.appendChild(ripple);
+    button.appendChild(rippleLayer);
 
     const timer = setTimeout(function () {
-        button.classList.remove("touch-feedback");
-        touchButtonTimers.delete(button);
-    }, TOUCH_BUTTON_FEEDBACK_DELAY);
+        rippleLayer.remove();
+        touchButtonRippleTimers.delete(button);
+    }, 650);
 
-    touchButtonTimers.set(button, timer);
+    touchButtonRippleTimers.set(button, timer);
 }
 
-document.addEventListener("pointerup", finishTouchButtonFeedback, true);
-document.addEventListener("pointercancel", finishTouchButtonFeedback, true);
-
+document.addEventListener("pointerdown", showTouchButtonRipple, true);
 
 // =============================================
 // 11. PLAYER MOVEMENT

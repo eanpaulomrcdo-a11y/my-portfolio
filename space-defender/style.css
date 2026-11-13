@@ -1328,8 +1328,9 @@ canvas {
         inset: 0;
 
         width: 100%;
+        /* Keep the result overlay tied to the layout viewport when the
+           Android keyboard opens, rather than resizing to the visual viewport. */
         height: 100vh;
-        height: 100dvh;
 
         margin: 0;
         padding: 12px;
@@ -1355,7 +1356,9 @@ canvas {
         width: 92%;
         max-width: 420px;
 
-        height: min(420px, 48dvh, calc(100dvh - 180px));
+        /* Keep the result popup at its original size while the Android
+           keyboard overlays the screen. */
+        height: min(420px, 48vh, calc(100vh - 180px));
         min-height: 160px;
         max-height: none;
 
@@ -1722,86 +1725,53 @@ canvas {
    21. TOUCHSCREEN BUTTON FEEDBACK
 ================================================= */
 
-/* Remove the browser's persistent tap flash; provide our own while pressed. */
-button {
-    /* Keep a visible native tap response on Android and other touch browsers. */
-    -webkit-tap-highlight-color: rgba(37, 99, 235, 0.25);
-}
-
-/* Preserve the special tap colors for the Quit and Continue buttons. */
-#quitGameButton {
-    -webkit-tap-highlight-color: rgba(239, 68, 68, 0.28);
-}
-
-#continueToNameEntryButton {
-    -webkit-tap-highlight-color: rgba(250, 204, 21, 0.28);
-}
-
-button:focus:not(:focus-visible) {
-    outline: none;
-}
-
-/* Touch devices use the same visual feedback as desktop hover states. */
+/* Replace the old lingering glow with a brief ripple at the tap location. */
 @media (hover: none) and (pointer: coarse) {
 
-    /* Do not leave keyboard/mouse selection styles stuck after a phone tap. */
-    .menu-buttons button.keyboard-selected,
-    .options-list button.keyboard-selected,
-    #nameEntryScreen button.keyboard-selected,
-    .menu-buttons button.mouse-selected,
-    .options-list button.mouse-selected,
-    #pauseButton.keyboard-selected,
-    #quitGameButton.keyboard-selected {
-        background: #1e293b;
-        color: #ffffff;
-        border-color: #2563eb;
-        box-shadow: none;
-        outline: none;
-        transform: none;
+    button {
+        position: relative;
+        isolation: isolate;
+        -webkit-tap-highlight-color: transparent;
     }
 
-    /* Standard blue buttons: match the desktop menu/options hover effect. */
-    button:active:not(:disabled),
-    button.touch-feedback:not(:disabled) {
-        background: #2563eb;
-        color: #ffffff;
-        box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
-        transform: scale(1.03);
+    .tap-ripple-layer {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        border-radius: inherit;
+        pointer-events: none;
     }
 
-    /* Pause uses the stronger blue glow already used by its desktop hover. */
-    #pauseButton:active:not(:disabled),
-    #pauseButton.touch-feedback:not(:disabled) {
-        outline: 2px solid #60a5fa;
-        outline-offset: 3px;
-        background: #2563eb;
-        color: #ffffff;
-        box-shadow:
-            0 0 10px rgba(37, 99, 235, 0.7),
-            0 0 20px rgba(37, 99, 235, 0.4);
-        transform: scale(1.05);
+    .tap-ripple {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: rgba(147, 197, 253, 0.48);
+        transform: translate(-50%, -50%) scale(0);
+        animation: button-tap-ripple 560ms ease-out forwards;
+        pointer-events: none;
     }
 
-    /* Continue keeps its distinctive gold desktop hover appearance. */
-    #continueToNameEntryButton:active:not(:disabled),
-    #continueToNameEntryButton.touch-feedback:not(:disabled) {
-        background: linear-gradient(90deg, #a16207, #eab308);
-        box-shadow: 0 0 25px rgba(250, 204, 21, 0.6);
-        transform: scale(1.04);
+    .tap-ripple--danger {
+        background: rgba(248, 113, 113, 0.5);
     }
 
-    /* Quit keeps its distinctive red desktop hover appearance. */
-    #quitGameButton:active:not(:disabled),
-    #quitGameButton.touch-feedback:not(:disabled) {
-        outline: 2px solid #f87171;
-        outline-offset: 3px;
-        background: #991b1b;
-        color: #ffffff;
-        border-color: #ef4444;
-        box-shadow:
-            0 0 10px rgba(239, 68, 68, 0.7),
-            0 0 20px rgba(239, 68, 68, 0.4);
-        transform: scale(1.05);
+    .tap-ripple--gold {
+        background: rgba(250, 204, 21, 0.52);
+    }
+
+    @keyframes button-tap-ripple {
+        0% {
+            opacity: 0.85;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(9);
+        }
     }
 }
 
