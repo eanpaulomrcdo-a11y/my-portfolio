@@ -145,6 +145,8 @@ canvas {
 
 #gameScreen,
 #highScoresScreen,
+#personalLeaderboardScreen,
+#globalLeaderboardScreen,
 #optionsScreen,
 #gameOverScreen,
 #congratulationsScreen,
@@ -261,6 +263,8 @@ canvas {
 ================================================= */
 
 #highScoresScreen,
+#personalLeaderboardScreen,
+#globalLeaderboardScreen,
 #optionsScreen,
 #controlsGuideScreen,
 #resetRecordsScreen,
@@ -317,6 +321,8 @@ canvas {
 ================================================= */
 
 #highScoresScreen .menu-overlay,
+#personalLeaderboardScreen .menu-overlay,
+#globalLeaderboardScreen .menu-overlay,
 #optionsScreen .menu-overlay,
 #controlsGuideScreen .menu-overlay,
 #resetRecordsScreen .menu-overlay,
@@ -1029,6 +1035,8 @@ canvas {
 
     .game-area:has(#mainMenu[style*="display: flex"]),
     .game-area:has(#highScoresScreen[style*="display: flex"]),
+    .game-area:has(#personalLeaderboardScreen[style*="display: flex"]),
+    .game-area:has(#globalLeaderboardScreen[style*="display: flex"]),
     .game-area:has(#optionsScreen[style*="display: flex"]),
     .game-area:has(#controlsGuideScreen[style*="display: flex"]),
     .game-area:has(#resetRecordsScreen[style*="display: flex"]),
@@ -1053,6 +1061,8 @@ canvas {
 
     .game-area:has(#mainMenu[style*="display: flex"]) #menuBackground,
     .game-area:has(#highScoresScreen[style*="display: flex"]) #menuBackground,
+    .game-area:has(#personalLeaderboardScreen[style*="display: flex"]) #menuBackground,
+    .game-area:has(#globalLeaderboardScreen[style*="display: flex"]) #menuBackground,
     .game-area:has(#optionsScreen[style*="display: flex"]) #menuBackground,
     .game-area:has(#controlsGuideScreen[style*="display: flex"]) #menuBackground,
     .game-area:has(#resetRecordsScreen[style*="display: flex"]) #menuBackground,
@@ -1078,6 +1088,8 @@ canvas {
 
     #mainMenu,
     #highScoresScreen,
+    #personalLeaderboardScreen,
+    #globalLeaderboardScreen,
     #optionsScreen,
     #controlsGuideScreen,
     #resetRecordsScreen,
@@ -1102,6 +1114,8 @@ canvas {
     /* 15.4 SHARED SUBMENU PANEL DESIGN */
 
     #highScoresScreen .menu-overlay,
+    #personalLeaderboardScreen .menu-overlay,
+    #globalLeaderboardScreen .menu-overlay,
     #optionsScreen .menu-overlay,
     #controlsGuideScreen .menu-overlay,
     #resetRecordsScreen .menu-overlay,
@@ -1127,6 +1141,8 @@ canvas {
     /* 15.5 SHARED SUBMENU HEADINGS */
 
     #highScoresScreen h2,
+    #personalLeaderboardScreen h2,
+    #globalLeaderboardScreen h2,
     #optionsScreen h2,
     #controlsGuideScreen h2,
     #resetRecordsScreen h2,
@@ -1144,6 +1160,8 @@ canvas {
     /* 15.6 SHARED SUBMENU BUTTONS */
 
     #highScoresScreen .menu-buttons,
+    #personalLeaderboardScreen .menu-buttons,
+    #globalLeaderboardScreen .menu-buttons,
     #optionsScreen .menu-buttons,
     #controlsGuideScreen .menu-buttons,
     #resetRecordsScreen .menu-buttons,
@@ -1154,6 +1172,8 @@ canvas {
     }
 
     #highScoresScreen .menu-buttons button,
+    #personalLeaderboardScreen .menu-buttons button,
+    #globalLeaderboardScreen .menu-buttons button,
     #optionsScreen .menu-buttons button,
     #controlsGuideScreen .menu-buttons button,
     #resetRecordsScreen .menu-buttons button,
@@ -2118,6 +2138,8 @@ canvas {
     /* All menu and result screens remain inside the game frame. */
     #mainMenu,
     #highScoresScreen,
+    #personalLeaderboardScreen,
+    #globalLeaderboardScreen,
     #optionsScreen,
     #controlsGuideScreen,
     #resetRecordsScreen,
@@ -2150,6 +2172,8 @@ canvas {
     }
 
     #highScoresScreen,
+    #personalLeaderboardScreen,
+    #globalLeaderboardScreen,
     #optionsScreen,
     #controlsGuideScreen,
     #resetRecordsScreen,
@@ -2216,6 +2240,8 @@ canvas {
     /* Shared submenu and result panels stay fully inside the game frame.
        Long content scrolls inside its own panel, not the page. */
     #highScoresScreen .menu-overlay,
+    #personalLeaderboardScreen .menu-overlay,
+    #globalLeaderboardScreen .menu-overlay,
     #optionsScreen .menu-overlay,
     #controlsGuideScreen .menu-overlay,
     #resetRecordsScreen .menu-overlay,
@@ -2243,6 +2269,8 @@ canvas {
     }
 
     #highScoresScreen h2,
+    #personalLeaderboardScreen h2,
+    #globalLeaderboardScreen h2,
     #optionsScreen h2,
     #controlsGuideScreen h2,
     #resetRecordsScreen h2,
@@ -2257,6 +2285,7 @@ canvas {
     }
 
     #highScoresList,
+    #globalHighScoresList,
     #optionsScreen .options-list,
     #resetRecordsScreen .options-list,
     #controlsGuideScreen .controls-guide-list {
@@ -2265,7 +2294,8 @@ canvas {
         margin: 6px auto;
     }
 
-    #highScoresList .score-row {
+    #highScoresList .score-row,
+    #globalHighScoresList .score-row {
         padding: 5px 8px;
         font-size: 10px;
     }
@@ -2353,6 +2383,10 @@ canvas {
     /* Keep all buttons large enough for touch, without changing their actions. */
     #mainMenu .menu-buttons button,
     #highScoresScreen .menu-buttons button,
+    #personalLeaderboardScreen .menu-buttons button,
+    #globalLeaderboardScreen .menu-buttons button,
+    #personalLeaderboardScreen .menu-buttons button,
+    #globalLeaderboardScreen .menu-buttons button,
     #optionsScreen .menu-buttons button,
     #controlsGuideScreen .menu-buttons button,
     #resetRecordsScreen .menu-buttons button,
@@ -2552,6 +2586,10 @@ canvas {
 
     #mainMenu .menu-buttons,
     #highScoresScreen .menu-buttons,
+    #personalLeaderboardScreen .menu-buttons,
+    #globalLeaderboardScreen .menu-buttons,
+    #personalLeaderboardScreen .menu-buttons,
+    #globalLeaderboardScreen .menu-buttons,
     #optionsScreen .menu-buttons,
     #controlsGuideScreen .menu-buttons,
     #resetRecordsScreen .menu-buttons,
@@ -2598,5 +2636,47 @@ canvas {
     #pauseOverlayButtons button {
         width: fit-content;
         min-width: 170px;
+    }
+}
+
+
+/* =================================================
+   GLOBAL LEADERBOARD ADDITIONS
+================================================= */
+
+#globalHighScoresList {
+    width: 100%;
+    max-width: 350px;
+    margin: 12px auto;
+}
+
+#globalHighScoresList .score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 15px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.leaderboard-status {
+    margin: 4px auto 8px;
+    color: #67e8f9;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+    #globalHighScoresList .score-row {
+        padding: 5px 8px;
+        font-size: 10px;
+        border-bottom: 1px solid rgba(96, 165, 250, 0.18);
+    }
+
+    .leaderboard-status {
+        font-size: 10px;
     }
 }

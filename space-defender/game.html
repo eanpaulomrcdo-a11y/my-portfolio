@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=overlays-content">
 
-    <title>Space Defenders</title>
+    <title>Space Defender</title>
 
     <!-- PAGE ICON AND STYLESHEET -->
     <link rel="icon" type="image/png" href="ipm-sd-favicon.png">
@@ -95,13 +95,13 @@
                 </div>
             </section>
 
-            <!-- TOP 5 NAME ENTRY -->
+            <!-- GLOBAL LEADERBOARD NAME ENTRY -->
             <section id="nameEntryScreen" class="main-menu sub-menu game-over-screen">
                 <div class="menu-overlay">
-                    <h2>TOP 5 QUALIFIED!</h2>
+                    <h2>GLOBAL LEADERBOARD</h2>
 
                     <p class="game-over-title">ENTER YOUR PILOT NAME</p>
-                    <p class="game-over-message">Add your name to the leaderboard.</p>
+                    <p class="game-over-message">Enter your pilot name to submit this run globally.</p>
 
                     <input
                         type="text"
@@ -129,6 +129,7 @@
                     </p>
 
                     <p id="gameOverFinalScoreDisplay">FINAL SCORE: 0</p>
+                    <p id="globalSubmissionMessage" class="leaderboard-status" aria-live="polite"></p>
 
                     <div class="menu-buttons">
                         <button id="playAgainButton">PLAY AGAIN</button>
@@ -139,17 +140,47 @@
 
             <!-- 2.2.5 MAIN MENU SUBSCREENS -->
 
-            <!-- HIGH SCORES -->
+            <!-- HIGH SCORES MENU -->
             <section id="highScoresScreen" class="high-scores-screen">
                 <div class="menu-overlay">
                     <h2>HIGH SCORES</h2>
 
+                    <div class="menu-buttons">
+                        <button id="personalLeaderboardButton">PERSONAL LEADERBOARD</button>
+                        <button id="globalLeaderboardButton">GLOBAL LEADERBOARD</button>
+                        <button id="highScoresBackButton">BACK TO MAIN MENU</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PERSONAL LEADERBOARD -->
+            <section id="personalLeaderboardScreen" class="high-scores-screen leaderboard-screen">
+                <div class="menu-overlay">
+                    <h2>PERSONAL LEADERBOARD</h2>
+
                     <div id="highScoresList">
-                        <p>NO HIGH SCORES RECORDED YET</p>
+                        <p>NO PERSONAL HIGH SCORES RECORDED YET</p>
                     </div>
 
                     <div class="menu-buttons">
-                        <button id="highScoresBackButton">BACK TO MAIN MENU</button>
+                        <button id="personalLeaderboardBackButton">BACK</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GLOBAL LEADERBOARD -->
+            <section id="globalLeaderboardScreen" class="high-scores-screen leaderboard-screen">
+                <div class="menu-overlay">
+                    <h2>GLOBAL LEADERBOARD</h2>
+
+                    <p id="globalLeaderboardStatus" class="leaderboard-status" aria-live="polite">LOADING GLOBAL SCORES...</p>
+                    <div id="globalHighScoresList">
+                        <p>LOADING...</p>
+                    </div>
+
+                    <div class="menu-buttons">
+                        <button id="globalLeaderboardRefreshButton">REFRESH</button>
+                        <button id="globalLeaderboardBackButton">BACK</button>
                     </div>
                 </div>
             </section>

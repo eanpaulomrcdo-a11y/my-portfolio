@@ -14,8 +14,12 @@ const highScoresList = document.getElementById("highScoresList");
 
 
 // =============================================
-// 2. SCORE SYSTEM AND TOP 5 LEADERBOARD
+// 2. SCORE SYSTEM AND PERSONAL TOP 5 LEADERBOARD
 // =============================================
+
+// Supabase browser connection. The publishable key is intended for client use.
+const SUPABASE_URL = "https://jcsxxarceppzyazpdbuk.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_VCYUf2Yztl80X6Vx2YyZig_bI7NrweV";
 
 let score = 0;
 let highScore = Number(localStorage.getItem("spaceDefenderHighScore")) || 0;
@@ -215,6 +219,90 @@ function displayTopScores() {
     }
 }
 
+async function loadGlobalLeaderboard() {
+    globalLeaderboardStatus.textContent = "LOADING GLOBAL SCORES...";
+    globalHighScoresList.innerHTML = "<p>LOADING...</p>";
+
+    try {
+        const response = await fetch(
+            SUPABASE_URL + "/rest/v1/leaderboard?select=player_name,score,created_at&order=score.desc,created_at.asc&limit=10",
+            {
+                method: "GET",
+                headers: {
+                    "apikey": SUPABASE_PUBLISHABLE_KEY
+                },
+                cache: "no-store"
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Leaderboard request failed (" + response.status + ").");
+        }
+
+        const records = await response.json();
+        globalHighScoresList.innerHTML = "";
+
+        for (let i = 0; i < 10; i++) {
+            const row = document.createElement("div");
+            row.classList.add("score-row");
+
+            const rank = document.createElement("span");
+            rank.textContent = "RANK " + (i + 1);
+
+            const scoreDisplay = document.createElement("span");
+            if (records[i]) {
+                scoreDisplay.textContent =
+                    String(records[i].player_name || "ANONYMOUS") + " — " +
+                    Number(records[i].score || 0);
+            } else {
+                scoreDisplay.textContent = "EMPTY";
+            }
+
+            row.appendChild(rank);
+            row.appendChild(scoreDisplay);
+            globalHighScoresList.appendChild(row);
+        }
+
+        globalLeaderboardStatus.textContent = "TOP 10 PILOTS WORLDWIDE";
+
+    } catch (error) {
+        console.error("Global leaderboard error:", error);
+        globalHighScoresList.innerHTML = "<p>UNABLE TO LOAD GLOBAL SCORES.</p>";
+        globalLeaderboardStatus.textContent = "CHECK YOUR CONNECTION AND TRY AGAIN.";
+    }
+}
+
+async function submitGlobalScore(playerName, newScore) {
+    try {
+        const response = await fetch(
+            SUPABASE_URL + "/rest/v1/rpc/submit_score",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": SUPABASE_PUBLISHABLE_KEY
+                },
+                body: JSON.stringify({
+                    p_player_name: playerName,
+                    p_score: newScore
+                })
+            }
+        );
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || "Score submission failed (" + response.status + ").");
+        }
+
+        return true;
+
+    } catch (error) {
+        console.error("Global score submission error:", error);
+        return false;
+    }
+}
+
+
 function updateHighScore() {
     if (score > highScore) {
         highScore = score;
@@ -312,6 +400,10 @@ const gameControls = document.querySelector(".game-controls");
 const startGameButton = document.getElementById("startGameButton");
 
 const highScoresScreen = document.getElementById("highScoresScreen");
+const personalLeaderboardScreen = document.getElementById("personalLeaderboardScreen");
+const globalLeaderboardScreen = document.getElementById("globalLeaderboardScreen");
+const globalHighScoresList = document.getElementById("globalHighScoresList");
+const globalLeaderboardStatus = document.getElementById("globalLeaderboardStatus");
 const optionsScreen = document.getElementById("optionsScreen");
 const controlsGuideScreen = document.getElementById("controlsGuideScreen");
 const resetRecordsScreen = document.getElementById("resetRecordsScreen");
@@ -320,6 +412,11 @@ const resetConfirmationScreen = document.getElementById("resetConfirmationScreen
 const highScoresButton = document.getElementById("highScoresButton");
 const optionsButton = document.getElementById("optionsButton");
 const highScoresBackButton = document.getElementById("highScoresBackButton");
+const personalLeaderboardButton = document.getElementById("personalLeaderboardButton");
+const globalLeaderboardButton = document.getElementById("globalLeaderboardButton");
+const personalLeaderboardBackButton = document.getElementById("personalLeaderboardBackButton");
+const globalLeaderboardBackButton = document.getElementById("globalLeaderboardBackButton");
+const globalLeaderboardRefreshButton = document.getElementById("globalLeaderboardRefreshButton");
 const optionsBackButton = document.getElementById("optionsBackButton");
 const controlsGuideButton = document.getElementById("controlsGuideButton");
 const controlsGuideBackButton = document.getElementById("controlsGuideBackButton");
@@ -337,6 +434,7 @@ const gameOverScreen = document.getElementById("gameOverScreen");
 
 const congratulationsFinalScoreDisplay = document.getElementById("finalScoreDisplay");
 const gameOverFinalScoreDisplay = document.getElementById("gameOverFinalScoreDisplay");
+const globalSubmissionMessage = document.getElementById("globalSubmissionMessage");
 
 const continueToNameEntryButton = document.getElementById("continueToNameEntryButton");
 const playerNameInput = document.getElementById("playerNameInput");
@@ -758,6 +856,8 @@ function handleMenuEscape() {
 
     const escapeButtons = {
         highScoresScreen: "highScoresBackButton",
+        personalLeaderboardScreen: "personalLeaderboardBackButton",
+        globalLeaderboardScreen: "globalLeaderboardBackButton",
         optionsScreen: "optionsBackButton",
         controlsGuideScreen: "controlsGuideBackButton",
         resetRecordsScreen: "resetRecordsBackButton",
@@ -833,6 +933,8 @@ function showScreen(screen) {
     mainMenu.style.display = "none";
     menuBackground.style.display = "none";
     highScoresScreen.style.display = "none";
+    personalLeaderboardScreen.style.display = "none";
+    globalLeaderboardScreen.style.display = "none";
     optionsScreen.style.display = "none";
     controlsGuideScreen.style.display = "none";
     congratulationsScreen.style.display = "none";
@@ -856,6 +958,8 @@ function showScreen(screen) {
     const menuScreens = [
         mainMenu,
         highScoresScreen,
+        personalLeaderboardScreen,
+        globalLeaderboardScreen,
         optionsScreen,
         controlsGuideScreen,
         resetRecordsScreen,
@@ -929,12 +1033,33 @@ startGameButton.addEventListener("click", function () {
 });
 
 highScoresButton.addEventListener("click", function () {
-    displayTopScores();
     showScreen(highScoresScreen);
+});
+
+personalLeaderboardButton.addEventListener("click", function () {
+    displayTopScores();
+    showScreen(personalLeaderboardScreen);
+});
+
+globalLeaderboardButton.addEventListener("click", function () {
+    showScreen(globalLeaderboardScreen);
+    loadGlobalLeaderboard();
 });
 
 highScoresBackButton.addEventListener("click", function () {
     showScreen(mainMenu);
+});
+
+personalLeaderboardBackButton.addEventListener("click", function () {
+    showScreen(highScoresScreen);
+});
+
+globalLeaderboardBackButton.addEventListener("click", function () {
+    showScreen(highScoresScreen);
+});
+
+globalLeaderboardRefreshButton.addEventListener("click", function () {
+    loadGlobalLeaderboard();
 });
 
 optionsButton.addEventListener("click", function () {
@@ -1083,25 +1208,34 @@ quitGameButton.addEventListener("click", function () {
 });
 
 continueToNameEntryButton.addEventListener("click", function () {
-    if (qualifiesForTopFive && !recordSubmissionHandled) {
+    if (!recordSubmissionHandled) {
         showScreen(nameEntryScreen);
         playerNameInput.focus();
     }
 });
 
 function submitTopScore(playerName) {
-    if (recordSubmissionHandled || !qualifiesForTopFive) {
+    if (recordSubmissionHandled) {
         return;
     }
 
-    recordTopScore(playerName, finalScore, currentRunId);
-
-    // Remove the backup only after the leaderboard has been saved.
-    clearPendingTopScore(currentRunId);
-
     recordSubmissionHandled = true;
 
-    displayTopScores();
+    // Preserve the existing personal Top 5 rules independently of global entry.
+    if (qualifiesForTopFive) {
+        recordTopScore(playerName, finalScore, currentRunId);
+        clearPendingTopScore(currentRunId);
+        displayTopScores();
+    }
+
+    // Every completed run is submitted globally, even if it misses the local Top 5.
+    globalSubmissionMessage.textContent = "SUBMITTING GLOBAL SCORE...";
+    submitGlobalScore(playerName, finalScore).then(success => {
+        globalSubmissionMessage.textContent = success
+            ? "GLOBAL SCORE SUBMITTED!"
+            : "GLOBAL SUBMISSION FAILED. CHECK YOUR CONNECTION.";
+    });
+
     showScreen(gameOverScreen);
 }
 
@@ -3000,7 +3134,7 @@ function gameLoop() {
 
             console.log("Final Score:", finalScore);
             console.log("Top Scores:", topScores);
-            console.log("Qualifies for Top 5:", qualifiesForTopFive);
+            console.log("Qualifies for Personal Top 5:", qualifiesForTopFive);
             console.log("New Personal Record:", achievedNewHighScore);
 
             congratulationsFinalScoreDisplay.textContent =
@@ -3012,12 +3146,9 @@ function gameLoop() {
             if (achievedNewHighScore) {
                 showScreen(congratulationsScreen);
 
-            } else if (qualifiesForTopFive) {
+            } else {
                 showScreen(nameEntryScreen);
                 playerNameInput.focus();
-
-            } else {
-                showScreen(gameOverScreen);
             }
         }
 
