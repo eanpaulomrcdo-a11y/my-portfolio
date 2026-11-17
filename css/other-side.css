@@ -1,0 +1,87 @@
+/* The Other Side of Me — separate visual identity, same portfolio */
+:root {
+    color-scheme: dark;
+    --night: #101827;
+    --deep: #0b1220;
+    --panel: #172235;
+    --text: #edf0f4;
+    --muted: #aab4c3;
+    --accent: #d7b88d;
+    --line: rgba(215, 184, 141, .24);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    background: var(--night);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.7;
+}
+a { color: inherit; }
+.site-header {
+    min-height: 76px;
+    padding: 18px clamp(22px, 6vw, 90px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: rgba(11, 18, 32, .94);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.wordmark { text-decoration: none; font: 700 1.35rem Arial, sans-serif; letter-spacing: .12em; }
+.wordmark span { color: var(--accent); }
+.site-header nav { display: flex; flex-wrap: wrap; gap: 22px; }
+.site-header nav a { color: var(--muted); text-decoration: none; font: 500 .82rem Arial, sans-serif; }
+.site-header nav a:hover, .text-link:hover { color: var(--accent); }
+main { overflow: hidden; }
+.opening {
+    position: relative;
+    min-height: min(760px, 86vh);
+    padding: clamp(90px, 14vh, 160px) clamp(24px, 12vw, 180px) 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background: radial-gradient(ellipse at 78% 30%, rgba(99, 89, 112, .25), transparent 38%), linear-gradient(130deg, var(--deep), #17253a 58%, #25283a);
+}
+.opening::after {
+    content: ""; position: absolute; width: 360px; height: 360px; right: 8%; bottom: -180px;
+    border: 1px solid var(--line); border-radius: 50%; box-shadow: 0 0 0 35px rgba(215,184,141,.025), 0 0 0 75px rgba(215,184,141,.02);
+}
+.eyebrow, .card-index { color: var(--accent); font: 700 .7rem/1.5 Arial, sans-serif; letter-spacing: .2em; }
+.opening h1 { max-width: 850px; margin: 22px 0; font-size: clamp(4rem, 10vw, 8.5rem); line-height: .94; font-weight: 400; letter-spacing: -.055em; }
+em { color: var(--accent); font-weight: 400; }
+.opening-copy { max-width: 570px; color: #c1cad6; font: 1.08rem/1.9 Arial, sans-serif; }
+.text-link { display: inline-flex; gap: 14px; align-items: center; margin-top: 24px; color: var(--text); text-decoration: none; font: 700 .78rem Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; transition: color .2s; }
+.opening-note { position: absolute; right: 12%; top: 34%; color: rgba(237,240,244,.22); font: 700 .68rem/1.8 Arial, sans-serif; letter-spacing: .24em; text-align: right; }
+.intro { max-width: 850px; margin: 0 auto; padding: 120px 28px 110px; text-align: center; }
+.intro h2, .section-heading h2 { margin: 18px 0 24px; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.08; font-weight: 400; letter-spacing: -.04em; }
+.intro > p:last-child { max-width: 680px; margin: 0 auto; color: var(--muted); font: 1rem/2 Arial, sans-serif; }
+.journal { padding: 90px clamp(22px, 7vw, 100px) 120px; background: var(--deep); }
+.section-heading { max-width: 1200px; margin: 0 auto 42px; }
+.section-heading h2 { font-size: clamp(2.4rem, 5vw, 4rem); }
+.collection-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.collection-card { min-height: 280px; padding: 32px; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); border: 1px solid rgba(255,255,255,.09); transition: transform .25s, border-color .25s; }
+.collection-card:hover { transform: translateY(-4px); border-color: var(--line); }
+.collection-card.featured { grid-column: 1 / -1; min-height: 360px; background: radial-gradient(ellipse at 85% 30%, rgba(143,111,130,.2), transparent 42%), linear-gradient(130deg, #202c40, #172235); }
+.collection-card h3 { margin: 28px 0 12px; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; line-height: 1.12; }
+.collection-card p:not(.card-index) { max-width: 510px; color: var(--muted); font: .95rem/1.8 Arial, sans-serif; }
+.coming-soon { display: inline-block; margin-top: 20px; color: var(--accent); font: 700 .68rem Arial, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+.closing-note { padding: 100px 24px; text-align: center; background: #131d2d; }
+.closing-note p { max-width: 700px; margin: 0 auto; font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-style: italic; line-height: 1.35; }
+footer { padding: 24px; text-align: center; color: #8290a3; background: var(--deep); font: .75rem Arial, sans-serif; }
+footer p { margin: 0; }
+@media (max-width: 700px) {
+    .site-header { align-items: flex-start; flex-direction: column; }
+    .site-header nav { gap: 14px; }
+    .opening { min-height: 650px; padding-top: 100px; }
+    .opening-note { display: none; }
+    .collection-grid { grid-template-columns: 1fr; }
+    .collection-card.featured { grid-column: auto; }
+    .intro { padding-top: 85px; padding-bottom: 80px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; }
+}
