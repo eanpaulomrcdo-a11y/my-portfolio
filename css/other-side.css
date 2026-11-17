@@ -72,6 +72,41 @@ em { color: var(--accent); font-weight: 400; }
 .closing-note p { max-width: 700px; margin: 0 auto; font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-style: italic; line-height: 1.35; }
 footer { padding: 24px; text-align: center; color: #8290a3; background: var(--deep); font: .75rem Arial, sans-serif; }
 footer p { margin: 0; }
+
+/* Poetry collection */
+.poetry {
+    padding: 100px clamp(22px, 7vw, 100px) 120px;
+    background: var(--night);
+}
+.poetry-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+.poem-card {
+    padding: 34px clamp(24px, 3vw, 42px);
+    background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+    border: 1px solid rgba(255,255,255,.09);
+}
+.poem-card:first-child { grid-column: 1 / -1; }
+.poem-card h3 {
+    margin: 22px 0 28px;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    font-weight: 400;
+}
+.poem-text {
+    color: #d7deea;
+    font-size: 1.02rem;
+    line-height: 1.9;
+}
+.poem-text p { margin: 0 0 1.45em; }
+.poem-text p:last-child { margin-bottom: 0; }
+.poem-ending { color: var(--accent); font-style: italic; }
+
 @media (max-width: 700px) {
     .site-header { align-items: flex-start; flex-direction: column; }
     .site-header nav { gap: 14px; }
@@ -79,6 +114,9 @@ footer p { margin: 0; }
     .opening-note { display: none; }
     .collection-grid { grid-template-columns: 1fr; }
     .collection-card.featured { grid-column: auto; }
+    .poetry-grid { grid-template-columns: 1fr; }
+    .poem-card:first-child { grid-column: auto; }
+    .poetry { padding-top: 80px; padding-bottom: 90px; }
     .intro { padding-top: 85px; padding-bottom: 80px; }
 }
 @media (prefers-reduced-motion: reduce) {

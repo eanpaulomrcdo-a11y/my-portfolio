@@ -604,3 +604,7 @@ footer {
     .mobile-gallery img { height: 190px; }
     .project-actions .btn-primary { width: 100%; text-align: center; }
 }
+
+
+/* Siomai tracker preview images */
+.siomai-gallery img { background: #eef2f7; object-fit: contain; }
