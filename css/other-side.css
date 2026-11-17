@@ -123,3 +123,57 @@ footer p { margin: 0; }
     html { scroll-behavior: auto; }
     *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+
+/* Expandable poetry reading list */
+.poetry-list {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    gap: 18px;
+}
+.poem-card {
+    border-radius: 4px;
+    transition: border-color .25s, background .25s;
+}
+.poem-card[open] {
+    background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
+    border-color: var(--line);
+}
+.poem-card summary {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    list-style: none;
+    outline-offset: 8px;
+}
+.poem-card summary::-webkit-details-marker { display: none; }
+.poem-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+}
+.poem-hint {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--accent);
+    font: 700 .68rem Arial, sans-serif;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+.poem-hint span { font-size: 1.2rem; transition: transform .2s; }
+.poem-card[open] .poem-hint span { transform: rotate(45deg); }
+.poem-card .poem-text {
+    max-width: 720px;
+    margin: 34px auto 4px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+}
+.featured-poem { padding: 38px clamp(24px, 4vw, 48px); }
+@media (prefers-reduced-motion: reduce) {
+    .poem-hint span { transition: none; }
+}
