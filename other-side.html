@@ -15,7 +15,7 @@
             <a href="index.html">Professional Portfolio</a>
             <a href="#about-this-space">About this space</a>
             <a href="#journal">The journal</a>
-            <a href="#poetry">My poetry</a>
+            <a href="poetry.html">My poetry</a>
         </nav>
     </header>
 
@@ -43,8 +43,8 @@
                 <article class="collection-card featured">
                     <p class="card-index">01 / THE WRITTEN WORD</p>
                     <h3>My <em>Poetry</em></h3>
-                    <p>Three poems, each holding a different feeling: reflection, wonder, and lasting love.</p>
-                    <a class="text-link" href="#poetry">Read the poems <span aria-hidden="true">↓</span></a>
+                    <p>A growing collection of reflections, wonder, and words written from the heart.</p>
+                    <a class="text-link" href="poetry.html">Enter the poetry collection <span aria-hidden="true">→</span></a>
                 </article>
                 <article class="collection-card">
                     <p class="card-index">02 / THROUGH MY LENS</p>
@@ -52,11 +52,33 @@
                     <p>Small details, close-up worlds, and moments worth keeping.</p>
                     <span class="coming-soon">Photography · Coming soon</span>
                 </article>
-                <article class="collection-card">
+                <article class="collection-card music-card" id="music-card">
                     <p class="card-index">03 / SOUNDTRACK</p>
-                    <h3>Soundtrack of My Life</h3>
+                    <h3>Soundtrack of <em>My Life</em></h3>
                     <p>Songs, covers, and the memories that certain melodies carry.</p>
-                    <span class="coming-soon">Music · Coming soon</span>
+                    <button class="music-open-button" id="openMusicLibrary" type="button" aria-expanded="false" aria-controls="musicLibraryPanel">Open music library <span aria-hidden="true">＋</span></button>
+                    <div class="music-library-panel" id="musicLibraryPanel" hidden>
+                        <div class="music-panel-heading">
+                            <div>
+                                <p class="card-index">YOUR PERSONAL SOUNDTRACK</p>
+                                <h4>Choose a collection</h4>
+                            </div>
+                            <button class="music-close-button" id="closeMusicLibrary" type="button" aria-label="Close music library">×</button>
+                        </div>
+                        <p class="music-help">Choose a folder on this device. Your music stays on your device and is never uploaded.</p>
+                        <div class="music-folder-actions">
+                            <button class="music-action-button" id="chooseMusicFolder" type="button">Choose music folder</button>
+                            <label class="music-action-button secondary" for="musicFolderFallback">Choose folder (compatibility)</label>
+                            <input id="musicFolderFallback" class="visually-hidden-input" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac" webkitdirectory directory multiple>
+                        </div>
+                        <p class="music-status" id="musicLibraryStatus" role="status" aria-live="polite">No folder selected yet.</p>
+                        <ul class="music-track-list" id="musicTrackList" aria-label="Music tracks"></ul>
+                    </div>
+                    <div class="music-card-now-playing" id="musicCardNowPlaying" hidden>
+                        <span class="now-playing-indicator" aria-hidden="true">♫</span>
+                        <span class="music-card-track" id="musicCardTrack">Nothing playing</span>
+                        <button class="music-reopen-button" id="reopenMusicLibrary" type="button">Open library</button>
+                    </div>
                 </article>
                 <article class="collection-card">
                     <p class="card-index">04 / FROM MY KITCHEN</p>
@@ -85,129 +107,6 @@
             </div>
         </section>
 
-        <section class="poetry" id="poetry" aria-labelledby="poetry-title">
-            <div class="section-heading">
-                <p class="eyebrow">THE WRITTEN WORD</p>
-                <h2 id="poetry-title">A few words from the heart.</h2>
-            </div>
-
-            <div class="poetry-list">
-                <details class="poem-card featured-poem">
-                    <summary>
-                        <span class="card-index">01 / REFLECTION</span>
-                        <span class="poem-title">The One That <em>Never Was</em></span>
-                        <span class="poem-hint">Open to read <span aria-hidden="true">＋</span></span>
-                    </summary>
-                    <div class="poem-text">
-                        <p>Ever wondered what it was like to be free?</p>
-
-                        <p>The “What ifs” you’ve lost and dared not to see.</p>
-
-                        <p>The things you could’ve but never tried to be.</p>
-
-                        <p>Ever thought what it was like to be three?</p>
-
-                        <p>Fun, friends, smiles were all you could see.</p>
-
-                        <p>Innocent, cheerful and living life as it should be.</p>
-
-                        <p>Oh how everything can change in a snap!</p>
-
-                        <p>One moment, you're in euphoria, living the dream.</p>
-
-                        <p>Next thing you know, you're falling with nothing to grasp.</p>
-
-                        <p>Caught in a current, fighting against the stream.</p>
-
-                        <p>Now you're drifting through an endless void,</p>
-
-                        <p>Stuck in a place where nothing can be changed.</p>
-
-                        <p>Reaching for that life you once enjoyed,</p>
-
-                        <p>Hoping somehow what's past be rearranged.</p>
-
-                        <p>Time won't turn back, no matter how you plead.</p>
-
-                        <p>Seconds keep passing, though it's all unseen.</p>
-
-                        <p>'Til all that remains is a life you never lived.</p>
-
-                        <p>To the wounds that stubbornly bleed.</p>
-
-                        <p>To the person you could have been.</p>
-
-                        <p>To the promises you once believed.</p>
-
-                        <p class="poem-ending">To the one that never was.</p>
-                    </div>
-                </details>
-
-                <details class="poem-card">
-                    <summary>
-                        <span class="card-index">02 / ROMANCE</span>
-                        <span class="poem-title">A Moment to <em>Treasure</em></span>
-                        <span class="poem-hint">Open to read <span aria-hidden="true">＋</span></span>
-                    </summary>
-                    <div class="poem-text">
-                        <p>Baby, thank you for being pure and true,<br>
-                        For bringing colors beyond the blue.</p>
-
-                        <p>I knew there was something special in you,<br>
-                        From the very first moment, did you feel it too?</p>
-
-                        <p>The timely smiles, the joy you bring,<br>
-                        Can lift my heart and make me sing.</p>
-
-                        <p>You walked me gently back into the light,<br>
-                        And showed me once more that life was bright.</p>
-
-                        <p>I wish that time would cease to flow,<br>
-                        And keep us here, with nowhere to go.</p>
-
-                        <p>Wait, stop! A time spell I shall cast,<br>
-                        Oh, how I wish this moment could last!</p>
-
-                        <p>These precious moments I will treasure,<br>
-                        And keep them safe beyond all measure.</p>
-
-                        <p>Hey, baby! May I hold your hand?<br>
-                        And make forever our own little land?</p>
-                    </div>
-                </details>
-
-                <details class="poem-card">
-                    <summary>
-                        <span class="card-index">03 / COMPANIONSHIP</span>
-                        <span class="poem-title">Me and <em>You</em></span>
-                        <span class="poem-hint">Open to read <span aria-hidden="true">＋</span></span>
-                    </summary>
-                    <div class="poem-text">
-                        <p>Me and you;</p>
-
-                        <p>Through thick and thin,<br>
-                        through every failure and win.</p>
-
-                        <p>We do what we do.</p>
-
-                        <p>We fight and make up.<br>
-                        Out of the blue,<br>
-                        we learn as we go.</p>
-
-                        <p>In what is there to come,<br>
-                        we might have none or some.</p>
-
-                        <p>There is one thing sure.<br>
-                        The love we have will endure.</p>
-
-                        <p class="poem-ending">224 rumble<br>
-                        143 straight<br>
-                        Ha ha ha happy hearts day!</p>
-                    </div>
-                </details>
-            </div>
-        </section>
-
         <section class="closing-note">
             <p>“A collection of things I made, things I felt, and things I chose to remember.”</p>
             <a class="text-link" href="index.html">← Back to the professional portfolio</a>
@@ -215,5 +114,28 @@
     </main>
 
     <footer><p>© 2026 Ian Paulo Mercado · The Other Side of Me</p></footer>
+
+    <aside class="music-player-dock" id="musicPlayerDock" aria-label="Music player" hidden>
+        <div class="dock-track-info">
+            <span class="dock-note" aria-hidden="true">♫</span>
+            <div class="dock-track-copy">
+                <strong id="dockTrackTitle">Nothing playing</strong>
+                <span id="dockTrackSource">Choose a local music folder</span>
+            </div>
+        </div>
+        <div class="dock-controls">
+            <button type="button" id="previousTrack" aria-label="Previous track" title="Previous track">|◀</button>
+            <button type="button" id="playPauseTrack" aria-label="Play" title="Play">▶</button>
+            <button type="button" id="stopTrack" aria-label="Stop" title="Stop">■</button>
+            <button type="button" id="nextTrack" aria-label="Next track" title="Next track">▶|</button>
+            <button type="button" id="shuffleTracks" aria-label="Enable shuffle" title="Shuffle" aria-pressed="false">⤨</button>
+        </div>
+        <div class="dock-progress-wrap">
+            <input type="range" id="musicProgress" min="0" max="1000" value="0" aria-label="Track progress">
+            <div class="dock-time"><span id="musicCurrentTime">0:00</span><span id="musicDuration">0:00</span></div>
+        </div>
+    </aside>
+    <audio id="localMusicAudio" preload="metadata" hidden></audio>
+    <script src="js/music-player.js" defer></script>
 </body>
 </html>
