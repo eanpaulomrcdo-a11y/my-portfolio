@@ -13,7 +13,9 @@ A personal portfolio website showcasing professional projects, creative work, an
 ├── css/                       # Site stylesheets
 ├── js/                        # Poetry and local music player scripts
 ├── images/                    # Site and project images
-├── projects/                  # Downloadable project samples
+├── projects/                  # Downloadable Access and Excel project samples
+│   ├── Database_Rental_Management_Sample.accdb
+│   └── Spreadsheet_Business_Tracker_Sample.xlsx
 └── space-defender/            # Space Defender game
 ```
 
@@ -32,3 +34,5 @@ For GitHub Pages, place the contents of this folder at the repository root so th
 - Keep asset paths in the HTML and CSS in sync if files are moved or renamed.
 - The downloadable CV is intended for public viewing; review it before publishing any future revision.
 - The project samples in `projects/` are the files currently included in this portfolio package.
+- Excel workbook previews are stored in `images/siomai-tracker/` and link to full-size images.
+- Review database and workbook contents for personal or confidential information before publishing downloadable copies.
