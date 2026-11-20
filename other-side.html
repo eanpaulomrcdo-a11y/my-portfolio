@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101827">
+    <title>The Other Side of Me | Ian Paulo Mercado</title>
+    <link rel="icon" type="image/png" href="images/IPM_Logo.png">
+    <link rel="stylesheet" href="css/other-side.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="wordmark" href="index.html" aria-label="IPM Professional Portfolio">IPM <span class="wordmark-divider" aria-hidden="true">|</span> Professional Portfolio</a>
+        <nav aria-label="Main navigation">
+            <a href="#about-this-space">About this space</a>
+            <a href="#journal">The journal</a>
+            <a href="#poetry">My poetry</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="opening" aria-labelledby="page-title">
+            <p class="eyebrow">A PERSONAL ARCHIVE · THOUGHTS, CRAFT & MEMORY</p>
+            <h1 id="page-title">The Other<br><em>Side of Me.</em></h1>
+            <p class="opening-copy">A place for the things that make a life feel like a life — words, photographs, music, food, memories, experiments, and everything in between.</p>
+            <a class="text-link" href="#journal">Wander through <span aria-hidden="true">↓</span></a>
+            <div class="opening-note" aria-hidden="true">NOT EVERYTHING<br>NEEDS TO BE<br>EXPLAINED.</div>
+        </section>
+
+        <section class="intro" id="about-this-space">
+            <p class="eyebrow">BEYOND THE RESUME</p>
+            <h2>More than what I do.<br><em>Also, who I am.</em></h2>
+            <p>This is the quieter, more personal side of my portfolio. It isn't meant to be a perfect record or a finished collection. It's a living space for the things I create, the moments I want to keep, and the thoughts I don't want to lose.</p>
+        </section>
+
+        <section class="journal" id="journal">
+            <div class="section-heading">
+                <p class="eyebrow">EXPLORE THE COLLECTION</p>
+                <h2>Little pieces of a life.</h2>
+            </div>
+            <div class="collection-grid">
+                <article class="collection-card featured poetry-collection-card" id="poetry">
+                    <p class="card-index">01 / THE WRITTEN WORD</p>
+                    <h3>My <em>Poetry</em></h3>
+                    <p>A growing collection of reflections, wonder, and words written from the heart.</p>
+                    <div class="poem-accordion" id="poemAccordion" aria-label="Poetry collection"></div>
+                </article>
+                <article class="collection-card">
+                    <p class="card-index">02 / THROUGH MY LENS</p>
+                    <h3>Through My Lens</h3>
+                    <p>Small details, close-up worlds, and moments worth keeping.</p>
+                    <span class="coming-soon">Photography · Coming soon</span>
+                </article>
+                <article class="collection-card music-card" id="music-card">
+                    <p class="card-index">03 / SOUNDTRACK</p>
+                    <h3>Soundtrack of <em>My Life</em></h3>
+                    <p>Songs, covers, and the memories that certain melodies carry.</p>
+
+                    <!-- IPM VIRTUAL CASSETTE PLAYER -->
+                    <div class="cassette-player" id="cassettePlayer">
+                    
+                        <!-- PLAYER HEADER -->
+                        <div class="cassette-player-header">
+                            <span class="cassette-brand">IPM AUDIO</span>
+                            <span class="cassette-edition">PERSONAL EDITION</span>
+                        </div>
+                    
+                        <!-- SONG DISPLAY -->
+                        <div class="cassette-display">
+                            <p class="cassette-display-label">NOW PLAYING</p>
+
+                            <div class="cassette-display-track">
+                                <div class="cassette-artwork-frame" id="cassetteArtworkFrame">
+                                    <img id="cassetteAlbumArt" class="cassette-album-art" alt="Album artwork" hidden>
+                                    <div class="cassette-artwork-placeholder" id="cassetteArtworkPlaceholder" aria-hidden="true">
+                                        <span class="artwork-cassette-icon">♫</span>
+                                        <span>IPM AUDIO</span>
+                                    </div>
+                                </div>
+
+                                <div class="cassette-track-details">
+                                    <h5 id="cassetteSongTitle">Nothing playing</h5>
+                                    <p id="cassetteArtist">Choose a song from your library</p>
+                                </div>
+                            </div>
+
+                            <div class="cassette-progress">
+                                <div class="cassette-progress-fill" id="cassetteProgress"></div>
+                            </div>
+                    
+                            <div class="cassette-time">
+                                <span id="cassetteCurrentTime">00:00</span>
+                                <span id="cassetteDuration">00:00</span>
+                            </div>
+                        </div>
+                    
+                        <!-- CASSETTE WINDOW -->
+                        <div class="cassette-window">
+                    
+                            <div class="cassette-label">
+                                <span>SIDE A</span>
+                                <span>IPM ORIGINAL MIX</span>
+                            </div>
+                    
+                            <div class="cassette-reels">
+                    
+                                <!-- LEFT REEL -->
+                                <div class="cassette-reel" id="leftCassetteReel">
+                                    <div class="cassette-reel-center"></div>
+                                </div>
+                    
+                                <!-- MAGNETIC TAPE -->
+                                <div class="cassette-tape">
+                                    <div class="cassette-tape-line"></div>
+                                </div>
+                    
+                                <!-- RIGHT REEL -->
+                                <div class="cassette-reel" id="rightCassetteReel">
+                                    <div class="cassette-reel-center"></div>
+                                </div>
+                    
+                            </div>
+                    
+                            <div class="cassette-window-bottom">
+                                <span>MADE OF MEMORIES</span>
+                                <span>01 / IPM</span>
+                            </div>
+                    
+                        </div>
+                    
+                        <!-- PHYSICAL-STYLE BUTTONS -->
+                        <div class="cassette-controls">
+                    
+                            <button type="button" class="cassette-button"
+                                data-cassette-action="rewind" aria-label="Rewind">
+                                <span>◀◀</span>
+                                <small>REW</small>
+                            </button>
+                    
+                            <button type="button" class="cassette-button"
+                                data-cassette-action="play" aria-label="Play">
+                                <span>▶</span>
+                                <small>PLAY</small>
+                            </button>
+                    
+                            <button type="button" class="cassette-button"
+                                data-cassette-action="pause" aria-label="Pause">
+                                <span>Ⅱ</span>
+                                <small>PAUSE</small>
+                            </button>
+                    
+                            <button type="button" class="cassette-button"
+                                data-cassette-action="stop" aria-label="Stop">
+                                <span>■</span>
+                                <small>STOP</small>
+                            </button>
+                    
+                            <button type="button" class="cassette-button"
+                                data-cassette-action="forward" aria-label="Fast forward">
+                                <span>▶▶</span>
+                                <small>FF</small>
+                            </button>
+                    
+                        </div>
+                    
+                        <!-- EJECT BUTTON -->
+                        <div class="cassette-player-footer">
+                            <span>WE MAKE MEMORIES. WE LIVE THE FUTURE.</span>
+                    
+                            <button type="button" id="cassetteEject"
+                                class="cassette-eject-button">
+                                EJECT ⏏
+                            </button>
+                        </div>
+                    
+                    </div>
+                    <!-- END IPM VIRTUAL CASSETTE PLAYER -->
+
+
+                    <button class="music-open-button" id="openMusicLibrary" type="button" aria-expanded="false" aria-controls="musicLibraryPanel">Open music library <span aria-hidden="true">＋</span></button>
+                    <div class="music-library-panel" id="musicLibraryPanel" hidden>
+                        <div class="music-panel-heading">
+                            <div>
+                                <p class="card-index">YOUR PERSONAL SOUNDTRACK</p>
+                                <h4>Choose a collection</h4>
+                            </div>
+                            <button class="music-close-button" id="closeMusicLibrary" type="button" aria-label="Close music library">×</button>
+                        </div>
+                        <p class="music-help">Choose a folder on this device. Your music stays on your device and is never uploaded.</p>
+
+
+
+                        
+                        <div class="music-folder-actions">
+                            <button class="music-action-button" id="chooseMusicFolder" type="button">Choose music folder</button>
+                            <label class="music-action-button secondary" for="musicFolderFallback">Choose folder (compatibility)</label>
+                            <input id="musicFolderFallback" class="visually-hidden-input" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac" webkitdirectory directory multiple>
+                        </div>
+                        <p class="music-status" id="musicLibraryStatus" role="status" aria-live="polite">No folder selected yet.</p>
+                        <ul class="music-track-list" id="musicTrackList" aria-label="Music tracks"></ul>
+                    </div>
+                </article>
+                <article class="collection-card">
+                    <p class="card-index">04 / FROM MY KITCHEN</p>
+                    <h3>From My Kitchen</h3>
+                    <p>Recipes, experiments, and the stories shared around food.</p>
+                    <span class="coming-soon">Cooking · Coming soon</span>
+                </article>
+                <article class="collection-card">
+                    <p class="card-index">05 / FRAGMENTS OF TIME</p>
+                    <h3>Fragments of Time</h3>
+                    <p>People, places, friendships, family, and the moments that stay.</p>
+                    <span class="coming-soon">Memories · Coming soon</span>
+                </article>
+                <article class="collection-card">
+                    <p class="card-index">06 / LETTERS TO TOMORROW</p>
+                    <h3>Letters to Tomorrow</h3>
+                    <p>Notes to a future self, and words I hope my children may read one day.</p>
+                    <span class="coming-soon">Letters · Coming soon</span>
+                </article>
+                <article class="collection-card">
+                    <p class="card-index">07 / LITTLE EXPERIMENTS</p>
+                    <h3>Little Experiments</h3>
+                    <p>Personal tech projects, games, ideas, and things made just to see if I could.</p>
+                    <span class="coming-soon">Creative projects · Coming soon</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="closing-note">
+            <p>“A collection of things I made, things I felt, and things I chose to remember.”</p>
+            <a class="text-link" href="index.html">← Back to the professional portfolio</a>
+        </section>
+    </main>
+
+    <footer><p>© 2026 Ian Paulo Mercado · The Other Side of Me</p></footer>
+    <audio id="localMusicAudio" preload="metadata" hidden></audio>
+    <script src="js/poetry.js" defer></script>
+    <script src="js/music-player.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,707 @@
+/* The Other Side of Me — separate visual identity, same portfolio */
+:root {
+    color-scheme: dark;
+    --night: #101827;
+    --deep: #0b1220;
+    --panel: #172235;
+    --text: #edf0f4;
+    --muted: #aab4c3;
+    --accent: #d7b88d;
+    --line: rgba(215, 184, 141, .24);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    background: var(--night);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.7;
+}
+a { color: inherit; }
+.site-header {
+    min-height: 76px;
+    padding: 18px clamp(22px, 6vw, 90px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: rgba(11, 18, 32, .94);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.wordmark { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font: 700 .98rem Arial, sans-serif; letter-spacing: .035em; white-space: nowrap; }
+.wordmark-divider { color: var(--accent); font-weight: 400; }
+.site-header nav { display: flex; flex-wrap: wrap; gap: 22px; }
+.site-header nav a { color: var(--muted); text-decoration: none; font: 500 .82rem Arial, sans-serif; }
+.site-header nav a:hover, .text-link:hover { color: var(--accent); }
+main { overflow: hidden; }
+.opening {
+    position: relative;
+    min-height: min(760px, 86vh);
+    padding: clamp(90px, 14vh, 160px) clamp(24px, 12vw, 180px) 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background: radial-gradient(ellipse at 78% 30%, rgba(99, 89, 112, .25), transparent 38%), linear-gradient(130deg, var(--deep), #17253a 58%, #25283a);
+}
+.opening::after {
+    content: ""; position: absolute; width: 360px; height: 360px; right: 8%; bottom: -180px;
+    border: 1px solid var(--line); border-radius: 50%; box-shadow: 0 0 0 35px rgba(215,184,141,.025), 0 0 0 75px rgba(215,184,141,.02);
+}
+.eyebrow, .card-index { color: var(--accent); font: 700 .7rem/1.5 Arial, sans-serif; letter-spacing: .2em; }
+.opening h1 { max-width: 850px; margin: 22px 0; font-size: clamp(4rem, 10vw, 8.5rem); line-height: .94; font-weight: 400; letter-spacing: -.055em; }
+em { color: var(--accent); font-weight: 400; }
+.opening-copy { max-width: 570px; color: #c1cad6; font: 1.08rem/1.9 Arial, sans-serif; }
+.text-link { display: inline-flex; gap: 14px; align-items: center; margin-top: 24px; color: var(--text); text-decoration: none; font: 700 .78rem Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; transition: color .2s; }
+.opening-note { position: absolute; right: 12%; top: 34%; color: rgba(237,240,244,.22); font: 700 .68rem/1.8 Arial, sans-serif; letter-spacing: .24em; text-align: right; }
+.intro { max-width: 850px; margin: 0 auto; padding: 120px 28px 110px; text-align: center; }
+.intro h2, .section-heading h2 { margin: 18px 0 24px; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.08; font-weight: 400; letter-spacing: -.04em; }
+.intro > p:last-child { max-width: 680px; margin: 0 auto; color: var(--muted); font: 1rem/2 Arial, sans-serif; }
+.journal { padding: 90px clamp(22px, 7vw, 100px) 120px; background: var(--deep); }
+.section-heading { max-width: 1200px; margin: 0 auto 42px; }
+.section-heading h2 { font-size: clamp(2.4rem, 5vw, 4rem); }
+.collection-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.collection-card { min-height: 280px; padding: 32px; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)); border: 1px solid rgba(255,255,255,.09); transition: transform .25s, border-color .25s; }
+.collection-card:hover { transform: translateY(-4px); border-color: var(--line); }
+.collection-card.featured { grid-column: 1 / -1; min-height: 360px; background: radial-gradient(ellipse at 85% 30%, rgba(143,111,130,.2), transparent 42%), linear-gradient(130deg, #202c40, #172235); }
+.collection-card h3 { margin: 28px 0 12px; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; line-height: 1.12; }
+.collection-card p:not(.card-index) { max-width: 510px; color: var(--muted); font: .95rem/1.8 Arial, sans-serif; }
+.coming-soon { display: inline-block; margin-top: 20px; color: var(--accent); font: 700 .68rem Arial, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+.closing-note { padding: 100px 24px; text-align: center; background: #131d2d; }
+.closing-note p { max-width: 700px; margin: 0 auto; font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-style: italic; line-height: 1.35; }
+footer { padding: 24px; text-align: center; color: #8290a3; background: var(--deep); font: .75rem Arial, sans-serif; }
+footer p { margin: 0; }
+
+/* Local music library */
+.music-card { position: relative; }
+.music-open-button, .music-action-button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    margin-top: 18px; padding: 12px 16px; color: var(--text); background: rgba(215,184,141,.09);
+    border: 1px solid var(--line); font: 700 .68rem Arial, sans-serif; letter-spacing: .1em;
+    text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .2s, border-color .2s;
+}
+.music-open-button:hover, .music-action-button:hover { background: rgba(215,184,141,.17); border-color: var(--accent); }
+.music-library-panel { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+.music-library-panel[hidden] { display: none; }
+.music-panel-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; }
+.music-panel-heading .card-index { margin: 0; }
+.music-panel-heading h4 { margin: 8px 0 0; font-size: 1.4rem; font-weight: 400; }
+.music-close-button { width: 34px; height: 34px; color: var(--muted); background: transparent; border: 1px solid rgba(255,255,255,.15); font-size: 1.35rem; cursor: pointer; }
+.music-help, .music-status { color: var(--muted); font: .82rem/1.7 Arial, sans-serif; }
+.music-folder-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.music-action-button { margin: 4px 0; }
+.music-action-button.secondary { color: var(--muted); background: transparent; }
+.visually-hidden-input { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.music-track-list { display: grid; gap: 7px; max-height: 280px; margin: 16px 0 0; padding: 0; overflow-y: auto; list-style: none; }
+.music-track-button { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 12px; width: 100%; padding: 12px 10px; color: var(--text); background: rgba(7,13,24,.3); border: 1px solid rgba(255,255,255,.07); text-align: left; cursor: pointer; }
+.music-track-button:hover, .music-track-button:focus-visible { border-color: var(--line); background: rgba(215,184,141,.07); }
+.music-track-number { color: var(--accent); font: .68rem Arial, sans-serif; }
+.music-track-name { overflow-wrap: anywhere; font: .9rem Arial, sans-serif; }
+.music-track-play { color: var(--accent); font: 700 .62rem Arial, sans-serif; letter-spacing: .1em; }
+
+.music-open-button[hidden] { display: none; }
+.music-library-panel[hidden] { display: none; }
+
+@media (max-width: 700px) {
+    .site-header { align-items: flex-start; flex-direction: column; }
+    .site-header nav { gap: 14px; }
+    .opening { min-height: 650px; padding-top: 100px; }
+    .opening-note { display: none; }
+    .collection-grid { grid-template-columns: 1fr; }
+    .collection-card.featured { grid-column: auto; }
+    .intro { padding-top: 85px; padding-bottom: 80px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; }
+}
+
+
+/* =====================================
+   IPM VIRTUAL CASSETTE PLAYER
+===================================== */
+
+.cassette-player {
+    width: 100%;
+    max-width: 520px;
+    margin: 30px auto;
+    padding: 24px;
+    background: linear-gradient(145deg, #343a3e, #202529);
+    border: 1px solid #596168;
+    border-radius: 18px;
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    color: #f1e6d5;
+    font-family: inherit;
+}
+
+/* PLAYER HEADER */
+
+.cassette-player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    letter-spacing: 2px;
+    font-size: 11px;
+}
+
+.cassette-brand {
+    color: #e6b77a;
+    font-weight: 800;
+}
+
+.cassette-edition {
+    color: #a9afb2;
+    font-size: 9px;
+}
+
+/* SONG DISPLAY */
+
+.cassette-display {
+    padding: 18px;
+    margin-bottom: 22px;
+    background: #171c20;
+    border: 1px solid #4b5359;
+    border-radius: 9px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.cassette-display-track {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    margin-bottom: 15px;
+}
+
+.cassette-artwork-frame {
+    position: relative;
+    flex: 0 0 88px;
+    width: 88px;
+    height: 88px;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #343b40, #20272c);
+    border: 1px solid #596168;
+    border-radius: 6px;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.45);
+}
+
+.cassette-album-art {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cassette-album-art[hidden] {
+    display: none;
+}
+
+.cassette-artwork-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #c6a77f;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.cassette-artwork-placeholder[hidden] {
+    display: none;
+}
+
+.artwork-cassette-icon {
+    display: grid;
+    place-items: center;
+    width: 43px;
+    height: 29px;
+    color: #d9c19f;
+    background: #3d454a;
+    border: 2px solid #a18b6d;
+    border-radius: 4px;
+    font-size: 17px;
+}
+
+.cassette-track-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.cassette-display-label {
+    margin: 0 0 8px;
+    color: #d6a66c;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.cassette-display h5 {
+    margin: 0;
+    color: #f4e9d8;
+    font-size: 18px;
+    overflow-wrap: anywhere;
+}
+
+.cassette-track-details p {
+    margin: 5px 0 0;
+    color: #aeb6bb;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.cassette-progress {
+    height: 4px;
+    overflow: hidden;
+    background: #454d52;
+    border-radius: 5px;
+}
+
+.cassette-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #d9a66e;
+}
+
+.cassette-time {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 7px;
+    color: #9ba4aa;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* CASSETTE WINDOW */
+
+.cassette-window {
+    position: relative;
+    overflow: hidden;
+    padding: 16px 14px 12px;
+    margin-bottom: 22px;
+    background: linear-gradient(145deg, #d8c19d, #a98b64);
+    border: 5px solid #161b1e;
+    border-radius: 10px;
+    box-shadow:
+        inset 0 0 12px rgba(0, 0, 0, 0.25),
+        0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cassette-label {
+    display: flex;
+    justify-content: space-between;
+    color: #403328;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.cassette-reels {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    min-height: 112px;
+    padding: 12px 15px;
+}
+
+.cassette-reel {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 76px;
+    width: 76px;
+    height: 76px;
+    display: grid;
+    place-items: center;
+    border: 6px solid #554b3d;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+        #8c806d 0deg 12deg,
+        #b5a58a 12deg 24deg
+    );
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.4),
+        inset 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.cassette-reel-center {
+    width: 24px;
+    height: 24px;
+    border: 5px solid #5a4c3b;
+    border-radius: 50%;
+    background: #d8c19d;
+}
+
+.cassette-tape {
+    position: relative;
+    flex: 1;
+    height: 34px;
+    background: rgba(48, 38, 29, 0.18);
+    border-top: 3px solid #4d4032;
+    border-bottom: 3px solid #4d4032;
+}
+
+.cassette-tape-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    transform: translateY(-50%);
+    background: #28221c;
+}
+
+.cassette-window-bottom {
+    display: flex;
+    justify-content: space-between;
+    color: #554536;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* CASSETTE CONTROLS */
+
+.cassette-controls {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.cassette-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
+    padding: 12px 4px;
+    color: #f1d5a9;
+    background: linear-gradient(145deg, #596168, #343a3e);
+    border: 1px solid #717a80;
+    border-radius: 6px;
+    box-shadow: 0 4px 0 #171c20;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.cassette-button span {
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.cassette-button small {
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.cassette-button:hover {
+    background: linear-gradient(145deg, #707a81, #454d52);
+}
+
+.cassette-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #171c20;
+}
+
+/* PLAYER FOOTER */
+
+.cassette-player-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.cassette-player-footer > span {
+    color: #a9afb2;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.cassette-eject-button {
+    padding: 8px 12px;
+    color: #f1d5a9;
+    background: #242a2e;
+    border: 1px solid #687177;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.cassette-eject-button:hover {
+    background: #454d52;
+}
+
+/* MOBILE LAYOUT */
+
+@media (max-width: 480px) {
+    .cassette-player {
+        padding: 16px;
+    }
+
+    .cassette-artwork-frame {
+        flex-basis: 72px;
+        width: 72px;
+        height: 72px;
+    }
+
+    .cassette-display-track {
+        gap: 10px;
+    }
+
+    .cassette-display h5 {
+        font-size: 15px;
+    }
+
+    .cassette-reels {
+        gap: 8px;
+        padding: 12px 5px;
+    }
+
+    .cassette-reel {
+        flex-basis: 62px;
+        width: 62px;
+        height: 62px;
+    }
+
+    .cassette-controls {
+        gap: 5px;
+    }
+
+    .cassette-button {
+        padding: 10px 2px;
+    }
+
+    .cassette-player-footer > span {
+        font-size: 7px;
+    }
+}
+
+
+/* =====================================
+   CASSETTE PLAYBACK ANIMATION
+===================================== */
+
+.cassette-player.is-playing .cassette-reel {
+    animation: cassetteSpin 2s linear infinite;
+}
+
+.cassette-player.is-playing .cassette-tape-line {
+    animation: tapeMovement 0.7s linear infinite;
+}
+
+@keyframes cassetteSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes tapeMovement {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 30px 0;
+    }
+}
+
+.cassette-tape-line {
+    background-image: repeating-linear-gradient(
+        90deg,
+        #28221c 0,
+        #28221c 8px,
+        #493b2d 8px,
+        #493b2d 12px
+    );
+    background-size: 30px 4px;
+}
+
+
+/* Keep the cassette visible while the library panel opens and closes. */
+.cassette-player {
+    margin: 26px 0;
+}
+
+.cassette-progress-fill {
+    transition: width 0.15s linear;
+}
+
+.cassette-button:focus-visible,
+.cassette-eject-button:focus-visible,
+.music-open-button:focus-visible,
+.music-action-button:focus-visible,
+.music-close-button:focus-visible,
+.music-track-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cassette-player.is-playing .cassette-reel,
+    .cassette-player.is-playing .cassette-tape-line {
+        animation: none;
+    }
+}
+
+
+/* =====================================
+   INLINE POETRY COLLECTION
+===================================== */
+
+.poetry-collection-card {
+    min-height: 0;
+}
+
+.poetry-collection-card > p:not(.card-index) {
+    margin-bottom: 28px;
+}
+
+.poem-accordion {
+    width: 100%;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.poem-accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.poem-accordion-trigger {
+    display: grid;
+    grid-template-columns: minmax(145px, 0.55fr) minmax(0, 1.5fr) 34px;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+    padding: 22px 4px;
+    color: var(--text);
+    text-align: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.poem-accordion-trigger:hover .poem-accordion-title,
+.poem-accordion-trigger:focus-visible .poem-accordion-title {
+    color: var(--accent);
+}
+
+.poem-accordion-trigger:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.poem-accordion-category {
+    color: var(--muted);
+    font: 700 0.65rem Arial, sans-serif;
+    letter-spacing: 0.13em;
+}
+
+.poem-accordion-title {
+    font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+    line-height: 1.3;
+    transition: color 0.2s ease;
+}
+
+.poem-accordion-action {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    color: var(--accent);
+    border: 1px solid rgba(215, 184, 141, 0.35);
+    border-radius: 50%;
+    font: 400 1.2rem/1 Arial, sans-serif;
+}
+
+.poem-accordion-item.is-open .poem-accordion-trigger {
+    padding-bottom: 16px;
+}
+
+.poem-accordion-panel {
+    padding: 4px 40px 30px;
+}
+
+.poem-accordion-panel[hidden] {
+    display: none;
+}
+
+.poem-accordion-text {
+    max-width: 720px;
+    margin: 0 auto;
+    color: #d7deea;
+    font-size: 1rem;
+    line-height: 1.9;
+    text-align: center;
+}
+
+.poem-accordion-text p {
+    margin: 0 0 1.35em;
+    white-space: pre-line;
+}
+
+.poem-accordion-text p:last-child {
+    margin-bottom: 0;
+}
+
+.poem-accordion-text .poem-ending {
+    color: var(--accent);
+    font-style: italic;
+}
+
+@media (max-width: 700px) {
+    .poem-accordion-trigger {
+        grid-template-columns: 1fr 30px;
+        gap: 8px 14px;
+        padding: 18px 2px;
+    }
+
+    .poem-accordion-category {
+        grid-column: 1;
+    }
+
+    .poem-accordion-title {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .poem-accordion-action {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+
+    .poem-accordion-panel {
+        padding: 4px 8px 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .poem-accordion-title {
+        transition: none;
+    }
+}
+
+/* Keep the accordion's poem text independent from the card description styling. */
+.collection-card.featured.poetry-collection-card {
+    min-height: 0;
+}
+
+.poetry-collection-card .poem-accordion-text p {
+    max-width: none;
+    color: #d7deea;
+    font: inherit;
+}
