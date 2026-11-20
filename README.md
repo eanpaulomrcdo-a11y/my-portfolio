@@ -14,7 +14,7 @@ A personal portfolio website showcasing professional experience, selected projec
 │   ├── style.css                      # Main portfolio styles
 │   └── other-side.css                 # Personal section, poetry, and music-player styles
 ├── js/
-│   ├── music-player.js                # Local music-player behavior
+│   ├── music-player.js                # Local music-library and cassette playback
 │   └── poetry.js                      # Poem content and inline accordion behavior
 ├── images/
 │   ├── IPM_Logo.png                   # Portfolio logo / favicon
@@ -41,9 +41,9 @@ This is a static website and does not require a build step or package installati
 2. Open `index.html` in a modern browser, or open the project folder in a code editor and start a local development server.
 3. Use the site's navigation to visit the professional portfolio and **The Other Side of Me**.
 
-The music player lets visitors select a local music folder in their browser. Selected audio files are read locally by the browser; visitors must choose their own folder. Folder-selection support can vary by browser.
+The retro cassette player plays music selected by each visitor from their own local music folder. The browser reads the selected audio files on the visitor's device; the files are not uploaded to the website. Folder-selection support varies by browser, and the site provides a compatibility folder picker for browsers without the modern folder-picker API.
 
-The poetry collection is embedded directly in `other-side.html`. Its poem text and accordion behavior are maintained in `js/poetry.js`, while its presentation is styled in `css/other-side.css`.
+The poetry collection is embedded directly in `other-side.html`. Its poem text and accordion behavior are maintained in `js/poetry.js`, while its presentation is styled in `css/other-side.css`. When a poem is opened, its title and category are presented in a centered reading heading above the centered poem text.
 
 ## Deploy with GitHub Pages
 

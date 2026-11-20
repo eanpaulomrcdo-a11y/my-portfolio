@@ -152,6 +152,19 @@ if (accordion) {
     panel.setAttribute("role", "region");
     panel.setAttribute("aria-label", `${poem.title} poem`);
 
+    const readingHeading = document.createElement("header");
+    readingHeading.className = "poem-reading-heading";
+
+    const readingCategory = document.createElement("span");
+    readingCategory.className = "poem-reading-category";
+    readingCategory.textContent = poem.category;
+
+    const readingTitle = document.createElement("h4");
+    readingTitle.className = "poem-reading-title";
+    readingTitle.textContent = poem.title;
+
+    readingHeading.append(readingCategory, readingTitle);
+
     const poemText = document.createElement("div");
     poemText.className = "poem-accordion-text";
 
@@ -166,7 +179,7 @@ if (accordion) {
       poemText.appendChild(stanza);
     });
 
-    panel.appendChild(poemText);
+    panel.append(readingHeading, poemText);
 
     trigger.addEventListener("click", () => {
       const isCurrentlyOpen = openPoemId === poem.id;

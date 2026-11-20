@@ -79,7 +79,7 @@
   function updateCassetteTrack(track) {
     cassetteSongTitle.textContent = track ? track.name : "Nothing playing";
     cassetteArtist.textContent = track
-      ? `LOCAL LIBRARY · ${track.source}`
+      ? (track.artist ? track.artist : `LOCAL LIBRARY · ${track.source}`)
       : "Choose a song from your library";
     clearCassetteArtwork();
   }
@@ -246,6 +246,7 @@
 
   async function loadCassetteArtwork(track) {
     const requestId = ++artworkRequestId;
+    if (!track.file) return;
     const artwork = await extractEmbeddedArtwork(track.file);
     if (requestId !== artworkRequestId || !artwork) return;
     showCassetteArtwork(artwork);
@@ -321,6 +322,7 @@
 
     status.textContent = `${tracks.length} track${tracks.length === 1 ? "" : "s"} ready. Select a song to load it into the cassette.`;
   }
+
 
   async function chooseFolder() {
     if (typeof window.showDirectoryPicker !== "function") {
@@ -414,7 +416,7 @@
           } else if (tracks.length) {
             await playTrack(0);
           } else {
-            status.textContent = "Choose a music folder first.";
+            status.textContent = "Open your music library and choose a song first.";
             setLibraryOpen(true);
           }
           break;

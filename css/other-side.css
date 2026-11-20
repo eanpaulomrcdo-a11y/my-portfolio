@@ -73,6 +73,7 @@ em { color: var(--accent); font-weight: 400; }
 footer { padding: 24px; text-align: center; color: #8290a3; background: var(--deep); font: .75rem Arial, sans-serif; }
 footer p { margin: 0; }
 
+
 /* Local music library */
 .music-card { position: relative; }
 .music-open-button, .music-action-button {
@@ -629,11 +630,44 @@ footer p { margin: 0; }
 }
 
 .poem-accordion-item.is-open .poem-accordion-trigger {
-    padding-bottom: 16px;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 12px;
+    padding-bottom: 0;
+}
+
+.poem-accordion-item.is-open .poem-accordion-category,
+.poem-accordion-item.is-open .poem-accordion-title {
+    display: none;
 }
 
 .poem-accordion-panel {
-    padding: 4px 40px 30px;
+    padding: 8px 40px 34px;
+}
+
+.poem-reading-heading {
+    max-width: 720px;
+    margin: 0 auto 30px;
+    padding-bottom: 22px;
+    text-align: center;
+    border-bottom: 1px solid rgba(215, 184, 141, .2);
+}
+
+.poem-reading-category {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--accent);
+    font: 700 .62rem/1.5 Arial, sans-serif;
+    letter-spacing: .2em;
+}
+
+.poem-reading-title {
+    margin: 0;
+    color: #f1e8dc;
+    font-size: clamp(1.8rem, 3.4vw, 2.65rem);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -.025em;
 }
 
 .poem-accordion-panel[hidden] {
