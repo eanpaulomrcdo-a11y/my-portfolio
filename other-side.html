@@ -45,12 +45,112 @@
                     <p>A growing collection of reflections, wonder, and words written from the heart.</p>
                     <div class="poem-accordion" id="poemAccordion" aria-label="Poetry collection"></div>
                 </article>
-                <article class="collection-card">
+                
+<article class="collection-card photo-collection-card" id="photography">
                     <p class="card-index">02 / THROUGH MY LENS</p>
-                    <h3>Through My Lens</h3>
+                    <h3>Through <em>My Lens</em></h3>
                     <p>Small details, close-up worlds, and moments worth keeping.</p>
-                    <span class="coming-soon">Photography · Coming soon</span>
+
+                    <!-- PHOTO COLLECTIONS -->
+                    <div class="photo-albums">
+                        <section class="photo-album" aria-labelledby="law-album-title">
+                            <div class="photo-album-cover">
+                                <img src="images/photo-gallery/Trafalgar-01.webp"
+                                     alt="Trafalgar D. Water Law action figure"
+                                     loading="lazy" decoding="async">
+                            </div>
+                            <div class="photo-album-info">
+                                <div>
+                                    <h4 id="law-album-title">Trafalgar D. Water Law</h4>
+                                    <p>A small collection of a favourite character.</p>
+                                </div>
+                                <span>03 PHOTOS</span>
+                            </div>
+                            <button class="photo-open-button" type="button"
+                                    data-gallery-target="lawPhotoGallery"
+                                    aria-expanded="false" aria-controls="lawPhotoGallery">
+                                Explore collection <span aria-hidden="true">＋</span>
+                            </button>
+                            <div class="photo-gallery" id="lawPhotoGallery" hidden>
+                                <div class="photo-gallery-grid">
+                                    <img src="images/photo-gallery/Trafalgar-01.webp"
+                                         alt="Trafalgar Law figure holding his sword" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/Trafalgar-02.webp"
+                                         alt="Trafalgar Law figure in a yellow shirt" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/Trafalgar-03.webp"
+                                         alt="Trafalgar Law figure with his sword extended" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="photo-album" aria-labelledby="r1-album-title">
+                            <div class="photo-album-cover">
+                                <img src="images/photo-gallery/HiBy-01.webp"
+                                     alt="HiBy R1 music player displaying a music track"
+                                     loading="lazy" decoding="async">
+                            </div>
+                            <div class="photo-album-info">
+                                <div>
+                                    <h4 id="r1-album-title">Random Spins on My R1</h4>
+                                    <p>Different genres, familiar moments, and whatever plays next.</p>
+                                </div>
+                                <span>03 PHOTOS</span>
+                            </div>
+                            <button class="photo-open-button" type="button"
+                                    data-gallery-target="r1PhotoGallery"
+                                    aria-expanded="false" aria-controls="r1PhotoGallery">
+                                Explore collection <span aria-hidden="true">＋</span>
+                            </button>
+                            <div class="photo-gallery" id="r1PhotoGallery" hidden>
+                                <div class="photo-gallery-grid">
+                                    <img src="images/photo-gallery/HiBy-01.webp"
+                                         alt="HiBy R1 music player playing a track" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/HiBy-02.webp"
+                                         alt="HiBy R1 music player displaying album artwork" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/HiBy-03.webp"
+                                         alt="HiBy R1 music player beside a computer display" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="photo-album" aria-labelledby="little-things-title">
+                            <div class="photo-album-cover">
+                                <img src="images/photo-gallery/Random-Moon.webp"
+                                     alt="Moon-shaped decorative lamp glowing in a dark room"
+                                     loading="lazy" decoding="async">
+                            </div>
+                            <div class="photo-album-info">
+                                <div>
+                                    <h4 id="little-things-title">Little Things Along the Way</h4>
+                                    <p>Everyday objects and small details that caught my eye.</p>
+                                </div>
+                                <span>06 PHOTOS</span>
+                            </div>
+                            <button class="photo-open-button" type="button"
+                                    data-gallery-target="littleThingsGallery"
+                                    aria-expanded="false" aria-controls="littleThingsGallery">
+                                Explore collection <span aria-hidden="true">＋</span>
+                            </button>
+                            <div class="photo-gallery" id="littleThingsGallery" hidden>
+                                <div class="photo-gallery-grid">
+                                    <img src="images/photo-gallery/Random-RAM.webp"
+                                         alt="HyperX computer memory modules" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/Random-Watch.webp"
+                                         alt="Fossil automatic wristwatch" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/Random-Moon.webp"
+                                         alt="Moon-shaped decorative lamp" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/Random-Hotwheels.webp"
+                                         alt="Miniature pickup truck model" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/Random-Beer.webp"
+                                         alt="A drink photographed outdoors" loading="lazy" decoding="async">
+                                    <img src="images/photo-gallery/Random-Coffee.webp"
+                                         alt="A cup of coffee" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </article>
+
                 <article class="collection-card music-card" id="music-card">
                     <p class="card-index">03 / SOUNDTRACK</p>
                     <h3>Soundtrack of <em>My Life</em></h3>
@@ -71,7 +171,7 @@
 
                             <div class="cassette-display-track">
                                 <div class="cassette-artwork-frame" id="cassetteArtworkFrame">
-                                    <img id="cassetteAlbumArt" class="cassette-album-art" alt="Album artwork" hidden>
+                                    <img id="cassetteAlbumArt" class="cassette-album-art" alt="Album artwork" hidden decoding="async">
                                     <div class="cassette-artwork-placeholder" id="cassetteArtworkPlaceholder" aria-hidden="true">
                                         <span class="artwork-cassette-icon">♫</span>
                                         <span>IPM AUDIO</span>
@@ -233,9 +333,29 @@
         </section>
     </main>
 
+
+    <dialog class="photo-lightbox" id="photoLightbox" aria-label="Photo viewer">
+        <div class="photo-lightbox-content">
+            <button class="photo-lightbox-close" id="closePhotoLightbox"
+                    type="button" aria-label="Close photo viewer">×</button>
+            <div class="photo-lightbox-stage">
+                <button class="photo-lightbox-nav" id="previousPhoto"
+                        type="button" aria-label="Previous photo">‹</button>
+                <img id="photoLightboxImage" alt="">
+                <button class="photo-lightbox-nav" id="nextPhoto"
+                        type="button" aria-label="Next photo">›</button>
+            </div>
+            <div class="photo-lightbox-footer">
+                <p id="photoLightboxCaption" class="photo-lightbox-caption"></p>
+                <span id="photoLightboxCounter" class="photo-lightbox-counter" aria-live="polite"></span>
+            </div>
+        </div>
+    </dialog>
+
     <footer><p>© 2026 Ian Paulo Mercado · The Other Side of Me</p></footer>
     <audio id="localMusicAudio" preload="metadata" hidden></audio>
     <script src="js/poetry.js" defer></script>
     <script src="js/music-player.js" defer></script>
+    <script src="js/photo-gallery.js" defer></script>
 </body>
 </html>

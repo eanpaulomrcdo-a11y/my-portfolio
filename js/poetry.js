@@ -109,6 +109,43 @@ const poems = [
       // Stanza 7
       "And when the morning takes the night,\nWill this feeling fade with the light?\nOr will it linger when the sun shines through,\nA quiet reminder of what I once knew?"
     ]
+  },
+
+    {
+    id: "poem-five",
+    category: "05 / REFLECTION",
+    title: "The In-between",
+    paragraphs: [
+      // Stanza 1
+      "Beyond the window, daylight fades,\nA golden sky slowly turns to gray.\nThe sun retreats, the colors dim,\nAnd evening takes the light away.",
+
+      // Stanza 2
+      "Yet somewhere past this sea of clouds,\nAnother dawn begins to rise.\nWhile one horizon falls to night,\nThe other greets the morning skies.",
+
+      // Stanza 3
+      "How strange the ways of distance are,\nTo leave behind what we have known.\nEach mile takes us further from the past,\nYet closer to the dreams we've grown.",
+
+      // Stanza 4
+      "We cross the lines that time has drawn,\nAnd leave behind familiar skies.\nFor sometimes we must lose our way,\nTo find the place where our future lies.",
+
+      // Stanza 5
+      "Such are the ironies of life,\nThe things we learn along the way.\nTo find the best, we face the worst,\nAnd lose some light to welcome day.",
+
+      // Stanza 6
+      "For what is growth without the change?\nAnd what is hope without the far?\n`How much could any dream be worth,\nIf we never reached beyond where we are?",
+
+      // Stanza 7
+      "And so we do the things we do,\nThough reasons sometimes escape our words.\nWe leave behind the lives we know,\nFor something greater yet unheard.",
+
+      // Stanza 8
+      "In every season, come what may,\nThrough every distance, every mile.\nSome journeys need no explanation,\nTheir meaning lives beyond the why.",
+
+      // Stanza 9
+      "And as the plane begins to descend,\nThe clouds give way to something new.\nThe world returns to its familiar shape,\nBut so does the person looking through.",
+
+      // Stanza 10
+      "The skies grow still, the journey ends,\nThe distant ground comes into view.\nYet somewhere between the dusk and dawn,\nA different world has passed through you."
+    ]
   }
 ];
 

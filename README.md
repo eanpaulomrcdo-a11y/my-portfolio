@@ -18,7 +18,8 @@ A personal portfolio website showcasing professional experience, selected projec
 │   └── poetry.js                      # Poem content and inline accordion behavior
 ├── images/
 │   ├── IPM_Logo.png                   # Portfolio logo / favicon
-│   ├── profile.jpg                    # Profile image
+│   ├── profile.webp                    # Profile image
+│   ├── photo-gallery/                 # Personal photo albums (HiBy R1, Trafalgar Law, and everyday details)
 │   ├── siomai-tracker/                # Project preview images
 │   └── space-defender/                # Space Defender screenshots
 ├── projects/
@@ -28,9 +29,9 @@ A personal portfolio website showcasing professional experience, selected projec
     ├── game.html                      # Space Defender game page
     ├── game.js                        # Game logic
     ├── style.css                      # Game styles
-    ├── ipm-sd-background.png          # Game background
+    ├── ipm-sd-background.webp          # Game background
     ├── ipm-sd-favicon.png             # Game favicon
-    └── ipm-sd-logo.png                # Game logo
+    └── ipm-sd-logo.webp                # Game logo
 ```
 
 ## Run locally
@@ -44,6 +45,8 @@ This is a static website and does not require a build step or package installati
 The retro cassette player plays music selected by each visitor from their own local music folder. The browser reads the selected audio files on the visitor's device; the files are not uploaded to the website. Folder-selection support varies by browser, and the site provides a compatibility folder picker for browsers without the modern folder-picker API.
 
 The poetry collection is embedded directly in `other-side.html`. Its poem text and accordion behavior are maintained in `js/poetry.js`, while its presentation is styled in `css/other-side.css`. When a poem is opened, its title and category are presented in a centered reading heading above the centered poem text.
+
+The **Through My Lens** section contains three expandable photo albums. The original photographs are stored in `images/photo-gallery/`; their paths are referenced directly by `other-side.html`. Album expand/collapse behavior is maintained in `js/photo-gallery.js`.
 
 ## Deploy with GitHub Pages
 
@@ -65,3 +68,8 @@ After future updates, commit and push the changed files to the selected branch. 
 - Space Defender is a self-contained browser game in `space-defender/`; its screenshots are stored in `images/space-defender/`.
 - Keep file paths in HTML and CSS synchronized if assets are moved or renamed. File and folder names are case-sensitive on GitHub Pages.
 - Review the downloadable CV, database, and workbook for personal or confidential information before publishing or updating the repository.
+
+
+## Image performance
+
+Website imagery is served as optimized WebP files. Original JPG/PNG source images were not included in this optimized package; keep your separate original-photo backup. Images use lazy loading where appropriate and asynchronous decoding.

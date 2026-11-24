@@ -160,7 +160,7 @@ h2 {
     overflow: hidden;
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10)),
-        url("../images/profile.jpg");
+        url("../images/profile.webp");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
